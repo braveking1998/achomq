@@ -6,6 +6,9 @@
         "build": "vite build",
         "preinstall": "npx npm-force-resolutions"
     },
+    "resolutions": {
+        "postcss": "^8.4.38"
+    },
     "devDependencies": {
         "@inertiajs/vue3": "^1.0.15",
         "@tailwindcss/forms": "^0.5.7",
