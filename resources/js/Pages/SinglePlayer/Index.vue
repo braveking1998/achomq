@@ -8,11 +8,14 @@
         :key="index"
         v-show="index == totalAnswered"
       >
+        <!-- Question -->
+        <!-- Header -->
         <div
           class="absolute top-0 right-0 h-10 z-10"
           :class="`bg-${color}`"
           :style="`width: ${((totalAnswered + 1) / questions.length) * 100}%`"
         ></div>
+        <!-- timer -->
         <div
           class="text-center text-white bg-opacity-40 font-bold shadow-sm h-10 leading-10 relative z-20"
           :class="`bg-${color}`"
@@ -22,10 +25,12 @@
           </p>
           <p class="absolute left-5 text-white">{{ timer }}</p>
         </div>
+        <!-- Question text -->
         <div class="my-8 font-bold text-center" :class="`text-${color}`">
           {{ question.text }}
         </div>
         <ul class="m-4 px-4">
+          <!-- Answer -->
           <div v-if="answered === null" class="flex flex-col gap-4 text-center">
             <li
               v-for="answer in question.answers"
@@ -37,6 +42,8 @@
               {{ answer.text }}
             </li>
           </div>
+
+          <!-- Correct answer -->
           <div v-else class="flex flex-col gap-4">
             <li
               v-for="answer in question.answers"
@@ -103,11 +110,10 @@ const answerClicked = (id, is_correct) => {
 };
 
 const next = () => {
-  answered.value = null;
-  timer.value = props.time;
-  timerEnabled.value = true;
-
   if (totalAnswered.value < props.questions.length - 1) {
+    answered.value = null;
+    timer.value = props.time;
+    timerEnabled.value = true;
     totalAnswered.value++;
   } else {
     router.put(route("single-player.result"), {
