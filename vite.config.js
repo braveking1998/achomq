@@ -17,6 +17,9 @@ export default defineConfig({
                 compilerOptions: {
                     isCustomElement: (tag) => ["label"].includes(tag),
                 },
+                compilerOptions: {
+                    isCustomElement: (tag) => ["label"].includes(tag),
+                },
             },
         }),
     ],
