@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Main html elements styles */
+@layer base {
+}
+
+/* Extra part of the webapp */
+@layer components {
+  .flash-message {
+    @apply absolute right-5 top-5 bg-green-500 opacity-75 font-bold px-4 py-2 rounded-md z-[9999];
+  }
+
+  .input {
+    @apply mt-2 w-full;
+  }
+
+  .input-error {
+    @apply mt-2 text-red-600 opacity-50 font-bold;
+  }
+
+  .btn-link {
+    @apply hover:bg-blue-light hover:text-white py-2 px-4 rounded-lg;
+  }
+
+  .btn-primary {
+    @apply bg-blue-light text-white py-2 px-4 border rounded-lg hover:bg-white hover:text-blue-light hover:border hover:border-blue-light;
+  }
+
+  .btn-bordered {
+    @apply hover:bg-blue-light hover:text-white py-2 px-4 rounded-lg border border-blue-light;
+  }
+
+  .btn-sign {
+    @apply text-center py-2 px-8 rounded-xl text-gray-100 border-0 border-solid shadow-[inset_0_0_20px_rgba(255,255,255,0)] outline outline-1 outline-[rgba(255,255,255,.5)] outline-offset-0 [text-shadow:_none] transition-all duration-[1250ms] ease-[cubic-bezier(0.19,1,0.22,1)];
+  }
+
+  .btn-sign:hover {
+    @apply border shadow-[inset_0_0_20px_rgba(255,255,255,.5)] shadow-[0_0_20px_rgba(255,255,255,.2)] outline-[rgba(255,255,255,0)] outline-offset-[15px] [text-shadow:_1px_1px_2px_#427388];
+  }
+
+  .btn-dashboard {
+    @apply text-center rounded-lg border-2 text-blue-light border-blue-light font-bold py-2 px-10 lg:px-20 lg:py-4;
+  }
+
+  .btn-dashboard:hover {
+    @apply bg-blue-light text-white;
+  }
+}
+
+/* Most used classes for margin, padding, etc. */
+
+@layer utilities {
+  .transition-ease-out-500 {
+    @apply transition-all duration-500 ease-out;
+  }
+
+  .stroke-dashoffset {
+    stroke-dashoffset: 219.91148575129;
+  }
+
+  .stroke-dasharray {
+    stroke-dasharray: 219.91148575129;
+  }
+
+  .text-anchor-middle {
+    text-anchor: middle;
+  }
+}

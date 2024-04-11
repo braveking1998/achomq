@@ -1,0 +1,18 @@
+New tasks:
+1. Add heart to play single games (not done)
+2. Add notification for playing multiplayer (not done)
+3. Add more features
+ :: edit name
+ :: edit password
+ :: edit email
+ :: edit phone number
+ to profile (not done)
+4. Add registering by phone number to register part (not done)
+5. Add buy gems and coins (not done)
+6. Add Event: guess the name of a country to the games
+
+/// done
+1. set the level for the questions of multiplayer games (done)
+2. decrease price of multiplayer games (done)
+3. give the reward to the winner of multiplayer games (done)
+4. give the reward to the designer of an approved question (not done)
