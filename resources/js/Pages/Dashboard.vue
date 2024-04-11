@@ -2,8 +2,17 @@
   <Head title="داشبورد" />
   <AuthWithoutSidebarLayout>
     <template #content>
+      <!-- Heart -->
+      <Box class="p-6">
+        <div class="text-center">
+          تعداد قلب های شما برای شرکت در مسابقه تک نفره: <span>5 </span>
+          <font-awesome-icon :icon="['fas', 'heart']" class="text-red-600" />
+        </div>
+      </Box>
+
+      <!-- Matches -->
       <div
-        class="flex flex-col md:flex-row gap-4 md:gap-16 justify-center items-center"
+        class="flex flex-col md:flex-row gap-4 md:gap-16 justify-center items-center mt-8"
       >
         <Link :href="route('single-player.category')" class="btn-dashboard"
           >مسابقه تک نفره</Link
@@ -20,7 +29,8 @@
         >
       </div>
 
-      <Box class="mt-8">
+      <!-- Events -->
+      <Box class="mt-8 p-6">
         <div class="flex gap-2 relative">
           <h1>رویداد های هفتگی</h1>
           <span

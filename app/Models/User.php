@@ -28,6 +28,7 @@ class User extends Authenticatable
         'points',
         'coins',
         'gems',
+        'hearts',
         'profile_image'
     ];
 

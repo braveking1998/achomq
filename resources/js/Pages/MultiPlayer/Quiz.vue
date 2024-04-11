@@ -174,11 +174,10 @@ const answerClicked = (q_id, id, is_correct) => {
 };
 
 const next = () => {
-  answered.value = null;
-  timer.value = props.time;
-  timerEnabled.value = true;
-
   if (totalAnswered.value < props.questions.length - 1) {
+    answered.value = null;
+    timer.value = props.time;
+    timerEnabled.value = true;
     totalAnswered.value++;
     qIdChanger();
   } else {
