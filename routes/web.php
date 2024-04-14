@@ -1,23 +1,21 @@
 <?php
 
-use Inertia\Inertia;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Application;
-use App\Http\Controllers\DebugController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\MessagesController;
-use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\LevelController;
 use App\Http\Controllers\Admin\StatsController;
-use App\Http\Controllers\MultiPlayerController;
-use App\Http\Controllers\SinglePlayerController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\AdminProfileController;
-use App\Http\Controllers\UploadPrivateImagesController;
-use App\Http\Controllers\UploadProfileImagesController;
 use App\Http\Controllers\Admin\SubmitQuestionController;
 use App\Http\Controllers\Admin\UploadPublicImagesController;
+use App\Http\Controllers\DebugController;
+use App\Http\Controllers\MessagesController;
+use App\Http\Controllers\MultiPlayerController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\SinglePlayerController;
+use App\Http\Controllers\UploadPrivateImagesController;
+use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,8 +31,7 @@ use App\Http\Controllers\Admin\UploadPublicImagesController;
 Route::name('guest.')->group(function () {
     Route::get(
         '/',
-        fn () =>
-        Inertia::render('FrontPage', [
+        fn () => Inertia::render('FrontPage', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
             'LaravelVersion' => Application::VERSION,
@@ -44,7 +41,6 @@ Route::name('guest.')->group(function () {
     Route::get('/about', fn () => Inertia::render('About'))->name('about');
     Route::get('/contact', fn () => Inertia::render('Contact'))->name('contact');
 });
-
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -56,7 +52,7 @@ Route::middleware('auth')->prefix('profile')->name('profile.')->group(function (
     Route::resource('images', UploadPrivateImagesController::class)->only(['store', 'destroy']);
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';
 
 // Messages
 Route::resource('messages', MessagesController::class)

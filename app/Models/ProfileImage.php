@@ -13,7 +13,7 @@ class ProfileImage extends Model
     protected $fillable = [
         'file_path',
         'type',
-        'user_id'
+        'user_id',
     ];
 
     protected $appends = ['src'];
@@ -25,6 +25,6 @@ class ProfileImage extends Model
 
     public function getSrcAttribute()
     {
-        return asset('storage/' . $this->file_path);
+        return asset('storage/'.$this->file_path);
     }
 }

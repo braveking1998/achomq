@@ -18,7 +18,7 @@ class LevelResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'max' => $this->max,
-            'add_question' => $this->add_question
+            'add_question' => $this->add_question,
         ];
     }
 }

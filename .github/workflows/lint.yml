@@ -1,0 +1,22 @@
+name: Lint
+run-name: ${{ github.actor }} is checking the project for lint
+on: [push]
+jobs:
+  Lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: ["8.1", "8.2", "8.3"]
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Setup PHP
+        id: setup-php
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          tools: laravel/pint, overtrue/phplint
+      - name: Check php syntax
+        run: phplint --exclude=*.log .
+      - name: Check code style
+        run: pint --test

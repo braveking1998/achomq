@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\ProfileImage;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class UploadPrivateImagesController extends Controller
 {
-
     /**
      * Store a newly created resource in storage.
      */
@@ -27,7 +26,7 @@ class UploadPrivateImagesController extends Controller
 
             $request->user()->profileImages()->create([
                 'file_path' => $path,
-                'type' => 'private'
+                'type' => 'private',
             ]);
         }
 
@@ -45,7 +44,7 @@ class UploadPrivateImagesController extends Controller
 
         // Set user's profile image to null
         User::where('profile_image', $image->id)->update([
-            'profile_image' => 1
+            'profile_image' => 1,
         ]);
 
         // Delete from the disk

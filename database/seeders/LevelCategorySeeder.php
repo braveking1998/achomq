@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class LevelCategorySeeder extends Seeder
@@ -32,7 +31,7 @@ class LevelCategorySeeder extends Seeder
 
             \App\Models\Category::factory()->create([
                 'name' => $this->category[$i],
-                'slug' => $this->category_slug[$i]
+                'slug' => $this->category_slug[$i],
             ]);
         }
     }

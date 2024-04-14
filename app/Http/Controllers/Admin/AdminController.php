@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Inertia\Inertia;
+use App\Http\Controllers\Controller;
 use App\Models\Question;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Inertia\Inertia;
 
 class AdminController extends Controller
 {
@@ -15,8 +15,9 @@ class AdminController extends Controller
     public function __invoke(Request $request)
     {
         $question = Question::all()->where('status', 0)->first();
+
         return Inertia::render('Admin/Index', [
-            'question' => $question
+            'question' => $question,
         ]);
     }
 }

@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
-use App\Models\Level;
 use App\Models\Answer;
 use App\Models\Category;
+use App\Models\Level;
 use App\Models\Question;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Inertia\Inertia;
 
 class QuestionController extends Controller
 {
-
     public function __construct()
     {
         $this->authorizeResource(Question::class, 'question');
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -34,7 +34,7 @@ class QuestionController extends Controller
                     ->paginate(10)
                     ->withQueryString(),
                 'categories' => Category::all(),
-                'levels' => Level::all()
+                'levels' => Level::all(),
             ]
         );
     }
@@ -46,7 +46,7 @@ class QuestionController extends Controller
     {
         return Inertia::render('Questions/Create', [
             'levels' => Level::all(),
-            'categories' => Category::all()
+            'categories' => Category::all(),
         ]);
     }
 
@@ -64,16 +64,16 @@ class QuestionController extends Controller
 
         $question = $request->user()->questions()->create([
             'unique_id' => (string) Str::orderedUuid(),
-            'text' => (Str::endsWith($request->question, '؟') ? $request->question : $request->question . '؟'),
+            'text' => (Str::endsWith($request->question, '؟') ? $request->question : $request->question.'؟'),
             'level_id' => $request->level_id,
-            'category_id' => $request->category_id
+            'category_id' => $request->category_id,
         ]);
 
         foreach ($valid['answers'] as $answer) {
             $question->answers()->create([
                 'unique_id' => (string) Str::orderedUuid(),
                 'text' => $answer,
-                'is_correct' => ($answer == $valid['answers']['correct']) ? true : false
+                'is_correct' => ($answer == $valid['answers']['correct']) ? true : false,
             ]);
         }
 
@@ -100,7 +100,7 @@ class QuestionController extends Controller
         return Inertia::render('Questions/Edit', [
             'question' => $question::with(['answers', 'level', 'category', 'user'])->find($question->id),
             'levels' => Level::all(),
-            'categories' => Category::all()
+            'categories' => Category::all(),
         ]);
     }
 
@@ -117,9 +117,9 @@ class QuestionController extends Controller
         );
 
         $qUpdate = $question->update([
-            'text' => (Str::endsWith($request->question, '؟') ? $request->question : $request->question . '؟'),
+            'text' => (Str::endsWith($request->question, '؟') ? $request->question : $request->question.'؟'),
             'level_id' => $request->level_id,
-            'category_id' => $request->category_id
+            'category_id' => $request->category_id,
         ]);
 
         // Update answers

@@ -6,8 +6,6 @@ use App\Events\AddQuestion;
 use App\Events\CorrectAnswer;
 use App\Events\MultiGameWinner;
 use Illuminate\Events\Dispatcher;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class IncreaseEventSubscriber
 {

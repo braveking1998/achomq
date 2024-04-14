@@ -4,17 +4,16 @@ namespace App\Policies;
 
 use App\Models\Question;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class QuestionPolicy
 {
-
     public function before()
     {
         if (auth()->user()->is_admin) {
             return true;
         }
     }
+
     /**
      * Determine whether the user can view any models.
      */

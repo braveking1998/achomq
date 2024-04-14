@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Str;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
-use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 class PasswordResetController extends Controller
@@ -30,7 +30,7 @@ class PasswordResetController extends Controller
 
         if ($status == Password::RESET_LINK_SENT) {
             return response([
-                'message' => __($status)
+                'message' => __($status),
             ]);
         }
 
@@ -70,7 +70,7 @@ class PasswordResetController extends Controller
         // redirect them back to where they came from with their error message.
         if ($status == Password::PASSWORD_RESET) {
             return response([
-                'message' => __($status)
+                'message' => __($status),
             ]);
         }
 

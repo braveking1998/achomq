@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class AuthController extends Controller
 {
@@ -22,7 +22,7 @@ class AuthController extends Controller
         $token = $user->createToken($user->email)->plainTextToken;
 
         return response([
-            'token' => $token
+            'token' => $token,
         ], 200);
     }
 
@@ -30,21 +30,21 @@ class AuthController extends Controller
     {
         $validate = $request->validate([
             'login_identity' => 'required',
-            'password' => 'required'
+            'password' => 'required',
         ]);
 
         $user = User::where('email', $validate['login_identity'])->orWhere('phone_number', $validate['login_identity'])->first();
 
-        if (!$user || !password_verify($validate['password'], $user->password)) {
+        if (! $user || ! password_verify($validate['password'], $user->password)) {
             return response([
-                'message' => __('Invalid credentials')
+                'message' => __('Invalid credentials'),
             ], 401);
         }
 
         $token = $user->createToken($validate['login_identity'])->plainTextToken;
 
         return response([
-            'token' => $token
+            'token' => $token,
         ], 200);
     }
 }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\level;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\LevelResource;
+use App\Models\level;
+use Illuminate\Http\Request;
 
 class LevelController extends Controller
 {

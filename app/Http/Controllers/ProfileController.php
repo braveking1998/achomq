@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\ProfileImage;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +19,7 @@ class ProfileController extends Controller
     public function index(Request $request): Response
     {
         return Inertia::render('Profile/Index', [
-            'images' => ProfileImage::where('user_id', $request->user()->id)->orWhere('type', 'public')->get()
+            'images' => ProfileImage::where('user_id', $request->user()->id)->orWhere('type', 'public')->get(),
         ]);
     }
 
