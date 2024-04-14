@@ -4,6 +4,9 @@ on: [push]
 jobs:
   Lint:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: ["8.1", "8.2", "8.3"]
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
@@ -11,12 +14,12 @@ jobs:
         id: setup-php
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.1"
+          php-version: ${{ matrix.php-version }}
           tools: laravel/pint
-      - name: check php syntax
-        uses: overtrue/phplint@8.1
+      - name: Check php syntax
+        uses: overtrue/phplint@${{ matrix.php-version }}
         with:
           path: .
           options: --exclude=*.log
-      - name: check code style
+      - name: Check code style
         run: pint --test
