@@ -1,1 +1,0 @@
-import{_ as s}from"./AuthenticatedLayout-49277159.js";import{o as a,i as r,w as l,f as t,q as o}from"./app-dd8571fb.js";const n={class:"py-12 flex flex-col gap-8 w-[85%] mx-auto"},p={__name:"AuthWithoutSidebarLayout",setup(c){return(e,_)=>(a(),r(s,null,{default:l(()=>[t("div",n,[o(e.$slots,"header"),t("section",null,[o(e.$slots,"content")])])]),_:3}))}};export{p as _};
