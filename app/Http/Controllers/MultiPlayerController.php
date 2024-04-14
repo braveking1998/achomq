@@ -2,22 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Inertia\Inertia;
-use App\Models\Category;
-use App\Models\Question;
-use App\Models\MultiGame;
-use Illuminate\Http\Request;
-use App\Models\MultiGameType;
-use App\Events\StartMultiGame;
 use App\Events\MultiGameWinner;
+use App\Events\StartMultiGame;
+use App\Models\Category;
+use App\Models\MultiGame;
+use App\Models\MultiGameType;
+use App\Models\Question;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Validation\ValidationException;
+use Inertia\Inertia;
 
 class MultiPlayerController extends Controller
 {
-
     private function gamerType(MultiGame $game)
     {
         $user = Auth::user();
@@ -32,13 +30,13 @@ class MultiPlayerController extends Controller
             if ($this->gamerType($game) == 'starter') {
                 if ((int) $game->s_corrects > (int) $game->r_corrects) {
                     MultiGameWinner::dispatchIf((int) $game->s_corrects > (int) $game->r_corrects, $user, (int) $type->coin, (int) $type->point);
-                } else if ((int) $game->s_corrects == (int) $game->r_corrects) {
+                } elseif ((int) $game->s_corrects == (int) $game->r_corrects) {
                     MultiGameWinner::dispatchIf((int) $game->s_corrects == (int) $game->r_corrects, $user, (int) $type->coin / 2, (int) $type->point / 2);
                 }
-            } else if ($this->gamerType($game) == 'rival') {
+            } elseif ($this->gamerType($game) == 'rival') {
                 if ((int) $game->s_corrects < (int) $game->r_corrects) {
                     MultiGameWinner::dispatchIf((int) $game->s_corrects < (int) $game->r_corrects, $user, (int) $type->coin, (int) $type->point);
-                } else if ((int) $game->s_corrects == (int) $game->r_corrects) {
+                } elseif ((int) $game->s_corrects == (int) $game->r_corrects) {
                     MultiGameWinner::dispatchIf((int) $game->s_corrects == (int) $game->r_corrects, $user, (int) $type->coin / 2, (int) $type->point / 2);
                 }
             }
@@ -86,7 +84,7 @@ class MultiPlayerController extends Controller
     private function saveAnswers(MultiGame $game, $answers, $corrects)
     {
         if ($this->gamerType($game) == 'starter') {
-            if (!empty($game->s_answers)) {
+            if (! empty($game->s_answers)) {
                 $prev_answers = json_decode($game->s_answers, true);
                 $game->s_answers = json_encode(array_merge($prev_answers, $answers));
             } else {
@@ -94,8 +92,8 @@ class MultiPlayerController extends Controller
             }
 
             $game->s_corrects += $corrects;
-        } else if ($this->gamerType($game) == 'rival') {
-            if (!empty($game->r_answers)) {
+        } elseif ($this->gamerType($game) == 'rival') {
+            if (! empty($game->r_answers)) {
                 $prev_answers = json_decode($game->r_answers, true);
                 $game->r_answers = json_encode(array_merge($prev_answers, $answers));
             } else {
@@ -120,7 +118,7 @@ class MultiPlayerController extends Controller
                 } else {
                     $game->who_to_play = $game->starter;
                 }
-            } else if ($this->gamerType($game) == 'rival') {
+            } elseif ($this->gamerType($game) == 'rival') {
                 if ($game->prev_selector == $user->id) {
                     $game->who_to_play = $game->starter;
                 } else {
@@ -176,7 +174,7 @@ class MultiPlayerController extends Controller
                 'rival' => 1,
                 'who_to_play' => $user->id,
                 'prev_selector' => $user->id,
-                'category_id' => 6
+                'category_id' => 6,
             ]);
 
             return redirect()->route('multi-player.play', ['game' => $game->id]);
@@ -190,10 +188,11 @@ class MultiPlayerController extends Controller
     public function play(MultiGame $game)
     {
         $user = Auth::user();
+
         return Inertia::render('MultiPlayer/Play', [
             'game' => $game,
             'gamerType' => $this->gamerType($game),
-            'user' => $user
+            'user' => $user,
         ]);
     }
 
@@ -205,7 +204,7 @@ class MultiPlayerController extends Controller
                 ->get()
                 ->shuffle()
                 ->take(3),
-            'gameId' => $game->id
+            'gameId' => $game->id,
         ]);
     }
 
@@ -230,11 +229,11 @@ class MultiPlayerController extends Controller
             ->shuffle()
             ->take(3);
 
-        $initial_answers  = [];
+        $initial_answers = [];
         foreach ($questions as $question) {
             $initial_answers[] = [
                 'q_id' => $question->id,
-                'is_correct' => 0
+                'is_correct' => 0,
             ];
         }
 
@@ -281,11 +280,10 @@ class MultiPlayerController extends Controller
                 'questions' => $questions,
                 'color' => $request->color,
                 'time' => 15,
-                'gameId' => $game->id
+                'gameId' => $game->id,
             ]
         );
     }
-
 
     public function quiz(Request $request, MultiGame $game)
     {
@@ -306,7 +304,7 @@ class MultiPlayerController extends Controller
                 $query->select('unique_id', 'text', 'question_id', 'is_correct')
                     ->inRandomOrder();
             })->get();
-        } else if (isset($r_answers[$game->stage])) {
+        } elseif (isset($r_answers[$game->stage])) {
             $ids = [];
             foreach ($r_answers[$game->stage] as $question) {
                 $ids[] = $question['q_id'];
@@ -334,7 +332,7 @@ class MultiPlayerController extends Controller
                 'questions' => $questions,
                 'color' => $request->color,
                 'time' => 15,
-                'gameId' => $game->id
+                'gameId' => $game->id,
             ]
         );
     }
@@ -342,19 +340,19 @@ class MultiPlayerController extends Controller
     public function quizLoad(MultiGame $game)
     {
         if ($game->category_id == 6) {
-            $answers[$game->stage]  = [
+            $answers[$game->stage] = [
                 [
                     'q_id' => 1,
-                    'is_correct' => 0
+                    'is_correct' => 0,
                 ],
                 [
                     'q_id' => 2,
-                    'is_correct' => 0
+                    'is_correct' => 0,
                 ],
                 [
                     'q_id' => 3,
-                    'is_correct' => 0
-                ]
+                    'is_correct' => 0,
+                ],
             ];
             $this->stageIncreaser($game);
         } else {
@@ -366,11 +364,11 @@ class MultiPlayerController extends Controller
                 ->shuffle()
                 ->take(3);
 
-            $initial_answers  = [];
+            $initial_answers = [];
             foreach ($questions as $question) {
                 $initial_answers[] = [
                     'q_id' => $question->id,
-                    'is_correct' => 0
+                    'is_correct' => 0,
                 ];
             }
 

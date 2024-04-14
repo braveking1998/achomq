@@ -5,8 +5,6 @@ namespace App\Listeners;
 use App\Events\StartMultiGame;
 use App\Events\WrongAnswer;
 use Illuminate\Events\Dispatcher;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class DecreaseEventSubscriber
 {
@@ -17,7 +15,6 @@ class DecreaseEventSubscriber
     {
         //
     }
-
 
     public function handleWrongAnswer(WrongAnswer $event): void
     {

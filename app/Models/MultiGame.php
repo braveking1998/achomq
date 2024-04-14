@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class MultiGame extends Model
 {
@@ -22,7 +22,7 @@ class MultiGame extends Model
         'prev_selector',
         'category_id',
         's_corrects',
-        'r_corrects'
+        'r_corrects',
     ];
 
     protected $with = ['starter', 'rival'];

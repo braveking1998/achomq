@@ -14,7 +14,6 @@ class AnswerFactory extends Factory
      *
      * @return array<string, mixed>
      */
-
     protected static $answerId = 281;
 
     public function definition(): array

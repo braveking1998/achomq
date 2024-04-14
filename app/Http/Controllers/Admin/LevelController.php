@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Inertia\Inertia;
+use App\Http\Controllers\Controller;
 use App\Models\Level;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Inertia\Inertia;
 
 class LevelController extends Controller
 {
@@ -23,7 +23,7 @@ class LevelController extends Controller
     public function index()
     {
         return Inertia::render('Admin/GameSetting/Level/Index', [
-            'levels' => Level::withCount('questions')->get()
+            'levels' => Level::withCount('questions')->get(),
         ]);
     }
 
@@ -38,7 +38,6 @@ class LevelController extends Controller
 
         return redirect()->back()->with('success', 'سطح ایجاد شد.');
     }
-
 
     /**
      * Show the form for editing the specified resource.

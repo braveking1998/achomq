@@ -2,10 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Answer;
 use App\Models\Question;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class QuestionSeeder extends Seeder
 {

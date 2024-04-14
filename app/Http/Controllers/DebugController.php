@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
 use App\Models\Answer;
 use App\Models\Question;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class DebugController extends Controller
 {

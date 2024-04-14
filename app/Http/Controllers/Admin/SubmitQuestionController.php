@@ -3,18 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Events\AddQuestion;
-use Inertia\Inertia;
-use App\Models\Level;
+use App\Http\Controllers\Controller;
 use App\Models\Answer;
 use App\Models\Category;
+use App\Models\Level;
 use App\Models\Question;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
+use Inertia\Inertia;
 
 class SubmitQuestionController extends Controller
 {
-
     /**
      * Show the form for editing the specified resource.
      */
@@ -26,7 +25,7 @@ class SubmitQuestionController extends Controller
             'question' => Question::with(['answers', 'level', 'category', 'user'])->find($id),
             'next' => $next,
             'levels' => Level::all(),
-            'categories' => Category::all()
+            'categories' => Category::all(),
         ]);
     }
 
@@ -45,10 +44,10 @@ class SubmitQuestionController extends Controller
         $question = Question::find($id);
 
         $qUpdate = $question->update([
-            'text' => (Str::endsWith($request->question, '؟') ? $request->question : $request->question . '؟'),
+            'text' => (Str::endsWith($request->question, '؟') ? $request->question : $request->question.'؟'),
             'level_id' => $request->level_id,
             'category_id' => $request->category_id,
-            'status' => 1
+            'status' => 1,
         ]);
 
         // Update answers
@@ -80,6 +79,7 @@ class SubmitQuestionController extends Controller
     {
         $question = Question::find($id);
         $question->deleteOrFail();
+
         return redirect()->back()->with('success', 'سوال با موفقیت حذف شد');
     }
 }

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\question;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\QuestionResource;
+use App\Models\question;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class QuestionController extends Controller
 {
@@ -34,16 +34,16 @@ class QuestionController extends Controller
 
         $question = $request->user()->questions()->create([
             'unique_id' => (string) Str::orderedUuid(),
-            'text' => (Str::endsWith($request->question, '؟') ? $request->question : $request->question . '؟'),
+            'text' => (Str::endsWith($request->question, '؟') ? $request->question : $request->question.'؟'),
             'level_id' => $request->level,
-            'category_id' => $request->category
+            'category_id' => $request->category,
         ]);
 
         foreach ($valid['answers'] as $answer) {
             $question->answers()->create([
                 'unique_id' => (string) Str::orderedUuid(),
                 'text' => $answer,
-                'is_correct' => ($answer == $valid['answers']['correct']) ? true : false
+                'is_correct' => ($answer == $valid['answers']['correct']) ? true : false,
             ]);
         }
     }

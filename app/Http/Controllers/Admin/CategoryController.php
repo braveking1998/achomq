@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Inertia\Inertia;
+use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Inertia\Inertia;
 
 class CategoryController extends Controller
 {
-
     public function index()
     {
         return Inertia::render('Admin/GameSetting/Category/Index', [
-            'categories' => Category::withCount('questions')->get()
+            'categories' => Category::withCount('questions')->get(),
         ]);
     }
 
@@ -24,7 +23,7 @@ class CategoryController extends Controller
     {
         Category::create($request->validate([
             'name' => 'required|string|min:3|max:255',
-            'slug' => 'required'
+            'slug' => 'required',
         ]));
 
         return redirect()->back()->with('success', 'دسته بندی ایجاد شد');
@@ -48,7 +47,7 @@ class CategoryController extends Controller
     {
         $category->update($request->validate([
             'name' => 'required|string|min:3|max:255',
-            'slug' => 'required'
+            'slug' => 'required',
         ]));
 
         return redirect()->back()->with('success', 'دسته بندی بروزرسانی شد');
@@ -62,6 +61,7 @@ class CategoryController extends Controller
         $default = Category::where('slug', 'default')->first()->id;
         $category->questions()->where('category_id', $category->id)->update(['category_id' => $default]);
         $category->delete();
+
         return redirect()->back()->with('success', 'دسته بندی حذف شد');
     }
 }

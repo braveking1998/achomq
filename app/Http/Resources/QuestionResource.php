@@ -23,7 +23,7 @@ class QuestionResource extends JsonResource
             'answers' => AnswerResource::collection($this->answers),
             'category' => new CategoryResource(Category::findOrFail($this->category_id)),
             'level' => new LevelResource(Level::findOrFail($this->level_id)),
-            'created_at' => $this->created_at
+            'created_at' => $this->created_at,
         ];
     }
 }

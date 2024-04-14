@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -22,7 +21,7 @@ class UserSeeder extends Seeder
             'name' => 'Braveking',
             'phone_number' => '09370636563',
             'email' => 'bravekingah@gmail.com',
-            'is_admin' => 1
+            'is_admin' => 1,
         ]);
     }
 }

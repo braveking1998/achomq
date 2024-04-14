@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Question extends Model
@@ -47,7 +47,7 @@ class Question extends Model
             fn ($query, $value) => $query->where('level_id', '=', $value)
         )->when(
             $filters['text'] ?? false,
-            fn ($query, $value) => $query->where('text', 'like', '%' . $value . '%')
+            fn ($query, $value) => $query->where('text', 'like', '%'.$value.'%')
         );
     }
 
@@ -70,7 +70,7 @@ class Question extends Model
         $nextType = MultiGameType::where('id', '>', $type->id)->orderBy('id')->first() ?? false;
         if ($nextType != false) {
             return $query->whereBetween('level_id', [$type->required_level, $nextType->required_level]);
-        } else if ($nextType == false) {
+        } elseif ($nextType == false) {
             return $query->where('level_id', '>=', $type->required_level);
         }
     }

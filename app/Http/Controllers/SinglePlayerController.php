@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
-use App\Models\Category;
-use App\Events\WrongAnswer;
-use Illuminate\Http\Request;
 use App\Events\CorrectAnswer;
+use App\Events\WrongAnswer;
+use App\Models\Category;
 use App\Models\SinglePlayerFeature;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class SinglePlayerController extends Controller
 {
@@ -37,7 +37,7 @@ class SinglePlayerController extends Controller
             [
                 'questions' => $questions,
                 'color' => $request->color,
-                'time' => (int) $time->value ?? 15
+                'time' => (int) $time->value ?? 15,
             ]
         );
     }
@@ -53,7 +53,7 @@ class SinglePlayerController extends Controller
                     }, '>=', 5)
                     ->get()
                     ->shuffle()
-                    ->take(3)
+                    ->take(3),
             ]
         );
     }
@@ -86,7 +86,7 @@ class SinglePlayerController extends Controller
             'total' => (int) $total,
             'color' => (string) $request->color,
             'earnedCoins' => (int) $earnedCoins,
-            'lostCoins' => (int) $lostCoins
+            'lostCoins' => (int) $lostCoins,
         ]);
     }
 }

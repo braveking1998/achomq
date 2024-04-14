@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\User;
-use Inertia\Inertia;
-use App\Models\ProfileImage;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\ProfileImage;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
 
 class UploadPublicImagesController extends Controller
 {
@@ -17,7 +17,7 @@ class UploadPublicImagesController extends Controller
     public function index()
     {
         return Inertia::render('Admin/GameSetting/Images/Index', [
-            'images' => ProfileImage::where('type', 'public')->get()
+            'images' => ProfileImage::where('type', 'public')->get(),
         ]);
     }
 
@@ -37,7 +37,7 @@ class UploadPublicImagesController extends Controller
 
             $request->user()->profileImages()->create([
                 'file_path' => $path,
-                'type' => 'public'
+                'type' => 'public',
             ]);
         }
 
@@ -51,7 +51,7 @@ class UploadPublicImagesController extends Controller
     {
         // Set user's profile image to null
         User::where('profile_image', $image->id)->update([
-            'profile_image' => 1
+            'profile_image' => 1,
         ]);
 
         // Delete from the disk

@@ -2,11 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\MultiGameType;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Category extends Model
 {
@@ -28,7 +27,7 @@ class Category extends Model
             $nextType = MultiGameType::where('id', '>', $type->id)->orderBy('id')->first() ?? false;
             if ($nextType != false) {
                 $query->whereBetween('level_id', [$type->required_level, $nextType->required_level]);
-            } else if ($nextType == false) {
+            } elseif ($nextType == false) {
                 $query->where('level_id', '>=', $type->required_level);
             }
         }, '>=', 5);
