@@ -1,0 +1,1 @@
+import{_ as e}from"./_plugin-vue_export-helper-c27b6911.js";import{o as r,c as s,q as t}from"./app-dd8571fb.js";const c={},n={class:"bg-white border border-gray-200 rounded-lg shadow-lg"};function a(o,d){return r(),s("div",n,[t(o.$slots,"default")])}const f=e(c,[["render",a]]);export{f as B};

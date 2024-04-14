@@ -1,0 +1,680 @@
+{
+  "_AuthWithSidebarLayout-53551b2d.js": {
+    "file": "assets/AuthWithSidebarLayout-53551b2d.js",
+    "imports": [
+      "_AuthenticatedLayout-49277159.js",
+      "resources/js/app.js"
+    ]
+  },
+  "_AuthWithoutSidebarLayout-3b9d1bd0.js": {
+    "file": "assets/AuthWithoutSidebarLayout-3b9d1bd0.js",
+    "imports": [
+      "_AuthenticatedLayout-49277159.js",
+      "resources/js/app.js"
+    ]
+  },
+  "_AuthenticatedLayout-49277159.js": {
+    "file": "assets/AuthenticatedLayout-49277159.js",
+    "imports": [
+      "resources/js/app.js",
+      "_DropdownLink-4735ad2e.js"
+    ]
+  },
+  "_Box-53e3f365.js": {
+    "file": "assets/Box-53e3f365.js",
+    "imports": [
+      "__plugin-vue_export-helper-c27b6911.js",
+      "resources/js/app.js"
+    ]
+  },
+  "_BoxWithTitle-a3c9f2bc.js": {
+    "file": "assets/BoxWithTitle-a3c9f2bc.js",
+    "imports": [
+      "__plugin-vue_export-helper-c27b6911.js",
+      "resources/js/app.js"
+    ]
+  },
+  "_Breadcrumbs-c157ac91.js": {
+    "file": "assets/Breadcrumbs-c157ac91.js",
+    "imports": [
+      "resources/js/app.js",
+      "_Box-53e3f365.js"
+    ]
+  },
+  "_DropdownLink-4735ad2e.js": {
+    "file": "assets/DropdownLink-4735ad2e.js",
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "_GameSetting-38a98955.js": {
+    "file": "assets/GameSetting-38a98955.js",
+    "imports": [
+      "resources/js/app.js",
+      "_AuthWithoutSidebarLayout-3b9d1bd0.js",
+      "_Box-53e3f365.js",
+      "_Breadcrumbs-c157ac91.js"
+    ]
+  },
+  "_GuestLayout-43855e95.js": {
+    "file": "assets/GuestLayout-43855e95.js",
+    "imports": [
+      "resources/js/app.js",
+      "resources/js/Pages/FrontPage/Components/Search.vue",
+      "_DropdownLink-4735ad2e.js"
+    ]
+  },
+  "_PrimaryButton-35509d27.js": {
+    "file": "assets/PrimaryButton-35509d27.js",
+    "imports": [
+      "__plugin-vue_export-helper-c27b6911.js",
+      "resources/js/app.js"
+    ]
+  },
+  "_TextInput-b12da949.js": {
+    "file": "assets/TextInput-b12da949.js",
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "__plugin-vue_export-helper-c27b6911.js": {
+    "file": "assets/_plugin-vue_export-helper-c27b6911.js"
+  },
+  "_date-c7da505b.js": {
+    "file": "assets/date-c7da505b.js"
+  },
+  "resources/js/Pages/About.vue": {
+    "file": "assets/About-29423ee6.js",
+    "imports": [
+      "resources/js/app.js",
+      "_GuestLayout-43855e95.js",
+      "resources/js/Pages/FrontPage/Components/Search.vue",
+      "__plugin-vue_export-helper-c27b6911.js",
+      "_DropdownLink-4735ad2e.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/About.vue"
+  },
+  "resources/js/Pages/Admin/GameSetting/Category/Edit.vue": {
+    "file": "assets/Edit-8cf7b455.js",
+    "imports": [
+      "resources/js/app.js",
+      "_Breadcrumbs-c157ac91.js",
+      "_AuthWithoutSidebarLayout-3b9d1bd0.js",
+      "_Box-53e3f365.js",
+      "_BoxWithTitle-a3c9f2bc.js",
+      "_AuthenticatedLayout-49277159.js",
+      "_DropdownLink-4735ad2e.js",
+      "__plugin-vue_export-helper-c27b6911.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Admin/GameSetting/Category/Edit.vue"
+  },
+  "resources/js/Pages/Admin/GameSetting/Category/Index.vue": {
+    "file": "assets/Index-d85176d3.js",
+    "imports": [
+      "resources/js/app.js",
+      "_GameSetting-38a98955.js",
+      "resources/js/Pages/Admin/GameSetting/Category/Index/Partials/Create.vue",
+      "resources/js/Pages/Admin/GameSetting/Category/Index/Partials/All.vue",
+      "_AuthWithoutSidebarLayout-3b9d1bd0.js",
+      "_AuthenticatedLayout-49277159.js",
+      "_DropdownLink-4735ad2e.js",
+      "_Box-53e3f365.js",
+      "__plugin-vue_export-helper-c27b6911.js",
+      "_Breadcrumbs-c157ac91.js",
+      "_BoxWithTitle-a3c9f2bc.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Admin/GameSetting/Category/Index.vue"
+  },
+  "resources/js/Pages/Admin/GameSetting/Category/Index/Partials/All.vue": {
+    "file": "assets/All-235f7583.js",
+    "imports": [
+      "resources/js/app.js",
+      "_BoxWithTitle-a3c9f2bc.js",
+      "__plugin-vue_export-helper-c27b6911.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Admin/GameSetting/Category/Index/Partials/All.vue"
+  },
+  "resources/js/Pages/Admin/GameSetting/Category/Index/Partials/Create.vue": {
+    "file": "assets/Create-c26447fb.js",
+    "imports": [
+      "resources/js/app.js",
+      "_BoxWithTitle-a3c9f2bc.js",
+      "__plugin-vue_export-helper-c27b6911.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Admin/GameSetting/Category/Index/Partials/Create.vue"
+  },
+  "resources/js/Pages/Admin/GameSetting/Images/Index.vue": {
+    "file": "assets/Index-1abc82b8.js",
+    "imports": [
+      "resources/js/app.js",
+      "_GameSetting-38a98955.js",
+      "_BoxWithTitle-a3c9f2bc.js",
+      "_AuthWithoutSidebarLayout-3b9d1bd0.js",
+      "_AuthenticatedLayout-49277159.js",
+      "_DropdownLink-4735ad2e.js",
+      "_Box-53e3f365.js",
+      "__plugin-vue_export-helper-c27b6911.js",
+      "_Breadcrumbs-c157ac91.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Admin/GameSetting/Images/Index.vue"
+  },
+  "resources/js/Pages/Admin/GameSetting/Level/Edit.vue": {
+    "file": "assets/Edit-d0176d75.js",
+    "imports": [
+      "resources/js/app.js",
+      "_Breadcrumbs-c157ac91.js",
+      "_AuthWithoutSidebarLayout-3b9d1bd0.js",
+      "_Box-53e3f365.js",
+      "_BoxWithTitle-a3c9f2bc.js",
+      "_AuthenticatedLayout-49277159.js",
+      "_DropdownLink-4735ad2e.js",
+      "__plugin-vue_export-helper-c27b6911.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Admin/GameSetting/Level/Edit.vue"
+  },
+  "resources/js/Pages/Admin/GameSetting/Level/Index.vue": {
+    "file": "assets/Index-a6ff077c.js",
+    "imports": [
+      "resources/js/app.js",
+      "_GameSetting-38a98955.js",
+      "resources/js/Pages/Admin/GameSetting/Level/Index/Partials/Create.vue",
+      "resources/js/Pages/Admin/GameSetting/Level/Index/Partials/All.vue",
+      "_AuthWithoutSidebarLayout-3b9d1bd0.js",
+      "_AuthenticatedLayout-49277159.js",
+      "_DropdownLink-4735ad2e.js",
+      "_Box-53e3f365.js",
+      "__plugin-vue_export-helper-c27b6911.js",
+      "_Breadcrumbs-c157ac91.js",
+      "_BoxWithTitle-a3c9f2bc.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Admin/GameSetting/Level/Index.vue"
+  },
+  "resources/js/Pages/Admin/GameSetting/Level/Index/Partials/All.vue": {
+    "file": "assets/All-f332c7c4.js",
+    "imports": [
+      "_BoxWithTitle-a3c9f2bc.js",
+      "resources/js/app.js",
+      "__plugin-vue_export-helper-c27b6911.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Admin/GameSetting/Level/Index/Partials/All.vue"
+  },
+  "resources/js/Pages/Admin/GameSetting/Level/Index/Partials/Create.vue": {
+    "file": "assets/Create-538e989c.js",
+    "imports": [
+      "resources/js/app.js",
+      "_BoxWithTitle-a3c9f2bc.js",
+      "__plugin-vue_export-helper-c27b6911.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Admin/GameSetting/Level/Index/Partials/Create.vue"
+  },
+  "resources/js/Pages/Admin/GameSetting/Stats.vue": {
+    "file": "assets/Stats-46d36db6.js",
+    "imports": [
+      "resources/js/app.js",
+      "_GameSetting-38a98955.js",
+      "_AuthWithoutSidebarLayout-3b9d1bd0.js",
+      "_AuthenticatedLayout-49277159.js",
+      "_DropdownLink-4735ad2e.js",
+      "_Box-53e3f365.js",
+      "__plugin-vue_export-helper-c27b6911.js",
+      "_Breadcrumbs-c157ac91.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Admin/GameSetting/Stats.vue"
+  },
+  "resources/js/Pages/Admin/Index.vue": {
+    "file": "assets/Index-7b778be4.js",
+    "imports": [
+      "_AuthWithoutSidebarLayout-3b9d1bd0.js",
+      "resources/js/app.js",
+      "_AuthenticatedLayout-49277159.js",
+      "_DropdownLink-4735ad2e.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Admin/Index.vue"
+  },
+  "resources/js/Pages/Admin/Submit.vue": {
+    "file": "assets/Submit-bd501f88.js",
+    "imports": [
+      "resources/js/app.js",
+      "_AuthWithSidebarLayout-53551b2d.js",
+      "_Box-53e3f365.js",
+      "_date-c7da505b.js",
+      "_AuthenticatedLayout-49277159.js",
+      "_DropdownLink-4735ad2e.js",
+      "__plugin-vue_export-helper-c27b6911.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Admin/Submit.vue"
+  },
+  "resources/js/Pages/Auth/ConfirmPassword.vue": {
+    "file": "assets/ConfirmPassword-54189e86.js",
+    "imports": [
+      "resources/js/app.js",
+      "_GuestLayout-43855e95.js",
+      "_TextInput-b12da949.js",
+      "_PrimaryButton-35509d27.js",
+      "resources/js/Pages/FrontPage/Components/Search.vue",
+      "__plugin-vue_export-helper-c27b6911.js",
+      "_DropdownLink-4735ad2e.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Auth/ConfirmPassword.vue"
+  },
+  "resources/js/Pages/Auth/ForgotPassword.vue": {
+    "file": "assets/ForgotPassword-ead8d68a.js",
+    "imports": [
+      "resources/js/app.js",
+      "_GuestLayout-43855e95.js",
+      "_TextInput-b12da949.js",
+      "_PrimaryButton-35509d27.js",
+      "resources/js/Pages/FrontPage/Components/Search.vue",
+      "__plugin-vue_export-helper-c27b6911.js",
+      "_DropdownLink-4735ad2e.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Auth/ForgotPassword.vue"
+  },
+  "resources/js/Pages/Auth/Login.vue": {
+    "file": "assets/Login-e2236935.js",
+    "imports": [
+      "resources/js/app.js",
+      "_Box-53e3f365.js",
+      "_GuestLayout-43855e95.js",
+      "_TextInput-b12da949.js",
+      "_PrimaryButton-35509d27.js",
+      "__plugin-vue_export-helper-c27b6911.js",
+      "resources/js/Pages/FrontPage/Components/Search.vue",
+      "_DropdownLink-4735ad2e.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Auth/Login.vue"
+  },
+  "resources/js/Pages/Auth/Register.vue": {
+    "file": "assets/Register-f7f904ce.js",
+    "imports": [
+      "resources/js/app.js",
+      "_GuestLayout-43855e95.js",
+      "_TextInput-b12da949.js",
+      "_Box-53e3f365.js",
+      "_PrimaryButton-35509d27.js",
+      "resources/js/Pages/FrontPage/Components/Search.vue",
+      "__plugin-vue_export-helper-c27b6911.js",
+      "_DropdownLink-4735ad2e.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Auth/Register.vue"
+  },
+  "resources/js/Pages/Auth/ResetPassword.vue": {
+    "file": "assets/ResetPassword-5e8bf50c.js",
+    "imports": [
+      "resources/js/app.js",
+      "_GuestLayout-43855e95.js",
+      "_TextInput-b12da949.js",
+      "_PrimaryButton-35509d27.js",
+      "resources/js/Pages/FrontPage/Components/Search.vue",
+      "__plugin-vue_export-helper-c27b6911.js",
+      "_DropdownLink-4735ad2e.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Auth/ResetPassword.vue"
+  },
+  "resources/js/Pages/Auth/VerifyEmail.vue": {
+    "file": "assets/VerifyEmail-e8a8cf2b.js",
+    "imports": [
+      "resources/js/app.js",
+      "_GuestLayout-43855e95.js",
+      "_PrimaryButton-35509d27.js",
+      "resources/js/Pages/FrontPage/Components/Search.vue",
+      "__plugin-vue_export-helper-c27b6911.js",
+      "_DropdownLink-4735ad2e.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Auth/VerifyEmail.vue"
+  },
+  "resources/js/Pages/Contact.vue": {
+    "file": "assets/Contact-9f569d03.js",
+    "imports": [
+      "resources/js/app.js",
+      "_GuestLayout-43855e95.js",
+      "resources/js/Pages/FrontPage/Components/Search.vue",
+      "__plugin-vue_export-helper-c27b6911.js",
+      "_DropdownLink-4735ad2e.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Contact.vue"
+  },
+  "resources/js/Pages/Dashboard.vue": {
+    "file": "assets/Dashboard-55a69203.js",
+    "imports": [
+      "resources/js/app.js",
+      "_AuthWithoutSidebarLayout-3b9d1bd0.js",
+      "_Box-53e3f365.js",
+      "_AuthenticatedLayout-49277159.js",
+      "_DropdownLink-4735ad2e.js",
+      "__plugin-vue_export-helper-c27b6911.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Dashboard.vue"
+  },
+  "resources/js/Pages/Debug.vue": {
+    "file": "assets/Debug-8ca8641a.js",
+    "imports": [
+      "__plugin-vue_export-helper-c27b6911.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Debug.vue"
+  },
+  "resources/js/Pages/FrontPage.vue": {
+    "file": "assets/FrontPage-39c825f6.js",
+    "imports": [
+      "resources/js/app.js",
+      "resources/js/Pages/FrontPage/Components/TopUser.vue",
+      "_GuestLayout-43855e95.js",
+      "__plugin-vue_export-helper-c27b6911.js",
+      "resources/js/Pages/FrontPage/Components/Search.vue",
+      "_DropdownLink-4735ad2e.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/FrontPage.vue"
+  },
+  "resources/js/Pages/FrontPage/Components/Search.vue": {
+    "file": "assets/Search-7974246e.js",
+    "imports": [
+      "__plugin-vue_export-helper-c27b6911.js",
+      "resources/js/app.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/FrontPage/Components/Search.vue"
+  },
+  "resources/js/Pages/FrontPage/Components/TopUser.vue": {
+    "file": "assets/TopUser-22c4a640.js",
+    "imports": [
+      "__plugin-vue_export-helper-c27b6911.js",
+      "resources/js/app.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/FrontPage/Components/TopUser.vue"
+  },
+  "resources/js/Pages/MultiPlayer/Category.vue": {
+    "file": "assets/Category-e9c8210f.js",
+    "imports": [
+      "resources/js/app.js",
+      "_AuthWithoutSidebarLayout-3b9d1bd0.js",
+      "_Box-53e3f365.js",
+      "_AuthenticatedLayout-49277159.js",
+      "_DropdownLink-4735ad2e.js",
+      "__plugin-vue_export-helper-c27b6911.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/MultiPlayer/Category.vue"
+  },
+  "resources/js/Pages/MultiPlayer/Index.vue": {
+    "file": "assets/Index-737eaccd.js",
+    "imports": [
+      "resources/js/app.js",
+      "_Box-53e3f365.js",
+      "_BoxWithTitle-a3c9f2bc.js",
+      "_AuthWithoutSidebarLayout-3b9d1bd0.js",
+      "__plugin-vue_export-helper-c27b6911.js",
+      "_AuthenticatedLayout-49277159.js",
+      "_DropdownLink-4735ad2e.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/MultiPlayer/Index.vue"
+  },
+  "resources/js/Pages/MultiPlayer/Index/Partials/DisplayButtons.vue": {
+    "file": "assets/DisplayButtons-9dcac5ed.js",
+    "imports": [
+      "resources/js/app.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/MultiPlayer/Index/Partials/DisplayButtons.vue"
+  },
+  "resources/js/Pages/MultiPlayer/Index/Partials/DisplayUser.vue": {
+    "file": "assets/DisplayUser-5b714337.js",
+    "imports": [
+      "resources/js/app.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/MultiPlayer/Index/Partials/DisplayUser.vue"
+  },
+  "resources/js/Pages/MultiPlayer/Index/Partials/StartButton.vue": {
+    "file": "assets/StartButton-06687a50.js",
+    "imports": [
+      "resources/js/app.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/MultiPlayer/Index/Partials/StartButton.vue"
+  },
+  "resources/js/Pages/MultiPlayer/Play.vue": {
+    "file": "assets/Play-cf35c35f.js",
+    "imports": [
+      "resources/js/app.js",
+      "_AuthWithoutSidebarLayout-3b9d1bd0.js",
+      "resources/js/Pages/MultiPlayer/Index/Partials/DisplayButtons.vue",
+      "resources/js/Pages/MultiPlayer/Index/Partials/StartButton.vue",
+      "resources/js/Pages/MultiPlayer/Index/Partials/DisplayUser.vue",
+      "_AuthenticatedLayout-49277159.js",
+      "_DropdownLink-4735ad2e.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/MultiPlayer/Play.vue"
+  },
+  "resources/js/Pages/MultiPlayer/Quiz.css": {
+    "file": "assets/Quiz-996e2499.css",
+    "src": "resources/js/Pages/SinglePlayer/Index.css"
+  },
+  "resources/js/Pages/MultiPlayer/Quiz.vue": {
+    "css": [
+      "assets/Quiz-996e2499.css"
+    ],
+    "file": "assets/Quiz-6464d883.js",
+    "imports": [
+      "resources/js/app.js",
+      "_AuthWithoutSidebarLayout-3b9d1bd0.js",
+      "_Box-53e3f365.js",
+      "_AuthenticatedLayout-49277159.js",
+      "_DropdownLink-4735ad2e.js",
+      "__plugin-vue_export-helper-c27b6911.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/MultiPlayer/Quiz.vue"
+  },
+  "resources/js/Pages/Profile/Index.vue": {
+    "file": "assets/Index-b9deb9d2.js",
+    "imports": [
+      "resources/js/app.js",
+      "_AuthWithoutSidebarLayout-3b9d1bd0.js",
+      "_Breadcrumbs-c157ac91.js",
+      "_Box-53e3f365.js",
+      "resources/js/Pages/Profile/Index/Partials/ProfileImages.vue",
+      "_AuthenticatedLayout-49277159.js",
+      "_DropdownLink-4735ad2e.js",
+      "__plugin-vue_export-helper-c27b6911.js",
+      "_BoxWithTitle-a3c9f2bc.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Profile/Index.vue"
+  },
+  "resources/js/Pages/Profile/Index/Partials/ProfileImages.vue": {
+    "file": "assets/ProfileImages-e6b9cede.js",
+    "imports": [
+      "_BoxWithTitle-a3c9f2bc.js",
+      "resources/js/app.js",
+      "__plugin-vue_export-helper-c27b6911.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Profile/Index/Partials/ProfileImages.vue"
+  },
+  "resources/js/Pages/Questions/Create.vue": {
+    "file": "assets/Create-6a5ea41e.js",
+    "imports": [
+      "resources/js/app.js",
+      "_AuthWithSidebarLayout-53551b2d.js",
+      "_Box-53e3f365.js",
+      "_date-c7da505b.js",
+      "_Breadcrumbs-c157ac91.js",
+      "_AuthenticatedLayout-49277159.js",
+      "_DropdownLink-4735ad2e.js",
+      "__plugin-vue_export-helper-c27b6911.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Questions/Create.vue"
+  },
+  "resources/js/Pages/Questions/Edit.vue": {
+    "file": "assets/Edit-e20f10e4.js",
+    "imports": [
+      "resources/js/app.js",
+      "_AuthWithSidebarLayout-53551b2d.js",
+      "_Box-53e3f365.js",
+      "_date-c7da505b.js",
+      "_Breadcrumbs-c157ac91.js",
+      "_AuthenticatedLayout-49277159.js",
+      "_DropdownLink-4735ad2e.js",
+      "__plugin-vue_export-helper-c27b6911.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Questions/Edit.vue"
+  },
+  "resources/js/Pages/Questions/Index.vue": {
+    "file": "assets/Index-b16ca3fe.js",
+    "imports": [
+      "resources/js/app.js",
+      "_AuthWithoutSidebarLayout-3b9d1bd0.js",
+      "_Breadcrumbs-c157ac91.js",
+      "_Box-53e3f365.js",
+      "_AuthenticatedLayout-49277159.js",
+      "_DropdownLink-4735ad2e.js",
+      "__plugin-vue_export-helper-c27b6911.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Questions/Index.vue"
+  },
+  "resources/js/Pages/Questions/Show.vue": {
+    "file": "assets/Show-b380ad2f.js",
+    "imports": [
+      "_AuthWithoutSidebarLayout-3b9d1bd0.js",
+      "_Breadcrumbs-c157ac91.js",
+      "_Box-53e3f365.js",
+      "resources/js/app.js",
+      "_date-c7da505b.js",
+      "_AuthenticatedLayout-49277159.js",
+      "_DropdownLink-4735ad2e.js",
+      "__plugin-vue_export-helper-c27b6911.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Questions/Show.vue"
+  },
+  "resources/js/Pages/SinglePlayer/Category.vue": {
+    "file": "assets/Category-36a52d44.js",
+    "imports": [
+      "resources/js/app.js",
+      "_AuthWithoutSidebarLayout-3b9d1bd0.js",
+      "_Box-53e3f365.js",
+      "_AuthenticatedLayout-49277159.js",
+      "_DropdownLink-4735ad2e.js",
+      "__plugin-vue_export-helper-c27b6911.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/SinglePlayer/Category.vue"
+  },
+  "resources/js/Pages/SinglePlayer/Index.css": {
+    "file": "assets/Quiz-996e2499.css",
+    "src": "resources/js/Pages/SinglePlayer/Index.css"
+  },
+  "resources/js/Pages/SinglePlayer/Index.vue": {
+    "css": [
+      "assets/Quiz-996e2499.css"
+    ],
+    "file": "assets/Index-dc39c9f6.js",
+    "imports": [
+      "resources/js/app.js",
+      "_AuthWithoutSidebarLayout-3b9d1bd0.js",
+      "_Box-53e3f365.js",
+      "_AuthenticatedLayout-49277159.js",
+      "_DropdownLink-4735ad2e.js",
+      "__plugin-vue_export-helper-c27b6911.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/SinglePlayer/Index.vue"
+  },
+  "resources/js/Pages/SinglePlayer/Result.vue": {
+    "file": "assets/Result-19c50071.js",
+    "imports": [
+      "resources/js/app.js",
+      "_AuthWithoutSidebarLayout-3b9d1bd0.js",
+      "_Box-53e3f365.js",
+      "_AuthenticatedLayout-49277159.js",
+      "_DropdownLink-4735ad2e.js",
+      "__plugin-vue_export-helper-c27b6911.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/SinglePlayer/Result.vue"
+  },
+  "resources/js/app.css": {
+    "file": "assets/app-79dc0b3f.css",
+    "src": "resources/js/app.css"
+  },
+  "resources/js/app.js": {
+    "css": [
+      "assets/app-79dc0b3f.css"
+    ],
+    "dynamicImports": [
+      "resources/js/Pages/About.vue",
+      "resources/js/Pages/Admin/GameSetting/Category/Edit.vue",
+      "resources/js/Pages/Admin/GameSetting/Category/Index.vue",
+      "resources/js/Pages/Admin/GameSetting/Category/Index/Partials/All.vue",
+      "resources/js/Pages/Admin/GameSetting/Category/Index/Partials/Create.vue",
+      "resources/js/Pages/Admin/GameSetting/Images/Index.vue",
+      "resources/js/Pages/Admin/GameSetting/Level/Edit.vue",
+      "resources/js/Pages/Admin/GameSetting/Level/Index.vue",
+      "resources/js/Pages/Admin/GameSetting/Level/Index/Partials/All.vue",
+      "resources/js/Pages/Admin/GameSetting/Level/Index/Partials/Create.vue",
+      "resources/js/Pages/Admin/GameSetting/Stats.vue",
+      "resources/js/Pages/Admin/Index.vue",
+      "resources/js/Pages/Admin/Submit.vue",
+      "resources/js/Pages/Auth/ConfirmPassword.vue",
+      "resources/js/Pages/Auth/ForgotPassword.vue",
+      "resources/js/Pages/Auth/Login.vue",
+      "resources/js/Pages/Auth/Register.vue",
+      "resources/js/Pages/Auth/ResetPassword.vue",
+      "resources/js/Pages/Auth/VerifyEmail.vue",
+      "resources/js/Pages/Contact.vue",
+      "resources/js/Pages/Dashboard.vue",
+      "resources/js/Pages/Debug.vue",
+      "resources/js/Pages/FrontPage.vue",
+      "resources/js/Pages/FrontPage/Components/Search.vue",
+      "resources/js/Pages/FrontPage/Components/TopUser.vue",
+      "resources/js/Pages/MultiPlayer/Category.vue",
+      "resources/js/Pages/MultiPlayer/Index.vue",
+      "resources/js/Pages/MultiPlayer/Index/Partials/DisplayButtons.vue",
+      "resources/js/Pages/MultiPlayer/Index/Partials/DisplayUser.vue",
+      "resources/js/Pages/MultiPlayer/Index/Partials/StartButton.vue",
+      "resources/js/Pages/MultiPlayer/Play.vue",
+      "resources/js/Pages/MultiPlayer/Quiz.vue",
+      "resources/js/Pages/Profile/Index.vue",
+      "resources/js/Pages/Profile/Index/Partials/ProfileImages.vue",
+      "resources/js/Pages/Questions/Create.vue",
+      "resources/js/Pages/Questions/Edit.vue",
+      "resources/js/Pages/Questions/Index.vue",
+      "resources/js/Pages/Questions/Show.vue",
+      "resources/js/Pages/SinglePlayer/Category.vue",
+      "resources/js/Pages/SinglePlayer/Index.vue",
+      "resources/js/Pages/SinglePlayer/Result.vue"
+    ],
+    "file": "assets/app-dd8571fb.js",
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  }
+}

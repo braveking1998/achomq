@@ -1,0 +1,1 @@
+import{o as t,i as s,w as a,q as n,p as o,u as l,k as u}from"./app-dd8571fb.js";const h={__name:"DropdownLink",props:{href:{type:String,required:!0}},setup(r){return(e,i)=>(t(),s(l(u),{href:e.route(r.href),class:o(["btn-link",{"bg-blue-light text-white":e.route().current(r.href)}])},{default:a(()=>[n(e.$slots,"default")]),_:3},8,["href","class"]))}};export{h as _};
