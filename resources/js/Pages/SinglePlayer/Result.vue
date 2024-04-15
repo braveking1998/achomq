@@ -1,16 +1,6 @@
 <template>
   <Head title="بازی تک نفره" />
   <AuthWithoutSidebarLayout>
-    <div
-      class="hidden bg-green-500 hover:bg-green-500 !bg-green-500 hover:!bg-green-500 text-green-500 hover:text-green-500 border-green-500 hover:border-green-500"
-    ></div>
-    <div
-      class="hidden bg-red-500 hover:bg-red-500 !bg-red-500 hover:!bg-red-500 text-red-500 hover:text-red-500 border-red-500 hover:border-red-500"
-    ></div>
-    <div
-      class="hidden bg-blue-light hover:bg-blue-light !bg-blue-light hover:!bg-blue-light text-blue-light hover:text-blue-light border-blue-light hover:border-blue-light"
-    ></div>
-
     <template #content>
       <Box class="container md:max-w-[50%] mx-auto" :class="`!bg-${color}`">
         <div

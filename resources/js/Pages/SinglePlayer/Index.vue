@@ -104,7 +104,7 @@ const answerClicked = (id, is_correct) => {
     timerEnabled.value = false;
   }
 
-  if (is_correct) {
+  if (Number(is_correct)) {
     correctAnswers.value++;
   }
 };

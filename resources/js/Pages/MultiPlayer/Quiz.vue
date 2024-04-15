@@ -168,7 +168,7 @@ const answerClicked = (q_id, id, is_correct) => {
     timerEnabled.value = false;
   }
 
-  if (is_correct == 1) {
+  if (Number(is_correct)) {
     correctAnswers.value++;
   }
 };
