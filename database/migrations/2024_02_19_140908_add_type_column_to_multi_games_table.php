@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('multi_games', function (Blueprint $table) {
-            $table->foreignIdFor('\App\Models\MultiGameType')->after('game_id')->nullable()->constrained('multi_game_types');
+            $table->foreignIdFor('\App\Models\MultiGameType')->after('id')->nullable()->constrained('multi_game_types');
         });
     }
 
