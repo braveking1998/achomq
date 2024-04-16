@@ -14,14 +14,18 @@ class QuestionFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+    protected static $qId = 51;
+
     public function definition(): array
     {
         return [
+            'id' => self::$qId++,
             'unique_id' => fake()->uuid(),
             'text' => fake()->sentence(),
             'status' => 1,
-            'level_id' => 1,
-            'category_id' => fake()->randomElement([4, 5]),
+            'level_id' => 3,
+            'category_id' => fake()->randomElement([1, 3]),
             'user_id' => 2,
         ];
     }
