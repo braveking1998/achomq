@@ -11,7 +11,7 @@
 
     <!-- Slider -->
     <section
-      class="bg-[url('/images/header-bg.svg')] bg-no-repeat bg-left-bottom bg-cover h-[550px] sm:h-fit p-10 sm:px-0 md:py-20"
+      class="bg-[url('/images/header-bg.webp')] bg-no-repeat bg-left-bottom bg-cover h-[550px] sm:h-fit p-10 sm:px-0 md:py-20"
     >
       <div
         class="flex flex-col-reverse sm:flex-row justify-center content-center gap-12 lg:justify-evenly"
@@ -29,7 +29,7 @@
         <div
           class="max-h-[200px] max-w-[240px] m-auto sm:m-0 sm:w-1/4 lg:w-1/3 sm:max-h-none sm:max-w-none"
         >
-          <img src="/images/logo.png" />
+          <img src="/images/logo.webp" />
         </div>
       </div>
       <div
@@ -53,7 +53,9 @@
   </main>
 
   <!-- Footer -->
-  <footer class="bg-[url('/images/footer-bg.svg')] py-8 text-gray-200 text-sm">
+  <footer
+    class="bg-[url('/images/footer-bg.webp')] bg-no-repeat bg-left-top bg-cover h-[450px] md:h-[350px] text-gray-200 text-lg pt-10"
+  >
     <div
       class="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16 my-4 md:my-14"
     >

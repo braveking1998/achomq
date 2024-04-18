@@ -37,8 +37,6 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'auth' => [
                 'user' => $request->user(),
-                'selectedImage' => $selectedImage,
-                'level' => $request->user()->level ?? false,
             ],
             'flash' => [
                 'success' => $request->session()->get('success'),

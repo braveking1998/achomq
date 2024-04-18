@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use App\Events\AddHeart;
+use App\Events\StartSinglePlayerGame;
 use App\Listeners\DecreaseEventSubscriber;
+use App\Listeners\DecreaseHeart;
+use App\Listeners\EarnHeart;
 use App\Listeners\IncreaseEventSubscriber;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -20,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        StartSinglePlayerGame::class => [
+            DecreaseHeart::class
+        ]
     ];
 
     protected $subscribe = [

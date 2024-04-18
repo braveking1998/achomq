@@ -1,5 +1,4 @@
 New tasks:
-1. Add heart to play single games (not done)
 2. Add notification for playing multiplayer (not done)
 3. Add more features
  :: edit name
@@ -16,3 +15,4 @@ New tasks:
 2. decrease price of multiplayer games (done)
 3. give the reward to the winner of multiplayer games (done)
 4. give the reward to the designer of an approved question (not done)
+5. Add heart to play single games (not done)

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col min-h-[98vh]">
+  <div class="flex flex-col min-h-[100vh]">
     <header>
       <div class="py-6 border-b-4 border-gray-600">
         <HeaderSmallDevices class="block md:hidden" />

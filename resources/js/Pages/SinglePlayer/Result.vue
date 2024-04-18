@@ -1,13 +1,16 @@
 <template>
   <Head title="بازی تک نفره" />
   <AuthWithoutSidebarLayout>
+    <template #header>
+      <Breadcrumbs :breadcrumbs="breadcrumbs"> </Breadcrumbs>
+    </template>
     <template #content>
       <Box class="container md:max-w-[50%] mx-auto" :class="`!bg-${color}`">
         <div
           class="flex flex-col gap-4 justify-center items-center text-white font-bold py-8"
         >
           <div class="w-52 h-52">
-            <img src="/images/logo.png" />
+            <img src="/images/logo.webp" />
           </div>
           <p>کل سوالات: {{ total }}</p>
           <p>
@@ -37,6 +40,7 @@
 import { Head, Link } from "@inertiajs/vue3";
 import AuthWithoutSidebarLayout from "@/Layouts/AuthWithoutSidebarLayout.vue";
 import Box from "@/Components/Box.vue";
+import Breadcrumbs from "@/Components/Breadcrumbs.vue";
 
 defineProps({
   correct: Number,
@@ -45,4 +49,7 @@ defineProps({
   earnedCoins: Number,
   lostCoins: Number,
 });
+
+// breadcrumbs
+const breadcrumbs = [{ label: "داشبورد", url: route("dashboard") }];
 </script>

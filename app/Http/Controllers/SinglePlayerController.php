@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Events\CorrectAnswer;
+use App\Events\StartSinglePlayerGame;
 use App\Events\WrongAnswer;
+use App\Jobs\EarnHeart;
 use App\Models\Category;
 use App\Models\SinglePlayerFeature;
 use Illuminate\Database\Eloquent\Builder;
@@ -44,6 +46,12 @@ class SinglePlayerController extends Controller
 
     public function category()
     {
+        $user = Auth::user();
+        $canPlay = ($user->hearts) ? 'true' : 'false';
+        StartSinglePlayerGame::dispatch($user);
+        if ($user->hearts >= 0) {
+            EarnHeart::dispatchIf($user->hearts <= 4, $user)->delay(now()->addMinutes(1));
+        }
         return Inertia::render(
             'SinglePlayer/Category',
             [
@@ -54,6 +62,7 @@ class SinglePlayerController extends Controller
                     ->get()
                     ->shuffle()
                     ->take(3),
+                'canPlay' => $canPlay
             ]
         );
     }

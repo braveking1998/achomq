@@ -13,6 +13,9 @@ export default {
     {
       pattern: /(hover:)?\!?(text|bg|border)-(red-500|green-500|blue-light)/,
     },
+    "hover:text-blue-light",
+    "hover:text-green-500",
+    "hover:text-red-500",
   ],
   theme: {
     extend: {

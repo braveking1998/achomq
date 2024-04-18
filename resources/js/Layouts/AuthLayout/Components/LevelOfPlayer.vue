@@ -27,7 +27,7 @@
           :style="{
             strokeDashoffset:
               219.91148575129 -
-              (auth.user.points * 219.91148575129) / auth.level.max,
+              (auth.user.points * 219.91148575129) / auth.user.level.max,
           }"
         ></circle>
         <text
@@ -36,14 +36,14 @@
           y="57%"
           transform="matrix(0, 1, -1, 0, 80, 0)"
         >
-          {{ Math.floor((auth.user.points / auth.level.max) * 100) }}%
+          {{ Math.floor((auth.user.points / auth.user.level.max) * 100) }}%
         </text>
       </svg>
     </div>
     <div
       class="-mr-10 bg-gray-300 border-b-2 border-green-400 text-center p-4 pr-16 pl-10 font-bold text-lg text-green-700"
     >
-      {{ auth.level.name }}
+      {{ auth.user.level.name }}
     </div>
   </div>
 </template>

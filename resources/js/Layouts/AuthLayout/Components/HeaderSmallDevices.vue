@@ -2,7 +2,7 @@
   <!-- Phones -->
   <DashboardDropdown
     :name="auth.user.name"
-    :src="auth.selectedImage.src"
+    :src="auth.user.chosen_image.src"
     class="block md:hidden"
   >
     <template #header>
@@ -56,7 +56,7 @@ import LevelOfPlayer from "@/Layouts/AuthLayout/Components/LevelOfPlayer.vue";
 import PurchaseItmes from "@/Layouts/AuthLayout/Components/PurchaseItems.vue";
 import DashboardDropdown from "@/Layouts/AuthLayout/Components/DashboardDropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
-import { reactive, computed } from "vue";
+import { computed } from "vue";
 import { Link, usePage } from "@inertiajs/vue3";
 import { useFullscreen } from "@vueuse/core";
 

@@ -52,7 +52,7 @@
       <div class="flex items-center gap-4 relative">
         <div class="w-24 h-24 border-2 border-gray-700 p-1 rounded-full">
           <img
-            :src="auth.selectedImage.src"
+            :src="auth.user.chosen_image.src"
             alt="profile"
             class="w-full h-full rounded-full"
           />
@@ -90,7 +90,7 @@ import LevelOfPlayer from "@/Layouts/AuthLayout/Components/LevelOfPlayer.vue";
 import PurchaseItmes from "@/Layouts/AuthLayout/Components/PurchaseItems.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
 import Message from "@/Layouts/AuthLayout/Components/Message.vue";
-import { reactive, ref, computed } from "vue";
+import { ref, computed } from "vue";
 import { Link, usePage } from "@inertiajs/vue3";
 import { useFullscreen } from "@vueuse/core";
 

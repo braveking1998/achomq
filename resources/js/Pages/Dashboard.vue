@@ -5,8 +5,10 @@
       <!-- Heart -->
       <Box class="p-6">
         <div class="text-center">
-          تعداد قلب های شما برای شرکت در مسابقه تک نفره: <span>5 </span>
+          تعداد قلب های شما برای شرکت در مسابقه تک نفره:
+          <span>{{ auth.user.hearts }}&nbsp;</span>
           <font-awesome-icon :icon="['fas', 'heart']" class="text-red-600" />
+          <span>&nbsp;(هر یک دقیقه به شما یک قلب داده می شود.)</span>
         </div>
       </Box>
 
@@ -55,7 +57,11 @@
 import AuthWithoutSidebarLayout from "@/Layouts/AuthWithoutSidebarLayout.vue";
 import { Head, Link } from "@inertiajs/vue3";
 import Box from "@/Components/Box.vue";
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { usePage } from "@inertiajs/vue3";
+
+const page = usePage();
+const auth = computed(() => page.props.auth);
 
 const help = ref(false);
 </script>
