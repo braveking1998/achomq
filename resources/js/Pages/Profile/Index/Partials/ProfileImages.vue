@@ -77,7 +77,7 @@ defineProps({
 });
 
 const page = usePage();
-const selectedImage = computed(() => page.props.auth.selectedImage);
+const selectedImage = computed(() => page.props.auth.user.chosen_image);
 const errors = computed(() => Object.values(page.props.errors));
 
 const chooseFile = (event) => {
