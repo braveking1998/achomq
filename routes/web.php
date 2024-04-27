@@ -11,7 +11,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\LevelController;
 use App\Http\Controllers\Admin\StatsController;
 use App\Http\Controllers\MultiPlayerController;
-use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\SinglePlayerController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\UploadPrivateImagesController;
@@ -57,7 +57,6 @@ require __DIR__ . '/auth.php';
 
 // Messages
 Route::resource('messages', MessageController::class)
-    ->only(['index'])
     ->middleware('auth');
 
 // Questions

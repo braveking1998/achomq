@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+use App\Models\message;
+use Illuminate\Http\Request;
 use App\Models\User;
 use Inertia\Inertia;
-use App\Models\Message;
 use App\Models\ProfileImage;
-use Illuminate\Http\Request;
 use App\Notifications\AdminMessage;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Notifications\DatabaseNotification;
@@ -18,7 +19,7 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Notification/Index', [
+        return Inertia::render('Admin/Notification/Index', [
             'messages' => Message::mostRecent()->paginate(10),
         ]);
     }
@@ -28,7 +29,7 @@ class NotificationController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Notification/Create', [
+        return Inertia::render('Admin/Notification/Create', [
             'users' => User::all(['id', 'name'])->except(1),
             'images' => ProfileImage::where('type', 'public')->get(),
         ]);
@@ -75,7 +76,7 @@ class NotificationController extends Controller
         if (in_array('all', $message['users'])) {
             $all = 'all';
         }
-        return Inertia::render('Notification/Show', [
+        return Inertia::render('Admin/Notification/Show', [
             'message' => $message,
             'users' => $all ?? User::find($users)
         ]);
