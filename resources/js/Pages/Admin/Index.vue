@@ -13,15 +13,10 @@
         <Link
           :href="route('admin.setting.index')"
           class="btn-dashboard text-red-500 border-red-500 hover:bg-red-500"
-          >تنظیمات مسابقات تک نفره</Link
+          >تنظیمات بازی ها</Link
         >
-        <Link
-          :href="route('single-player.category')"
-          class="btn-dashboard text-green-500 border-green-500 hover:bg-green-500"
-          >تنظیمات مسابقات دو نفره</Link
-        >
-        <Link :href="route('single-player.category')" class="btn-dashboard"
-          >تنظیمات مسابقات گروهی</Link
+        <Link :href="route('admin.notification.index')" class="btn-dashboard"
+          >ارسال پیام به کاربران</Link
         >
       </div>
     </template>

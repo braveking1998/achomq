@@ -94,7 +94,7 @@ return [
         'array' => 'The :attribute field must not have more than :max items.',
         'file' => 'بیشترین حجم :attribute می تواند :max کیلوبایت باشد.',
         'numeric' => 'The :attribute field must not be greater than :max.',
-        'string' => 'The :attribute field must not be greater than :max characters.',
+        'string' => 'فیلد :attribute باید حداکثر :max حرف باشد.',
     ],
     'max_digits' => 'The :attribute field must not have more than :max digits.',
     'mimes' => 'فرمت :attribute باید :values باشد.',
@@ -103,7 +103,7 @@ return [
         'array' => 'The :attribute field must have at least :min items.',
         'file' => 'The :attribute field must be at least :min kilobytes.',
         'numeric' => 'The :attribute field must be at least :min.',
-        'string' => 'The :attribute field must be at least :min characters.',
+        'string' => 'فیلد :attribute باید حداقل :min حرف باشد.',
     ],
     'min_digits' => 'The :attribute field must have at least :min digits.',
     'missing' => 'The :attribute field must be missing.',
@@ -201,6 +201,9 @@ return [
         'type' => 'نوع',
         'image' => 'عکس',
         'url' => 'آدرس اینترنتی',
+        'text' => 'پیام',
+        'selectedUsers' => 'انتخاب کاربران',
+        'title' => 'عنوان'
     ],
 
 ];

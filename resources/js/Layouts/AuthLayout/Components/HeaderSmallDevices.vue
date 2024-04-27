@@ -28,7 +28,12 @@
           :href="route('messages.index')"
         >
           <div class="relative text-2xl">
-            <div class="absolute text-xs top-0 right-0 -mr-1 -mt-1">🔴</div>
+            <div
+              class="absolute text-xs top-0 right-0 -mr-1 -mt-1"
+              v-if="messages.length"
+            >
+              🔴
+            </div>
             💬
           </div>
           <div class="text-lg text-gray-100">پیام ها</div>
@@ -62,6 +67,7 @@ import { useFullscreen } from "@vueuse/core";
 
 const page = usePage();
 const auth = computed(() => page.props.auth);
+const messages = computed(() => page.props.auth.messages);
 
 // fullscreen
 const { toggle } = useFullscreen();

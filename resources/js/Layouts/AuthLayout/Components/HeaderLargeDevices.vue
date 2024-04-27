@@ -23,6 +23,7 @@
           <div
             class="absolute text-xs top-0 right-0 -mr-1 -mt-1"
             id="toggleMessages"
+            v-if="messages.length"
           >
             🔴
           </div>
@@ -43,9 +44,16 @@
             </div>
           </div>
           <div class="py-4 flex flex-col items-center gap-2">
-            <Message href="messages.index" text="سلام..." />
-            <Message href="messages.index" />
-            <Message href="messages.index" />
+            <div v-if="messages.length">
+              <Message
+                v-for="message in messages"
+                href="messages.index"
+                :title="message.data.title"
+                :image="message.data.image"
+                :date="message.created_at"
+              />
+            </div>
+            <div v-else><p>هیج پیام جدیدی وجود ندارد.</p></div>
           </div>
         </div>
       </div>
@@ -96,6 +104,7 @@ import { useFullscreen } from "@vueuse/core";
 
 const page = usePage();
 const auth = computed(() => page.props.auth);
+const messages = computed(() => page.props.auth.messages);
 
 const isMenu = ref(false);
 const isMessageCenterOpen = ref(false);

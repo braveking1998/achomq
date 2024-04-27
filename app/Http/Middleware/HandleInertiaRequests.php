@@ -2,10 +2,11 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\ProfileImage;
-use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
+use App\Models\ProfileImage;
+use Illuminate\Http\Request;
+use Illuminate\Notifications\DatabaseNotification;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -37,6 +38,7 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'auth' => [
                 'user' => $request->user(),
+                'messages' => DatabaseNotification::where('notifiable_id', $request->user()->id)->where('read_at', null)->latest()->limit(3)->get(),
             ],
             'flash' => [
                 'success' => $request->session()->get('success'),

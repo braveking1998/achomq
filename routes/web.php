@@ -1,21 +1,22 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\LevelController;
-use App\Http\Controllers\Admin\StatsController;
-use App\Http\Controllers\Admin\SubmitQuestionController;
-use App\Http\Controllers\Admin\UploadPublicImagesController;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
 use App\Http\Controllers\DebugController;
-use App\Http\Controllers\MessagesController;
-use App\Http\Controllers\MultiPlayerController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\LevelController;
+use App\Http\Controllers\Admin\StatsController;
+use App\Http\Controllers\MultiPlayerController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SinglePlayerController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\UploadPrivateImagesController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
+use App\Http\Controllers\Admin\SubmitQuestionController;
+use App\Http\Controllers\Admin\UploadPublicImagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,10 +53,10 @@ Route::middleware('auth')->prefix('profile')->name('profile.')->group(function (
     Route::resource('images', UploadPrivateImagesController::class)->only(['store', 'destroy']);
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 // Messages
-Route::resource('messages', MessagesController::class)
+Route::resource('messages', MessageController::class)
     ->only(['index'])
     ->middleware('auth');
 
@@ -96,6 +97,7 @@ Route::middleware(['auth', 'verified', 'admin'])->name('admin.')->prefix('admin'
     Route::get('/', AdminController::class)->name('index');
     Route::resource('submit', SubmitQuestionController::class)
         ->only(['edit', 'update', 'destroy']);
+    Route::resource('notification', NotificationController::class)->except(['edit', 'update'])->parameter('notification', 'message');
     Route::prefix('setting')->name('setting.')->group(function () {
         Route::get('/', [CategoryController::class, 'index'])->name('index');
         Route::resource('category', CategoryController::class)->only(['index', 'store', 'edit', 'update', 'destroy']);

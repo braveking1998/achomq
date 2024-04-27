@@ -11,17 +11,6 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\User::factory()->create([
-            'name' => 'حریف نامشخص',
-            'phone_number' => '09123456789',
-            'email' => 'test@example.com',
-        ]);
-
-        \App\Models\User::factory()->create([
-            'name' => 'Braveking',
-            'phone_number' => '09370636563',
-            'email' => 'bravekingah@gmail.com',
-            'is_admin' => 1,
-        ]);
+        \App\Models\User::factory(10)->create();
     }
 }
