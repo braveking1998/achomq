@@ -1,13 +1,8 @@
 <template>
   <BoxWithTitle>
     <!-- Flash messages -->
-    <div
-      v-show="flashMessage && flashMessageVisible"
-      @click="flashMessageVisible = !flashMessageVisible"
-      class="flash-message"
-    >
-      {{ flashMessage }}
-    </div>
+    <FlashMessage ref="messageComponent" />
+
     <!-- Title -->
     <template #title>ایجاد دسته بندی جدید</template>
     <!-- Create Form -->
@@ -42,22 +37,13 @@
 </template>
 
 <script setup>
-import { useForm, usePage } from "@inertiajs/vue3";
-import { computed, ref } from "vue";
+import { useForm } from "@inertiajs/vue3";
+import { ref } from "vue";
 import BoxWithTitle from "@/Components/BoxWithTitle.vue";
+import FlashMessage from "@/Components/FlashMessage.vue";
 
 // Handle flash messages
-const page = usePage();
-const flashMessage = computed(() => {
-  return page.props.flash.success;
-});
-
-const flashMessageVisible = ref(true);
-const flashMessageVisibleChange = (time) => {
-  setTimeout(() => {
-    flashMessageVisible.value = false;
-  }, time);
-};
+const messageComponent = ref(null);
 
 const form = useForm({
   name: "",
@@ -67,9 +53,7 @@ const form = useForm({
 const create = () => {
   form.post(route("admin.setting.category.store"), {
     onSuccess: () => {
-      flashMessageVisible.value = true;
-
-      flashMessageVisibleChange(2000);
+      messageComponent.value.remover();
     },
   });
 };

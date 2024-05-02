@@ -11,8 +11,7 @@ class DebugController extends Controller
 {
     public function index(Request $request)
     {
-        // $collection = collect(['hi' => 'red', 'hello'])->toObject();
-
-        // return $collection->hi;
+        // Question::withTrashed()
+        //     ->restore();
     }
 }

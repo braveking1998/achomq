@@ -32,13 +32,13 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        $selectedImage = ($request->user()) ? ProfileImage::find($request->user()->profile_image) : false;
+        $messages = ($request->user()) ? DatabaseNotification::where('notifiable_id', $request->user()->id)->where('read_at', null)->latest()->limit(3)->get() : false;
 
         return [
             ...parent::share($request),
             'auth' => [
                 'user' => $request->user(),
-                'messages' => DatabaseNotification::where('notifiable_id', $request->user()->id)->where('read_at', null)->latest()->limit(3)->get(),
+                'messages' => $messages,
             ],
             'flash' => [
                 'success' => $request->session()->get('success'),

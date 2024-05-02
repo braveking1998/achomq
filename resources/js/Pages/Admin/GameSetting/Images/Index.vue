@@ -3,13 +3,7 @@
 
   <GameSetting tab="images">
     <!-- Flash messages -->
-    <div
-      v-show="flashMessage && flashMessageVisible"
-      @click="flashMessageVisible = !flashMessageVisible"
-      class="flash-message"
-    >
-      {{ flashMessage }}
-    </div>
+    <FlashMessage ref="messageComponent" />
 
     <!-- Upload public profile images -->
     <BoxWithTitle>
@@ -46,6 +40,7 @@
                 as="button"
                 method="delete"
                 class="bg-red-500 text-white px-3 py-1 rounded-full absolute -right-2 -top-2 hover:opacity-80"
+                v-if="image.id != 1"
               >
                 x
               </Link>
@@ -77,6 +72,7 @@ import { Head, router, usePage, Link } from "@inertiajs/vue3";
 import { computed, ref } from "vue";
 import GameSetting from "@/Layouts/GameSetting.vue";
 import BoxWithTitle from "@/Components/BoxWithTitle.vue";
+import FlashMessage from "@/Components/FlashMessage.vue";
 
 defineProps({
   images: Object,
@@ -84,16 +80,9 @@ defineProps({
 
 const page = usePage();
 const errors = computed(() => Object.values(page.props.errors));
-const flashMessage = computed(() => {
-  return page.props.flash.success;
-});
 
-const flashMessageVisible = ref(true);
-const flashMessageVisibleChange = (time) => {
-  setTimeout(() => {
-    flashMessageVisible.value = false;
-  }, time);
-};
+// Handle flash messages
+const messageComponent = ref(null);
 
 const chooseFile = (event) => {
   let file = event.target.files[0];
@@ -105,8 +94,7 @@ const chooseFile = (event) => {
     },
     {
       onSuccess: () => {
-        flashMessageVisible.value = true;
-        flashMessageVisibleChange(2000);
+        messageComponent.value.remover();
       },
     }
   );

@@ -8,13 +8,8 @@
     </template>
     <template #content>
       <!-- Flash messages -->
-      <div
-        v-show="flashMessage && flashMessageVisible"
-        @click="flashMessageVisible = !flashMessageVisible"
-        class="flash-message"
-      >
-        {{ flashMessage }}
-      </div>
+      <FlashMessage ref="messageComponent" />
+
       <Box class="p-6">
         <!-- Content -->
         <BoxWithTitle>
@@ -55,12 +50,13 @@
 </template>
 
 <script setup>
-import { Head, useForm, usePage } from "@inertiajs/vue3";
+import { Head, useForm } from "@inertiajs/vue3";
 import Breadcrumbs from "@/Components/Breadcrumbs.vue";
 import AuthWithoutSidebarLayout from "@/Layouts/AuthWithoutSidebarLayout.vue";
 import Box from "@/Components/Box.vue";
 import BoxWithTitle from "@/Components/BoxWithTitle.vue";
-import { computed, ref } from "vue";
+import { ref } from "vue";
+import FlashMessage from "@/Components/FlashMessage.vue";
 
 const props = defineProps({
   category: Object,
@@ -68,17 +64,7 @@ const props = defineProps({
 });
 
 // Handle flash messages
-const page = usePage();
-const flashMessage = computed(() => {
-  return page.props.flash.success;
-});
-
-const flashMessageVisible = ref(true);
-const flashMessageVisibleChange = (time) => {
-  setTimeout(() => {
-    flashMessageVisible.value = false;
-  }, time);
-};
+const messageComponent = ref(null);
 
 // breadcrumbs
 const breadcrumbs = [
@@ -94,9 +80,7 @@ const form = useForm({
 const update = () => {
   form.put(route("admin.setting.category.update", props.category.id), {
     onSuccess: () => {
-      flashMessageVisible.value = true;
-
-      flashMessageVisibleChange(2000);
+      messageComponent.value.remover();
     },
   });
 };

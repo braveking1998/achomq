@@ -6,6 +6,9 @@
 
     <!-- Content -->
     <template #default>
+      <!-- Flash messages -->
+      <FlashMessage ref="messageComponent" />
+
       <!-- Content -->
       <div class="flex flex-col gap-4">
         <!-- Errors -->
@@ -27,15 +30,13 @@
             v-for="image in images"
             :key="image.id"
           >
-            <Link
-              :href="route('profile.images.destroy', image.id)"
-              as="button"
-              method="delete"
+            <div
               class="bg-red-500 text-white px-3 py-1 rounded-full absolute -right-2 -top-2 hover:opacity-80"
               v-if="image.type === 'private'"
+              @click="deleteImage(image.id)"
             >
               x
-            </Link>
+            </div>
             <img
               :src="image.src"
               :alt="image.type"
@@ -70,7 +71,8 @@
 <script setup>
 import BoxWithTitle from "@/Components/BoxWithTitle.vue";
 import { usePage, Link, router } from "@inertiajs/vue3";
-import { computed } from "vue";
+import { computed, ref } from "vue";
+import FlashMessage from "@/Components/FlashMessage.vue";
 
 defineProps({
   images: Object,
@@ -80,10 +82,11 @@ const page = usePage();
 const selectedImage = computed(() => page.props.auth.user.chosen_image);
 const errors = computed(() => Object.values(page.props.errors));
 
+// Handle flash messages
+const messageComponent = ref(null);
+
 const chooseFile = (event) => {
   let file = event.target.files[0];
-
-  console.log(file);
 
   router.post(
     route("profile.images.store"),
@@ -93,14 +96,25 @@ const chooseFile = (event) => {
     },
     {
       onSuccess: () => {
-        flashMessageVisible.value = true;
-        flashMessageVisibleChange(2000);
+        messageComponent.value.remover();
       },
     }
   );
 };
 
 const selectNewImage = (id) => {
-  router.put(route("profile.update.image", { image_id: id }));
+  router.put(route("profile.update.image", { image_id: id }), false, {
+    onSuccess: () => {
+      messageComponent.value.remover();
+    },
+  });
+};
+
+const deleteImage = (id) => {
+  router.delete(route("profile.images.destroy", id), {
+    onSuccess: () => {
+      messageComponent.value.remover();
+    },
+  });
 };
 </script>

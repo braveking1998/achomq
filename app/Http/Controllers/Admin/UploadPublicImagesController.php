@@ -7,6 +7,7 @@ use App\Models\ProfileImage;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 
 class UploadPublicImagesController extends Controller
@@ -49,6 +50,10 @@ class UploadPublicImagesController extends Controller
      */
     public function destroy(ProfileImage $image)
     {
+        if ($image->id === 1) {
+            throw ValidationException::withMessages(['message' => 'شما نمی توانید این پروفایل را حذف کنید.']);
+            return redirect()->back();
+        }
         // Set user's profile image to null
         User::where('profile_image', $image->id)->update([
             'profile_image' => 1,

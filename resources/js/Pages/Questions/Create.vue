@@ -15,13 +15,7 @@
     </template>
     <template #content>
       <!-- Flash messages -->
-      <div
-        v-show="flashMessage && flashMessageVisible"
-        @click="flashMessageVisible = !flashMessageVisible"
-        class="flash-message"
-      >
-        {{ flashMessage }}
-      </div>
+      <FlashMessage ref="messageComponent" />
       <Box class="p-6">
         <form @submit.prevent="create">
           <div class="flex flex-col gap-4 md:px-16">
@@ -146,6 +140,7 @@ import Box from "@/Components/Box.vue";
 import { computed, ref } from "vue";
 import { useShamsiNames, useShamsiDate } from "@/Composables/date.js";
 import Breadcrumbs from "@/Components/Breadcrumbs.vue";
+import FlashMessage from "@/Components/FlashMessage.vue";
 
 const props = defineProps({
   levels: Object,
@@ -157,16 +152,8 @@ const page = usePage();
 const user = computed(() => page.props.auth.user);
 
 // Handle flash messages
-const flashMessage = computed(() => {
-  return page.props.flash.success;
-});
+const messageComponent = ref(null);
 
-const flashMessageVisible = ref(true);
-const flashMessageVisibleChange = (time) => {
-  setTimeout(() => {
-    flashMessageVisible.value = false;
-  }, time);
-};
 // breadcrumbs
 const breadcrumbs = [
   { label: "داشبورد", url: route("dashboard") },
@@ -198,10 +185,7 @@ const create = () =>
   form.post(route("questions.store"), {
     onSuccess: () => {
       form.reset("question", "answers");
-
-      flashMessageVisible.value = true;
-
-      flashMessageVisibleChange(2000);
+      messageComponent.value.remover();
     },
   });
 </script>

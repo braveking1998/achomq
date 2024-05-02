@@ -27,6 +27,8 @@ class ProfileController extends Controller
     {
         $request->user()->profile_image = $request->image_id;
         $request->user()->save();
+
+        return redirect()->back()->with('success', 'عکس پروفایل شما تغییر کرد.');
     }
 
     /**
