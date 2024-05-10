@@ -1,6 +1,9 @@
 <template>
   <Head title="بازی دو نفره" />
   <AuthWithoutSidebarLayout>
+    <template #header>
+      <Breadcrumbs :breadcrumbs="breadcrumbs"> </Breadcrumbs>
+    </template>
     <template #content>
       <div class="w-full md:w-2/3 mx-auto">
         <div class="grid grid-cols-2">
@@ -31,6 +34,9 @@
               <DisplayButtons :answers="game" />
             </div>
           </div>
+          <div v-if="s_answers.length === 0" class="w-full col-span-2 mt-4">
+            <p class="text-center">شما باید بازی را شروع کنید.</p>
+          </div>
 
           <!-- Button -->
           <div class="col-span-2 mt-8">
@@ -39,7 +45,10 @@
               :game="game"
               v-if="game.is_active == 1"
             />
-            <button v-else class="btn-primary block mx-auto">
+            <button
+              v-else
+              class="btn-primary block mx-auto hover:bg-blue-light hover:text-white hover:border-white focus:border-white cursor-default"
+            >
               {{ determinWinner(game) }}
             </button>
           </div>
@@ -58,6 +67,13 @@ import DisplayUser from "@/Pages/MultiPlayer/Index/Partials/DisplayUser.vue";
 import { ref } from "vue";
 import { onMounted, onUnmounted } from "vue";
 import { preventGoBack, allowGoBack } from "@/Composables/preventer";
+import Breadcrumbs from "@/Components/Breadcrumbs.vue";
+
+// breadcrumbs
+const breadcrumbs = [
+  { label: "داشبورد", url: route("dashboard") },
+  { label: "بازی های دو نفره", url: route("multi-player.index") },
+];
 
 onMounted(() => {
   preventGoBack();

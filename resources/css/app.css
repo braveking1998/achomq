@@ -25,11 +25,32 @@
   }
 
   .btn-primary {
-    @apply bg-blue-light text-white py-2 px-4 border rounded-lg hover:bg-white hover:text-blue-light hover:border hover:border-blue-light;
+    @apply font-bold bg-blue-light text-white py-2 px-4 border rounded-lg hover:bg-white hover:text-blue-light hover:border hover:border-blue-light;
   }
 
-  .btn-bordered {
-    @apply hover:bg-blue-light hover:text-white py-2 px-4 rounded-lg border border-blue-light;
+  .btn-success {
+    @apply font-medium bg-green-500 text-white py-2 px-4 border rounded-lg hover:bg-white hover:text-green-500 hover:border hover:border-green-500;
+  }
+
+  .btn-danger {
+    @apply font-medium bg-red-500 text-white py-2 px-4 border rounded-lg hover:bg-white hover:text-red-500 hover:border hover:border-red-500;
+  }
+
+  .btn-primary-border {
+    @apply font-medium text-blue-light hover:bg-blue-light hover:text-white py-2 px-4 rounded-lg border border-blue-light text-center;
+  }
+
+  
+  .btn-success-border {
+    @apply font-medium text-green-500 hover:bg-green-500 hover:text-white py-2 px-4 rounded-lg border border-green-500 text-center;
+  }
+  
+  .btn-danger-border {
+    @apply font-medium text-red-500 hover:bg-red-500 hover:text-white py-2 px-4 rounded-lg border border-red-500 text-center;
+  }
+
+  .btn-success-disabled {
+    @apply font-medium text-white bg-green-500 opacity-55 cursor-not-allowed py-2 px-4 rounded-lg text-center;
   }
 
   .btn-sign {
@@ -38,14 +59,6 @@
 
   .btn-sign:hover {
     @apply border shadow-[inset_0_0_20px_rgba(255,255,255,.5)] shadow-[0_0_20px_rgba(255,255,255,.2)] outline-[rgba(255,255,255,0)] outline-offset-[15px] [text-shadow:_1px_1px_2px_#427388];
-  }
-
-  .btn-dashboard {
-    @apply text-center rounded-lg border-2 text-blue-light border-blue-light font-bold py-2 px-10 lg:px-20 lg:py-4;
-  }
-
-  .btn-dashboard:hover {
-    @apply bg-blue-light text-white;
   }
 }
 

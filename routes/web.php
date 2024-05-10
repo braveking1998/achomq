@@ -2,21 +2,21 @@
 
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Application;
 use App\Http\Controllers\DebugController;
+use App\Http\Controllers\MultiController;
+use App\Http\Controllers\SingleController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\LevelController;
 use App\Http\Controllers\Admin\StatsController;
-use App\Http\Controllers\MultiPlayerController;
-use App\Http\Controllers\Admin\NotificationController;
-use App\Http\Controllers\SinglePlayerController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\UploadPrivateImagesController;
 use App\Http\Controllers\Admin\SubmitQuestionController;
 use App\Http\Controllers\Admin\UploadPublicImagesController;
+use App\Http\Controllers\FrontController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,15 +30,7 @@ use App\Http\Controllers\Admin\UploadPublicImagesController;
 */
 
 Route::name('guest.')->group(function () {
-    Route::get(
-        '/',
-        fn () => Inertia::render('FrontPage', [
-            'canLogin' => Route::has('login'),
-            'canRegister' => Route::has('register'),
-            'LaravelVersion' => Application::VERSION,
-            'phpVersion' => PHP_VERSION,
-        ])
-    )->name('front');
+    Route::get('/', FrontController::class)->name('front');
     Route::get('/about', fn () => Inertia::render('About'))->name('about');
     Route::get('/contact', fn () => Inertia::render('Contact'))->name('contact');
 });
@@ -65,27 +57,28 @@ Route::resource('questions', QuestionController::class)
 
 // Single player
 Route::middleware('auth')
-    ->name('single-player.')
+    ->name('single.')
+    ->prefix('single')
     ->group(function () {
-        Route::get('/single-player', [SinglePlayerController::class, 'category'])->name('category');
-        Route::post('/single-player', [SinglePlayerController::class, 'index'])->name('quiz');
-        Route::put('/single-player', [SinglePlayerController::class, 'result'])->name('result');
+        Route::get('/', [SingleController::class, 'index'])->name('index');
+        Route::post('/', [SingleController::class, 'quiz'])->name('quiz');
+        Route::put('/', [SingleController::class, 'result'])->name('result');
     });
 
 // Multi player
 Route::middleware('auth')
-    ->name('multi-player.')
-    ->prefix('multi-player')
+    ->name('multi.')
+    ->prefix('multi')
     ->group(function () {
-        Route::get('/', [MultiPlayerController::class, 'index'])->name('index');
-        Route::post('/create/{type}', [MultiPlayerController::class, 'create'])->name('create');
-        Route::get('/play/{game}', [MultiPlayerController::class, 'play'])->name('play');
-        Route::get('/play/{game}/category', [MultiPlayerController::class, 'categoryLoad'])->name('categoryLoad');
-        Route::post('/play/{game}/category', [MultiPlayerController::class, 'category'])->name('category');
-        Route::get('/play/{game}/quiz', [MultiPlayerController::class, 'quizLoad'])->name('quizLoad');
-        Route::post('/play/{game}/quiz', [MultiPlayerController::class, 'setQuiz'])->name('setQuiz');
-        Route::put('/play/{game}/quiz', [MultiPlayerController::class, 'quiz'])->name('quiz');
-        Route::patch('/play/{game}', [MultiPlayerController::class, 'result'])->name('result');
+        Route::get('/', [MultiController::class, 'index'])->name('index');
+        Route::post('/create/{type}', [MultiController::class, 'create'])->name('create');
+        Route::get('/play/{game}', [MultiController::class, 'play'])->name('play');
+        Route::get('/play/{game}/category', [MultiController::class, 'categoryLoad'])->name('categoryLoad');
+        Route::post('/play/{game}/category', [MultiController::class, 'category'])->name('category');
+        Route::get('/play/{game}/quiz', [MultiController::class, 'quizLoad'])->name('quizLoad');
+        Route::post('/play/{game}/quiz', [MultiController::class, 'setQuiz'])->name('setQuiz');
+        Route::put('/play/{game}/quiz', [MultiController::class, 'quiz'])->name('quiz');
+        Route::patch('/play/{game}', [MultiController::class, 'result'])->name('result');
     });
 
 // Debog

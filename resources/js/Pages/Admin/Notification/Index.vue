@@ -14,13 +14,7 @@
     </template>
     <template #content>
       <!-- Flash messages -->
-      <div
-        v-show="flashMessage && flashMessageVisible"
-        @click="flashMessageVisible = !flashMessageVisible"
-        class="flash-message bg-red-500"
-      >
-        {{ flashMessage }}
-      </div>
+      <FlashMessage ref="messageComponent" />
 
       <Box class="p-6">
         <table
@@ -31,7 +25,7 @@
               <th class="border border-gray-500 p-2 md:p-4">ردیف</th>
               <th class="border border-gray-500">عنوان</th>
               <th class="border border-gray-500">متن پیام</th>
-              <th class="border border-gray-500">حذف</th>
+              <th class="border border-gray-500">عملیات</th>
             </tr>
           </thead>
           <tbody>
@@ -81,9 +75,10 @@ import AuthWithoutSidebarLayout from "@/Layouts/AuthWithoutSidebarLayout.vue";
 import Breadcrumbs from "@/Components/Breadcrumbs.vue";
 import Box from "@/Components/Box.vue";
 import Pagination from "@/Components/Pagination.vue";
-import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
-import { computed, ref } from "vue";
+import { Head, Link, useForm } from "@inertiajs/vue3";
+import { ref } from "vue";
 import { shorten } from "@/Composables/string";
+import FlashMessage from "@/Components/FlashMessage.vue";
 
 const props = defineProps({
   messages: Object,
@@ -93,17 +88,7 @@ const props = defineProps({
 const breadcrumbs = [{ label: "مدیریت", url: route("admin.index") }];
 
 // Handle flash messages
-const page = usePage();
-const flashMessage = computed(() => {
-  return page.props.flash.success;
-});
-
-const flashMessageVisible = ref(true);
-const flashMessageVisibleChange = (time) => {
-  setTimeout(() => {
-    flashMessageVisible.value = false;
-  }, time);
-};
+const messageComponent = ref(null);
 
 const deleteMessage = (id) => {
   const form = useForm({
@@ -112,9 +97,8 @@ const deleteMessage = (id) => {
 
   form.delete(route("admin.notification.destroy", id), {
     onSuccess: () => {
-      form.reset(), (flashMessageVisible.value = true);
-
-      flashMessageVisibleChange(2000);
+      form.reset();
+      messageComponent.value.remover();
     },
   });
 };

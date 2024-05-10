@@ -31,7 +31,7 @@
         </div>
         <div
           v-if="isMessageCenterOpen"
-          class="bg-amber-100 absolute top-16 left-0 w-64 flex flex-col"
+          class="bg-amber-100 absolute top-16 left-0 w-64 flex flex-col z-50"
         >
           <div class="flex justify-between bg-gray-400 p-2">
             <div>اعلانات</div>
@@ -43,17 +43,16 @@
               >
             </div>
           </div>
-          <div class="py-4 flex flex-col items-center gap-2">
-            <div v-if="messages.length">
-              <Message
-                v-for="message in messages"
-                href="messages.index"
-                :title="message.data.title"
-                :image="message.data.image"
-                :date="message.created_at"
-              />
+          <div class="py-4">
+            <div
+              v-if="messages.length"
+              class="flex flex-col items-center gap-2"
+            >
+              <Message v-for="message in messages" :info="message" />
             </div>
-            <div v-else><p>هیج پیام جدیدی وجود ندارد.</p></div>
+            <div class="text-center" v-else>
+              <p>هیج پیام جدیدی وجود ندارد.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -75,7 +74,7 @@
         </div>
         <div
           v-if="isMenu"
-          class="absolute top-28 left-4 bg-amber-100 p-4 flex flex-col gap-4 w-56"
+          class="absolute top-28 left-4 bg-amber-100 p-4 flex flex-col gap-4 w-56 z-50"
         >
           <DropdownLink href="dashboard">داشبورد</DropdownLink>
           <DropdownLink href="questions.index">طراحی سوال</DropdownLink>

@@ -2,7 +2,7 @@
   <Head title="همه سوالات" />
   <AuthWithoutSidebarLayout>
     <template #header>
-      <Breadcrumbs :breadcrumbs="breadcrumbs">
+      <app-breadcrumbs :breadcrumbs="breadcrumbs">
         <template #right-side>
           <Link
             :href="route('questions.create')"
@@ -10,53 +10,17 @@
             >افزودن سوال</Link
           >
         </template>
-      </Breadcrumbs>
+      </app-breadcrumbs>
     </template>
     <template #content>
       <!-- Flash messages -->
       <FlashMessage ref="messageComponent" />
-      <Box class="p-6 mb-6">
-        <form @submit.prevent="filter">
-          <div class="grid grid-cols-1 md:grid-cols-3 place-content-center">
-            <div class="flex items-center justify-center gap-4">
-              <label for="category" class="w-1/3 md:w-auto">دسته بندی:</label>
-              <select id="category" class="input w-2/3" v-model="form.category">
-                <option value="0" selected>همه دسته بندی ها</option>
-                <option
-                  v-for="category in categories"
-                  :key="category.id"
-                  :value="category.id"
-                >
-                  {{ category.name }}
-                </option>
-              </select>
-            </div>
-            <div class="flex items-center justify-center gap-4">
-              <label for="level" class="w-1/3 md:w-auto">سطح:</label>
-              <select id="level" class="input w-2/3" v-model="form.level">
-                <option value="0" selected>همه سطوح</option>
-                <option
-                  v-for="level in levels"
-                  :key="level.id"
-                  :value="level.id"
-                >
-                  {{ level.name }}
-                </option>
-              </select>
-            </div>
-            <div class="flex items-center justify-center gap-4">
-              <input
-                type="text"
-                placeholder="متن خود را جستجو کنید"
-                class="input w-2/3"
-                v-model="form.text"
-              />
-              <button type="submit" class="btn-primary mt-2">جستجو</button>
-            </div>
-          </div>
-        </form>
-      </Box>
-      <Box class="p-6">
+      <app-search
+        :categories="categories"
+        :levels="levels"
+        :filters="filters"
+      />
+      <app-box class="p-6">
         <table
           class="w-full table-auto border border-gray-500 border-collapse text-base font-medium text-gray-500"
         >
@@ -115,21 +79,22 @@
           v-if="questions.data.length"
           class="w-full flex justify-center my-8"
         >
-          <Pagination :links="questions.links" />
+          <app-pagination :links="questions.links" />
         </div>
-      </Box>
+      </app-box>
     </template>
   </AuthWithoutSidebarLayout>
 </template>
 
 <script setup>
 import AuthWithoutSidebarLayout from "@/Layouts/AuthWithoutSidebarLayout.vue";
-import Breadcrumbs from "@/Components/Breadcrumbs.vue";
-import Box from "@/Components/Box.vue";
+import AppBreadcrumbs from "@/Components/AppBreadcrumbs.vue";
+import AppBox from "@/Components/AppBox.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
-import Pagination from "@/Components/Pagination.vue";
+import AppPagination from "@/Components/AppPagination.vue";
 import FlashMessage from "@/Components/FlashMessage.vue";
 import { ref } from "vue";
+import AppSearch from "@/Pages/Questions/Index/Components/AppSearch.vue";
 
 const props = defineProps({
   filters: Object,
@@ -145,17 +110,6 @@ const breadcrumbs = [
   { label: "داشبورد", url: route("dashboard") },
   { label: "سوالات", url: route("questions.index") },
 ];
-
-const form = useForm({
-  category: props.filters.category ?? 0,
-  level: props.filters.level ?? 0,
-  text: props.filters.text ?? "",
-});
-
-const filter = () =>
-  form.get(route("questions.index"), {
-    preserveScroll: true,
-  });
 
 const deleteQuestion = (id) => {
   const form = useForm({

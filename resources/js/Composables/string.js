@@ -8,6 +8,8 @@ export const shorten = (text, length) => {
 
 export const dateTr = (text) => {
   const mapObj = {
+    today: "امروز",
+    yesterday: "دیروز",
     last: "قبل",
     ago: "قبل",
     next: "بعد",

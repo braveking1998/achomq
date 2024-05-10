@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Notifications\DatabaseNotification;
 
 class MessageController extends Controller
 {
@@ -11,23 +13,11 @@ class MessageController extends Controller
      */
     public function index()
     {
-        return "All messages";
-    }
+        $messages = DatabaseNotification::where('notifiable_id', Auth::user()->id)->where('type', 'App\Notifications\AdminMessage')->orderByRaw('-`read_at` ASC')->latest()->paginate(10);
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+        return Inertia::render('Messages/Index', [
+            'messages' => $messages,
+        ]);
     }
 
     /**
@@ -35,30 +25,30 @@ class MessageController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $message = DatabaseNotification::find($id);
+
+        if (!$message) {
+            return redirect()->route('messages.index');
+        }
+        // Mark read
+        $message->update(['read_at' => now()]);
+
+        if ($message->type === "App\Notifications\MultiplayNotification") {
+            $game_id = $message->data['game_id'];
+            return redirect()->route('multi-play');
+        }
+
+        return Inertia::render('Messages/Show', [
+            'message' => $message
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+        $message = DatabaseNotification::find($id);
+
+        $message->delete();
+
+        return redirect()->route('messages.index')->with('success', 'پیام حذف شد.');
     }
 }

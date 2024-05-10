@@ -1,13 +1,12 @@
 <template>
-  <GuestLayout>
-    <Head title="Register" />
-
-    <Box class="w-full md:w-1/2 mx-auto my-10 p-6">
+  <Head title="Register" />
+  <guest-layout>
+    <app-box class="w-4/5 md:w-1/2 mx-auto my-10 p-6">
       <form @submit.prevent="submit">
         <div>
-          <InputLabel for="name" value="نام" />
+          <input-label for="name" value="نام" />
 
-          <TextInput
+          <text-input
             id="name"
             type="text"
             class="mt-1 block w-full"
@@ -17,13 +16,13 @@
             autocomplete="name"
           />
 
-          <InputError class="mt-2" :message="form.errors.name" />
+          <input-error class="mt-2" :message="form.errors.name" />
         </div>
 
         <div class="mt-4">
-          <InputLabel for="email" value="ایمیل" />
+          <input-label for="email" value="ایمیل" />
 
-          <TextInput
+          <text-input
             id="email"
             type="email"
             class="mt-1 block w-full"
@@ -33,13 +32,28 @@
             dir="ltr"
           />
 
-          <InputError class="mt-2" :message="form.errors.email" />
+          <input-error class="mt-2" :message="form.errors.email" />
         </div>
 
         <div class="mt-4">
-          <InputLabel for="password" value="رمزعبور" />
+          <input-label for="phone-number" value="شماره همراه" />
 
-          <TextInput
+          <text-input
+            id="phone-number"
+            type="text"
+            class="mt-1 block w-full"
+            v-model="form.phoneNumber"
+            required
+            dir="ltr"
+          />
+
+          <input-error class="mt-2" :message="form.errors.phoneNumber" />
+        </div>
+
+        <div class="mt-4">
+          <input-label for="password" value="رمزعبور" />
+
+          <text-input
             id="password"
             type="password"
             class="mt-1 block w-full"
@@ -48,13 +62,13 @@
             autocomplete="new-password"
           />
 
-          <InputError class="mt-2" :message="form.errors.password" />
+          <input-error class="mt-2" :message="form.errors.password" />
         </div>
 
         <div class="mt-4">
-          <InputLabel for="password_confirmation" value="تکرار رمزعبور" />
+          <input-label for="password_confirmation" value="تکرار رمزعبور" />
 
-          <TextInput
+          <text-input
             id="password_confirmation"
             type="password"
             class="mt-1 block w-full"
@@ -63,13 +77,15 @@
             autocomplete="new-password"
           />
 
-          <InputError
+          <input-error
             class="mt-2"
             :message="form.errors.password_confirmation"
           />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
+        <div
+          class="flex flex-col sm:flex-row gap-4 sm:gap-0 items-center justify-end mt-4"
+        >
           <Link
             :href="route('login')"
             class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -77,23 +93,23 @@
             آیا می خواهید وارد شوید؟
           </Link>
 
-          <PrimaryButton
+          <primary-button
             class="ms-4"
             :class="{ 'opacity-25': form.processing }"
             :disabled="form.processing"
           >
             ثبت نام
-          </PrimaryButton>
+          </primary-button>
         </div>
       </form>
-    </Box>
-  </GuestLayout>
+    </app-box>
+  </guest-layout>
 </template>
 
 <script setup>
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import InputError from "@/Components/InputError.vue";
-import Box from "@/Components/Box.vue";
+import AppBox from "@/Components/AppBox.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
@@ -104,6 +120,7 @@ const title = "عضویت";
 const form = useForm({
   name: "",
   email: "",
+  phoneNumber: "",
   password: "",
   password_confirmation: "",
 });

@@ -79,8 +79,18 @@
             :class="`bg-${color} hover:border-${color} hover:text-${color}`"
             v-show="answered"
             @click="next"
+            v-if="totalAnswered < props.questions.length - 1"
           >
             بعدی
+          </button>
+          <button
+            class="btn-primary border-2 block mr-auto ml-4 my-8 font-bold"
+            :class="`bg-${color} hover:border-${color} hover:text-${color}`"
+            v-show="answered"
+            @click="seeResult"
+            v-else
+          >
+            نتیجه
           </button>
         </transition>
       </Box>
@@ -136,6 +146,9 @@ const props = defineProps({
   gameId: Number,
 });
 
+// Stop submit several times
+const submitAnswers = ref(false);
+
 const timer = ref(props.time);
 const timerEnabled = ref(true);
 
@@ -174,13 +187,16 @@ const answerClicked = (q_id, id, is_correct) => {
 };
 
 const next = () => {
-  if (totalAnswered.value < props.questions.length - 1) {
-    answered.value = null;
-    timer.value = props.time;
-    timerEnabled.value = true;
-    totalAnswered.value++;
-    qIdChanger();
-  } else {
+  answered.value = null;
+  timer.value = props.time;
+  timerEnabled.value = true;
+  totalAnswered.value++;
+  qIdChanger();
+};
+
+const seeResult = () => {
+  if (submitAnswers.value === false) {
+    submitAnswers.value = true;
     router.patch(route("multi-player.result", props.gameId), {
       answers: answers.value,
       corrects: correctAnswers.value,

@@ -9,12 +9,13 @@ use App\Models\MultiGame;
 use App\Models\MultiGameType;
 use App\Models\Question;
 use App\Models\User;
+use App\Notifications\MultiplayNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 
-class MultiPlayerController extends Controller
+class MultiController extends Controller
 {
     private function gamerType(MultiGame $game)
     {
@@ -24,21 +25,19 @@ class MultiPlayerController extends Controller
         return $gamerType;
     }
 
-    private function theWinner(MultiGame $game, User $user, MultiGameType $type)
+    private function theWinner(MultiGame $game, MultiGameType $type)
     {
+        $starter = User::find($game->starter);
+        $rival = User::find($game->rival);
+
         if ($game->is_active == 0) {
-            if ($this->gamerType($game) == 'starter') {
-                if ((int) $game->s_corrects > (int) $game->r_corrects) {
-                    MultiGameWinner::dispatchIf((int) $game->s_corrects > (int) $game->r_corrects, $user, (int) $type->coin, (int) $type->point);
-                } elseif ((int) $game->s_corrects == (int) $game->r_corrects) {
-                    MultiGameWinner::dispatchIf((int) $game->s_corrects == (int) $game->r_corrects, $user, (int) $type->coin / 2, (int) $type->point / 2);
-                }
-            } elseif ($this->gamerType($game) == 'rival') {
-                if ((int) $game->s_corrects < (int) $game->r_corrects) {
-                    MultiGameWinner::dispatchIf((int) $game->s_corrects < (int) $game->r_corrects, $user, (int) $type->coin, (int) $type->point);
-                } elseif ((int) $game->s_corrects == (int) $game->r_corrects) {
-                    MultiGameWinner::dispatchIf((int) $game->s_corrects == (int) $game->r_corrects, $user, (int) $type->coin / 2, (int) $type->point / 2);
-                }
+            if ((int) $game->s_corrects > (int) $game->r_corrects) {
+                MultiGameWinner::dispatchIf((int) $game->s_corrects > (int) $game->r_corrects, $starter, (int) $type->coin, (int) $type->point);
+            } else if ((int) $game->s_corrects < (int) $game->r_corrects) {
+                MultiGameWinner::dispatchIf((int) $game->s_corrects < (int) $game->r_corrects, $rival, (int) $type->coin, (int) $type->point);
+            } else if ((int) $game->s_corrects === (int) $game->r_corrects) {
+                MultiGameWinner::dispatchIf((int) $game->s_corrects == (int) $game->r_corrects, $starter, (int) $type->coin / 2, (int) $type->point / 2);
+                MultiGameWinner::dispatchIf((int) $game->s_corrects == (int) $game->r_corrects, $rival, (int) $type->coin / 2, (int) $type->point / 2);
             }
         }
     }
@@ -84,7 +83,7 @@ class MultiPlayerController extends Controller
     private function saveAnswers(MultiGame $game, $answers, $corrects)
     {
         if ($this->gamerType($game) == 'starter') {
-            if (! empty($game->s_answers)) {
+            if (!empty($game->s_answers)) {
                 $prev_answers = json_decode($game->s_answers, true);
                 $game->s_answers = json_encode(array_merge($prev_answers, $answers));
             } else {
@@ -93,7 +92,7 @@ class MultiPlayerController extends Controller
 
             $game->s_corrects += $corrects;
         } elseif ($this->gamerType($game) == 'rival') {
-            if (! empty($game->r_answers)) {
+            if (!empty($game->r_answers)) {
                 $prev_answers = json_decode($game->r_answers, true);
                 $game->r_answers = json_encode(array_merge($prev_answers, $answers));
             } else {
@@ -115,12 +114,16 @@ class MultiPlayerController extends Controller
             if ($this->gamerType($game) == 'starter') {
                 if ($game->prev_selector == $user->id) {
                     $game->who_to_play = $game->rival;
+
+                    User::find($game->rival)->notify(new MultiplayNotification(['id' => $game->id]));
                 } else {
                     $game->who_to_play = $game->starter;
                 }
             } elseif ($this->gamerType($game) == 'rival') {
                 if ($game->prev_selector == $user->id) {
                     $game->who_to_play = $game->starter;
+
+                    User::find($game->starter)->notify(new MultiplayNotification(['id' => $game->id]));
                 } else {
                     $game->who_to_play = $game->rival;
                 }
@@ -403,7 +406,7 @@ class MultiPlayerController extends Controller
         $this->stageIncreaser($game);
         $this->whoToPlay($game);
         $this->saveAnswers($game, $answers, $request->corrects);
-        $this->theWinner($game, $user, $type);
+        $this->theWinner($game, $type);
 
         $game->save();
 

@@ -141,6 +141,7 @@ const create = () =>
   form.post(route("admin.notification.store"), {
     onSuccess: () => {
       form.reset("text", "title", "selectedUsers");
+      selectedImage.value = false;
     },
   });
 

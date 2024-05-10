@@ -1,6 +1,9 @@
 <template>
   <Head title="بازی دو نفره" />
   <AuthWithoutSidebarLayout>
+    <template #header>
+      <Breadcrumbs :breadcrumbs="breadcrumbs"> </Breadcrumbs>
+    </template>
     <template #content>
       <Box class="p-6">
         <BoxWithTitle>
@@ -274,6 +277,10 @@ import BoxWithTitle from "@/Components/BoxWithTitle.vue";
 import AuthWithoutSidebarLayout from "@/Layouts/AuthWithoutSidebarLayout.vue";
 import { Head, Link, usePage } from "@inertiajs/vue3";
 import { computed } from "vue";
+import Breadcrumbs from "@/Components/Breadcrumbs.vue";
+
+// breadcrumbs
+const breadcrumbs = [{ label: "داشبورد", url: route("dashboard") }];
 
 const props = defineProps({
   games: Object,
