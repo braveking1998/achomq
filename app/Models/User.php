@@ -29,10 +29,9 @@ class User extends Authenticatable
         'coins',
         'gems',
         'hearts',
+        'stars',
         'profile_image',
     ];
-
-    protected $with = ['chosenImage', 'level'];
 
     /**
      * The attributes that should be hidden for serialization.

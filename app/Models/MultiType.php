@@ -11,8 +11,6 @@ class MultiType extends Model
 {
     use HasFactory;
 
-    protected $with = ['minLevel'];
-
     public function minLevel(): BelongsTo
     {
         return $this->belongsTo(Level::class, 'min_level');
