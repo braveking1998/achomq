@@ -16,10 +16,13 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('phone_number');
             $table->string('password');
             $table->integer('points')->default(0);
             $table->integer('coins')->default(200);
             $table->integer('gems')->default(10);
+            $table->integer('hearts')->default(5);
+            $table->integer('stars')->default(0);
             $table->rememberToken();
             $table->boolean('is_admin')->default(false);
             $table->timestamps();

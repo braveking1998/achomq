@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('multi_game_types', function (Blueprint $table) {
+        Schema::create('single_features', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('cost');
-            $table->integer('coin');
-            $table->integer('point');
-            $table->integer('star');
+            $table->foreignIdFor(\App\Models\Level::class)->constrained('levels')->onDelete('cascade');
+            $table->string('feature');
+            $table->string('value');
+            $table->unique(['level_id', 'feature']);
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('multi_game_types');
+        Schema::dropIfExists('single_player_features');
     }
 };

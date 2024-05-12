@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('multi_games', function (Blueprint $table) {
+        Schema::create('multi', function (Blueprint $table) {
             $table->id();
             $table->integer('stage');
+            $table->foreignIdFor('\App\Models\MultiType')->nullable()->constrained('multi_types');
             $table->foreignIdFor('\App\Models\User', 'starter')->constrained('users');
             $table->foreignIdFor('\App\Models\User', 'rival')->constrained('users')->nullable();
             $table->text('questions')->nullable();
@@ -21,6 +22,11 @@ return new class extends Migration
             $table->text('r_answers')->nullable();
             $table->integer('prev_selector');
             $table->foreignIdFor('\App\Models\Category')->constrained('categories')->nullable();
+            $table->integer('s_corrects')->default(0);
+            $table->integer('r_corrects')->default(0);
+            $table->boolean('is_playing')->default(0);
+            $table->integer('who_to_play');
+            $table->boolean('is_active')->default(1);
             $table->timestamps();
         });
     }

@@ -10,7 +10,7 @@ class Level extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'slug', 'max', 'add_question'];
+    protected $fillable = ['name', 'slug', 'max'];
 
     public function questions(): HasMany
     {
@@ -22,8 +22,8 @@ class Level extends Model
         return $this->hasMany(User::class);
     }
 
-    public function singlePlayer(): HasMany
+    public function levelPerks(): HasMany
     {
-        return $this->hasMany(SinglePlayerFeature::class);
+        return $this->hasMany(LevelPerk::class);
     }
 }

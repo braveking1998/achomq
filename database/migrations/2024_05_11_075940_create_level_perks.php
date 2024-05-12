@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->integer('hearts')->default(5);
+        Schema::create('level_perks', function (Blueprint $table) {
+            $table->id();
+            $table->foreignIdFor('\App\Models\Level')->constrained('levels')->onDelete('cascade');
+            $table->string("action");
+            $table->string("value");
+            $table->timestamps();
         });
     }
 
@@ -21,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('hearts');
-        });
+        Schema::dropIfExists('level_perks');
     }
 };

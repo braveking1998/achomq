@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class MultiGame extends Model
+class Multi extends Model
 {
     use HasFactory;
 
@@ -44,6 +44,6 @@ class MultiGame extends Model
 
     public function type(): BelongsTo
     {
-        return $this->belongsTo(MultiGameType::class, 'multi_game_type_id');
+        return $this->belongsTo(MultiType::class);
     }
 }

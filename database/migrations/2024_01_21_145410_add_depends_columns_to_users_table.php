@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('phone_number')->nullable()->after('email');
+            $table->foreignIdFor(\App\Models\Level::class)->after("is_admin")->default(1)->constrained('levels')->onUpdate('cascade');
+            $table->foreignIdFor('\App\Models\ProfileImage', 'profile_image')->after("is_admin")->default(1)->constrained('profile_images')->onUpdate('cascade');
         });
     }
 
@@ -22,7 +23,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('phone_number');
+            $table->dropConstrainedForeignIdFor('\App\Models\ProfileImage', 'profile_image');
+            $table->dropConstrainedForeignIdFor(\App\Models\Level::class);
         });
     }
 };

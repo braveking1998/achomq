@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->integer('max');
-            $table->integer('add_question')->default(0);
             $table->timestamps();
         });
     }

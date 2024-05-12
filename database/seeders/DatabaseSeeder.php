@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
             ProfileImageSeeder::class,
             LevelCategorySeeder::class,
             UserSeeder::class,
-            QuestionSeeder::class,
         ]);
     }
 }

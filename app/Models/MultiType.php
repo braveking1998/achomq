@@ -7,19 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class MultiGameType extends Model
+class MultiType extends Model
 {
     use HasFactory;
 
-    protected $with = ['requiredLevel'];
+    protected $with = ['minLevel'];
 
-    public function requiredLevel(): BelongsTo
+    public function minLevel(): BelongsTo
     {
-        return $this->belongsTo(Level::class, 'required_level');
+        return $this->belongsTo(Level::class, 'min_level');
     }
 
-    public function multiGame(): HasMany
+    public function multi(): HasMany
     {
-        return $this->hasMany(MultiGame::class);
+        return $this->hasMany(Multi::class);
     }
 }
