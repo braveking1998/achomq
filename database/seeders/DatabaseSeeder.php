@@ -15,7 +15,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             ProfileImageSeeder::class,
-            LevelCategorySeeder::class,
+            CategorySeeder::class,
+            LevelSeeder::class,
+            MultiTypeSeeder::class,
             UserSeeder::class,
         ]);
     }

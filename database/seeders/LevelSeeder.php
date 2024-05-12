@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Level;
 use App\Models\LevelPerk;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class LevelSeeder extends Seeder
@@ -25,22 +26,17 @@ class LevelSeeder extends Seeder
     public function run(): void
     {
         foreach ($this->levels as $level) {
-            Level::factory()->create([
-                'id' => $level['id'],
-                'name' => $level['name'],
-                'slug' => $level['slug'],
-                'max' => $level['max']
-            ]);
+            DB::table('levels')->insert($level);
 
             if ($level['id'] != 7) {
-                LevelPerk::factory()->create([
+                DB::table('level_perks')->insert([
                     'level_id' => $level['id'],
                     'action' => 'add_question_points',
                     'value' => $level['id'] * 5
                 ]);
             }
 
-            LevelPerk::factory()->create([
+            DB::table('level_perks')->insert([
                 'level_id' => $level['id'],
                 'action' => 'add_question_coins',
                 'value' => $level['id'] * 5

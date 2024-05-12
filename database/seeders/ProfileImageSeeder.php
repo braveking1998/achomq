@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\ProfileImage;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ProfileImageSeeder extends Seeder
 {
@@ -19,11 +19,8 @@ class ProfileImageSeeder extends Seeder
     public function run(): void
     {
         foreach ($this->images as $image) {
-            ProfileImage::factory()->create([
-                'id' => $image['id'],
-                'type' => 'public',
-                'file_path' => $image['file_path'],
-            ]);
+            $image['type'] = 'public';
+            DB::table('profile_images')->insert($image);
         }
     }
 }

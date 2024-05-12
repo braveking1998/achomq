@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->foreignIdFor(\App\Models\Level::class, 'min_level')->constrained('levels');
             $table->integer('cost');
-            $table->integer('coin');
-            $table->integer('point');
-            $table->integer('star');
+            $table->integer('coins');
+            $table->integer('points');
+            $table->integer('stars');
             $table->timestamps();
         });
     }

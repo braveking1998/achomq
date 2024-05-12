@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
         \App\Models\User::factory()->create([
-            'id' => 1,
+            'id' => 2,
             'name' => 'احمد احمدپور',
             'email' => 'bravekingah@gmail.com',
             'phone_number' => '09027777657',

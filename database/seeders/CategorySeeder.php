@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class CategorySeeder extends Seeder
@@ -16,9 +16,9 @@ class CategorySeeder extends Seeder
         ['id' => 4, 'name' => 'هوش و ریاضی', 'slug' => 'math'],
         ['id' => 5, 'name' => 'تاریخ', 'slug' => 'history'],
         ['id' => 6, 'name' => 'زبان و فرهنگ', 'slug' => 'literature'],
-        ['id' => 6, 'name' => 'دینی', 'slug' => 'religion'],
-        ['id' => 6, 'name' => 'جغراقیا', 'slug' => 'geography'],
-        ['id' => 6, 'name' => 'فیلم شناسی', 'slug' => 'geography'],
+        ['id' => 7, 'name' => 'دینی', 'slug' => 'religion'],
+        ['id' => 8, 'name' => 'جغراقیا', 'slug' => 'geography'],
+        ['id' => 9, 'name' => 'فیلم شناسی', 'slug' => 'geography'],
     );
 
     /**
@@ -27,11 +27,7 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         foreach ($this->categories as $category) {
-            Category::factory()->create([
-                'id' => $category['id'],
-                'name' => $category['name'],
-                'slug' => $category['slug']
-            ]);
+            DB::table('categories')->insert($category);
         }
     }
 }

@@ -47,7 +47,7 @@ class Question extends Model
             fn ($query, $value) => $query->where('level_id', '=', $value)
         )->when(
             $filters['text'] ?? false,
-            fn ($query, $value) => $query->where('text', 'like', '%'.$value.'%')
+            fn ($query, $value) => $query->where('text', 'like', '%' . $value . '%')
         );
     }
 
@@ -64,10 +64,10 @@ class Question extends Model
         return $query->orderByDesc('created_at');
     }
 
-    public function scopeSetLevel(Builder $query, MultiGame $game): Builder
+    public function scopeSetLevel(Builder $query, Multi $game): Builder
     {
         $type = $game->type()->first();
-        $nextType = MultiGameType::where('id', '>', $type->id)->orderBy('id')->first() ?? false;
+        $nextType = MultiType::where('id', '>', $type->id)->orderBy('id')->first() ?? false;
         if ($nextType != false) {
             return $query->whereBetween('level_id', [$type->required_level, $nextType->required_level]);
         } elseif ($nextType == false) {

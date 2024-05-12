@@ -18,13 +18,13 @@ class Category extends Model
         return $this->hasMany(Question::class);
     }
 
-    public function scopeCheckQuestions(Builder $query, MultiGame $game): Builder
+    public function scopeCheckQuestions(Builder $query, Multi $game): Builder
     {
         return $query->whereHas('questions', function (Builder $query) use ($game) {
             $query->where('status', 1);
 
             $type = $game->type()->first();
-            $nextType = MultiGameType::where('id', '>', $type->id)->orderBy('id')->first() ?? false;
+            $nextType = MultiType::where('id', '>', $type->id)->orderBy('id')->first() ?? false;
             if ($nextType != false) {
                 $query->whereBetween('level_id', [$type->required_level, $nextType->required_level]);
             } elseif ($nextType == false) {
