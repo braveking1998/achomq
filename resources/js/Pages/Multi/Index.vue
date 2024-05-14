@@ -1,12 +1,12 @@
 <template>
   <Head title="بازی دو نفره" />
-  <AuthWithoutSidebarLayout>
+  <auth-without-sidebar-layout>
     <template #header>
-      <Breadcrumbs :breadcrumbs="breadcrumbs"> </Breadcrumbs>
+      <app-breadcrumbs :breadcrumbs="breadcrumbs"> </app-breadcrumbs>
     </template>
     <template #content>
-      <Box class="p-6">
-        <BoxWithTitle>
+      <app-box class="p-6">
+        <box-with-title>
           <!-- Title -->
           <template #title> بازی های فعال </template>
 
@@ -60,10 +60,10 @@
             <p>تعداد بازی فعال: 1</p>
             <button class="btn-primary">افزایش تعداد: 1000 سکه</button>
           </div>
-        </BoxWithTitle>
-      </Box>
-      <Box class="p-6 mt-4">
-        <BoxWithTitle>
+        </box-with-title>
+      </app-box>
+      <app-box class="p-6 mt-4">
+        <box-with-title>
           <!-- Title -->
           <template #title>آخرین بازی ها</template>
 
@@ -111,10 +111,10 @@
               </tbody>
             </table>
           </div>
-        </BoxWithTitle>
-      </Box>
-      <Box class="p-6 mt-4">
-        <BoxWithTitle>
+        </box-with-title>
+      </app-box>
+      <app-box class="p-6 mt-4">
+        <box-with-title>
           <!-- Title -->
           <template #title>ایجاد بازی جدید</template>
           <!-- Errors -->
@@ -265,19 +265,19 @@
               </p>
             </div>
           </div>
-        </BoxWithTitle>
-      </Box>
+        </box-with-title>
+      </app-box>
     </template>
-  </AuthWithoutSidebarLayout>
+  </auth-without-sidebar-layout>
 </template>
 
 <script setup>
-import Box from "@/Components/Box.vue";
+import AppBox from "@/Components/AppBox.vue";
 import BoxWithTitle from "@/Components/BoxWithTitle.vue";
 import AuthWithoutSidebarLayout from "@/Layouts/AuthWithoutSidebarLayout.vue";
 import { Head, Link, usePage } from "@inertiajs/vue3";
 import { computed } from "vue";
-import Breadcrumbs from "@/Components/Breadcrumbs.vue";
+import AppBreadcrumbs from "@/Components/AppBreadcrumbs.vue";
 
 // breadcrumbs
 const breadcrumbs = [{ label: "داشبورد", url: route("dashboard") }];

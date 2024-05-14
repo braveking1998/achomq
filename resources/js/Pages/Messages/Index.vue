@@ -1,14 +1,14 @@
 <template>
   <Head title="همه پیام ها" />
-  <AuthWithoutSidebarLayout>
+  <auth-without-sidebar-layout>
     <template #header>
-      <Breadcrumbs :breadcrumbs="breadcrumbs"> </Breadcrumbs>
+      <app-breadcrumbs :breadcrumbs="breadcrumbs"> </app-breadcrumbs>
     </template>
     <template #content>
       <!-- Flash messages -->
-      <FlashMessage ref="messageComponent" />
+      <flash-message ref="flashMessageComponent" />
 
-      <Box class="p-6">
+      <app-box class="p-6">
         <table
           v-if="messages.data.length"
           class="w-full table-auto border border-gray-500 border-collapse text-base font-medium text-gray-500"
@@ -61,25 +61,25 @@
           v-if="messages.data.length"
           class="w-full flex justify-center my-8"
         >
-          <Pagination :links="messages.links" />
+          <app-pagination :links="messages.links" />
         </div>
-      </Box>
+      </app-box>
     </template>
-  </AuthWithoutSidebarLayout>
+  </auth-without-sidebar-layout>
 </template>
 
 <script setup>
 import AuthWithoutSidebarLayout from "@/Layouts/AuthWithoutSidebarLayout.vue";
-import Breadcrumbs from "@/Components/Breadcrumbs.vue";
-import Box from "@/Components/Box.vue";
-import Pagination from "@/Components/Pagination.vue";
+import AppBreadcrumbs from "@/Components/AppBreadcrumbs.vue";
+import AppBox from "@/Components/AppBox.vue";
+import AppPagination from "@/Components/AppPagination.vue";
 import { Head, Link } from "@inertiajs/vue3";
 import { shorten } from "@/Composables/string";
 import FlashMessage from "@/Components/FlashMessage.vue";
 import { ref } from "vue";
 
 // Handle flash messages
-const messageComponent = ref(null);
+const flashMessageComponent = ref(null);
 
 const props = defineProps({
   messages: Object,

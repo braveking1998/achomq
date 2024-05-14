@@ -7,7 +7,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 
-class StartSinglePlayerGame
+class StartSingle
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 

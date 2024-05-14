@@ -33,6 +33,9 @@ export default {
         sans: ["Figtree", ...defaultTheme.fontFamily.sans],
         farsi: ["Iransans", ...defaultTheme.fontFamily.sans],
       },
+      screens: {
+        xs: "390px",
+      },
     },
   },
 

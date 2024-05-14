@@ -1,6 +1,6 @@
 <template>
   <Head title="اچم کیو" />
-  <GuestLayout title="صفحه نخست">
+  <guest-layout title="صفحه نخست">
     <!-- Games -->
     <!-- Games: phones -->
     <section class="md:hidden mx-2 mt-8">
@@ -124,7 +124,7 @@
         </a>
       </div>
     </section>
-  </GuestLayout>
+  </guest-layout>
 </template>
 
 <script setup>

@@ -2,11 +2,11 @@
   <!-- Header -->
   <header>
     <div class="py-6 sm:py-2 sm:pr-4 text-gray-900">
-      <Dropdown :title="title">
-        <DropdownLink href="guest.front">صفحه نخست</DropdownLink>
-        <DropdownLink href="guest.about">درباره ما</DropdownLink>
-        <DropdownLink href="guest.contact">تماس با ما</DropdownLink>
-      </Dropdown>
+      <app-dropdown :title="title">
+        <dropdown-link href="guest.front">صفحه نخست</dropdown-link>
+        <dropdown-link href="guest.about">درباره ما</dropdown-link>
+        <dropdown-link href="guest.contact">تماس با ما</dropdown-link>
+      </app-dropdown>
     </div>
 
     <!-- Slider -->
@@ -79,7 +79,7 @@
           </ul>
         </div>
         <div class="mt-6">
-          <Search />
+          <app-search />
         </div>
       </div>
     </div>
@@ -91,8 +91,8 @@
 
 <script setup>
 import { Link } from "@inertiajs/vue3";
-import Search from "@/Pages/FrontPage/Components/Search.vue";
-import Dropdown from "@/Components/Dropdown.vue";
+import AppSearch from "@/Layouts/GuestLayout/Components/AppSearch.vue";
+import AppDropdown from "@/Components/AppDropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
 
 defineProps({ title: String });

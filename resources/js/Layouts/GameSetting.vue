@@ -1,10 +1,10 @@
 <template>
-  <AuthWithoutSidebarLayout>
+  <auth-without-sidebar-layout>
     <template #header>
-      <Breadcrumbs :breadcrumbs="breadcrumbs" />
+      <app-breadcrumbs :breadcrumbs="breadcrumbs" />
     </template>
     <template #content>
-      <Box class="p-6">
+      <app-box class="p-6">
         <div class="flex flex-col md:flex-row gap-4 md:px-0">
           <Link
             class="btn-bordered"
@@ -35,21 +35,21 @@
             آپلود تصاویر عمومی
           </Link>
         </div>
-      </Box>
-      <Box class="p-6 mt-8">
+      </app-box>
+      <app-box class="p-6 mt-8">
         <div class="flex flex-col gap-8 md:px-0">
           <slot>Default</slot>
         </div>
-      </Box>
+      </app-box>
     </template>
-  </AuthWithoutSidebarLayout>
+  </auth-without-sidebar-layout>
 </template>
 
 <script setup>
 import { Link } from "@inertiajs/vue3";
 import AuthWithoutSidebarLayout from "@/Layouts/AuthWithoutSidebarLayout.vue";
-import Box from "@/Components/Box.vue";
-import Breadcrumbs from "@/Components/Breadcrumbs.vue";
+import AppBox from "@/Components/AppBox.vue";
+import AppBreadcrumbs from "@/Components/AppBreadcrumbs.vue";
 
 defineProps({
   tab: String,

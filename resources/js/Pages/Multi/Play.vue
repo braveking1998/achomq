@@ -1,8 +1,8 @@
 <template>
   <Head title="بازی دو نفره" />
-  <AuthWithoutSidebarLayout>
+  <auth-without-sidebar-layout>
     <template #header>
-      <Breadcrumbs :breadcrumbs="breadcrumbs"> </Breadcrumbs>
+      <app-breadcrumbs :breadcrumbs="breadcrumbs"> </app-breadcrumbs>
     </template>
     <template #content>
       <div class="w-full md:w-2/3 mx-auto">
@@ -10,28 +10,28 @@
           <!-- Starter -->
           <div class="flex flex-col border-l-2 border-gray-500">
             <!-- Titles -->
-            <DisplayUser
+            <display-user
               :src="game.starter.chosen_image.src"
               :name="game.starter.name"
             />
 
             <!-- Starter Answers loop -->
             <div v-for="game in s_answers">
-              <DisplayButtons :answers="game" />
+              <display-buttons :answers="game" />
             </div>
           </div>
 
           <!-- Rival -->
           <div class="flex flex-col">
             <!-- Titles -->
-            <DisplayUser
+            <display-user
               :src="game.rival.chosen_image.src"
               :name="game.rival.name"
             />
 
             <!-- Rival Answers loop -->
             <div v-for="game in r_answers">
-              <DisplayButtons :answers="game" />
+              <display-buttons :answers="game" />
             </div>
           </div>
           <div v-if="s_answers.length === 0" class="w-full col-span-2 mt-4">
@@ -40,7 +40,7 @@
 
           <!-- Button -->
           <div class="col-span-2 mt-8">
-            <StartButton
+            <start-button
               :text="whoToPlay()"
               :game="game"
               v-if="game.is_active == 1"
@@ -55,19 +55,19 @@
         </div>
       </div>
     </template>
-  </AuthWithoutSidebarLayout>
+  </auth-without-sidebar-layout>
 </template>
 
 <script setup>
 import { Head } from "@inertiajs/vue3";
 import AuthWithoutSidebarLayout from "@/Layouts/AuthWithoutSidebarLayout.vue";
-import DisplayButtons from "@/Pages/MultiPlayer/Index/Partials/DisplayButtons.vue";
-import StartButton from "@/Pages/MultiPlayer/Index/Partials/StartButton.vue";
-import DisplayUser from "@/Pages/MultiPlayer/Index/Partials/DisplayUser.vue";
+import DisplayButtons from "@/Pages/Multi/Index/Components/DisplayButtons.vue";
+import StartButton from "@/Pages/Multi/Index/Components/StartButton.vue";
+import DisplayUser from "@/Pages/Multi/Index/Components/DisplayUser.vue";
 import { ref } from "vue";
 import { onMounted, onUnmounted } from "vue";
 import { preventGoBack, allowGoBack } from "@/Composables/preventer";
-import Breadcrumbs from "@/Components/Breadcrumbs.vue";
+import AppBreadcrumbs from "@/Components/AppBreadcrumbs.vue";
 
 // breadcrumbs
 const breadcrumbs = [

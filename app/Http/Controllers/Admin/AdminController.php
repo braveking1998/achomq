@@ -14,10 +14,10 @@ class AdminController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $question = Question::all()->where('status', 0)->first();
+        $question = Question::where('status', 0)->get();
 
         return Inertia::render('Admin/Index', [
-            'question' => $question,
+            'question' => $question->count(),
         ]);
     }
 }

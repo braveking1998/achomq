@@ -16,15 +16,10 @@ class ProfileImage extends Model
         'user_id',
     ];
 
-    protected $appends = ['src'];
+
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function getSrcAttribute()
-    {
-        return asset('storage/'.$this->file_path);
     }
 }

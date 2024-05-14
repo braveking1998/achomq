@@ -64,7 +64,7 @@ class QuestionController extends Controller
 
         $question = $request->user()->questions()->create([
             'unique_id' => (string) Str::orderedUuid(),
-            'text' => (Str::endsWith($request->question, '؟') ? $request->question : $request->question.'؟'),
+            'text' => (Str::endsWith($request->question, '؟') ? $request->question : $request->question . '؟'),
             'level_id' => $request->level_id,
             'category_id' => $request->category_id,
         ]);
@@ -117,7 +117,7 @@ class QuestionController extends Controller
         );
 
         $qUpdate = $question->update([
-            'text' => (Str::endsWith($request->question, '؟') ? $request->question : $request->question.'؟'),
+            'text' => (Str::endsWith($request->question, '؟') ? $request->question : $request->question . '؟'),
             'level_id' => $request->level_id,
             'category_id' => $request->category_id,
         ]);

@@ -1,12 +1,12 @@
 <template>
   <Head title="آپلود تصاویر عمومی" />
 
-  <GameSetting tab="images">
+  <game-setting tab="images">
     <!-- Flash messages -->
-    <FlashMessage ref="messageComponent" />
+    <flash-message ref="flashMessageComponent" />
 
     <!-- Upload public profile images -->
-    <BoxWithTitle>
+    <box-with-title>
       <!-- Title -->
       <template #title
         >آپلود تصاویر عمومی پروفایل (اندازه استاندارد 512 × 512 پیکسل)</template
@@ -63,8 +63,8 @@
           </div>
         </div>
       </template>
-    </BoxWithTitle>
-  </GameSetting>
+    </box-with-title>
+  </game-setting>
 </template>
 
 <script setup>
@@ -82,7 +82,7 @@ const page = usePage();
 const errors = computed(() => Object.values(page.props.errors));
 
 // Handle flash messages
-const messageComponent = ref(null);
+const flashMessageComponent = ref(null);
 
 const chooseFile = (event) => {
   let file = event.target.files[0];
@@ -94,7 +94,7 @@ const chooseFile = (event) => {
     },
     {
       onSuccess: () => {
-        messageComponent.value.remover();
+        flashMessageComponent.value.remover();
       },
     }
   );

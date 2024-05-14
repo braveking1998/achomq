@@ -2,25 +2,53 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\CorrectAnswer;
-use App\Events\StartSinglePlayerGame;
-use App\Events\WrongAnswer;
+use Inertia\Inertia;
 use App\Jobs\EarnHeart;
 use App\Models\Category;
-use App\Models\SinglePlayerFeature;
-use Illuminate\Database\Eloquent\Builder;
+use App\Events\StartSingle;
+use App\Events\WrongAnswer;
 use Illuminate\Http\Request;
+use App\Events\CorrectAnswer;
+use App\Models\SingleFeature;
+use App\Models\SinglePlayerFeature;
 use Illuminate\Support\Facades\Auth;
-use Inertia\Inertia;
+use Illuminate\Database\Eloquent\Builder;
 
 class SingleController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        // dd(Category::find($request->category)->questions()->get()->shuffle()->take(4)->toArray());
+        $user = Auth::user();
+        $canPlay = ($user->hearts) ? 'true' : 'false';
+
+        // Decrease hearts
+        StartSingle::dispatch($user);
+
+        // Earn hearts
+        if ($user->hearts >= 0) {
+            EarnHeart::dispatchIf($user->hearts <= 4, $user)->delay(now()->addMinutes(1));
+        }
+
+        return Inertia::render(
+            'Single/Index',
+            [
+                'categories' => Category::where('slug', '!=', 'default')
+                    ->whereHas('questions', function (Builder $query) {
+                        $query->where('status', 1)->where('level_id', Auth::user()->level_id);
+                    }, '>=', 5)
+                    ->get()
+                    ->shuffle()
+                    ->take(3),
+                'canPlay' => $canPlay
+            ]
+        );
+    }
+
+    public function quiz(Request $request)
+    {
         $level = Auth::user()->level_id;
 
-        $time = SinglePlayerFeature::where('level_id', $level)->where('feature', 'time')->first();
+        $time = SingleFeature::where('level_id', $level)->where('feature', 'time')->first();
 
         $questions = Category::find($request->category)
             ->questions()
@@ -35,34 +63,11 @@ class SingleController extends Controller
             ->take(3);
 
         return Inertia::render(
-            'SinglePlayer/Index',
+            'Single/Quiz',
             [
                 'questions' => $questions,
                 'color' => $request->color,
                 'time' => (int) $time->value ?? 15,
-            ]
-        );
-    }
-
-    public function category()
-    {
-        $user = Auth::user();
-        $canPlay = ($user->hearts) ? 'true' : 'false';
-        StartSinglePlayerGame::dispatch($user);
-        if ($user->hearts >= 0) {
-            EarnHeart::dispatchIf($user->hearts <= 4, $user)->delay(now()->addMinutes(1));
-        }
-        return Inertia::render(
-            'SinglePlayer/Category',
-            [
-                'categories' => Category::where('slug', '!=', 'default')
-                    ->whereHas('questions', function (Builder $query) {
-                        $query->where('status', 1)->where('level_id', Auth::user()->level_id);
-                    }, '>=', 5)
-                    ->get()
-                    ->shuffle()
-                    ->take(3),
-                'canPlay' => $canPlay
             ]
         );
     }
@@ -74,9 +79,9 @@ class SingleController extends Controller
         $wrong = $total - $correct;
 
         $level = $request->user()->level->id;
-        $win_coins = SinglePlayerFeature::where('level_id', $level)->where('feature', 'win_coins')->first();
-        $lose_coins = SinglePlayerFeature::where('level_id', $level)->where('feature', 'lose_coins')->first();
-        $points = SinglePlayerFeature::where('level_id', $level)->where('feature', 'points')->first();
+        $win_coins = SingleFeature::where('level_id', $level)->where('feature', 'win_coins')->first() ?? 10;
+        $lose_coins = SingleFeature::where('level_id', $level)->where('feature', 'lose_coins')->first() ?? 2;
+        $points = SingleFeature::where('level_id', $level)->where('feature', 'points')->first() ?? 10;
 
         $earnedCoins = $correct * $win_coins->value;
         $lostCoins = $wrong * $lose_coins->value;
@@ -90,7 +95,7 @@ class SingleController extends Controller
             WrongAnswer::dispatch($request->user(), $lostCoins);
         }
 
-        return Inertia::render('SinglePlayer/Result', [
+        return Inertia::render('Single/Result', [
             'correct' => (int) $correct,
             'total' => (int) $total,
             'color' => (string) $request->color,

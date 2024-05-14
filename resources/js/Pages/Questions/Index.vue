@@ -6,7 +6,7 @@
         <template #right-side>
           <Link
             :href="route('questions.create')"
-            class="btn-primary hidden md:block"
+            class="btn-primary hidden xs:block"
             >افزودن سوال</Link
           >
         </template>
@@ -14,7 +14,7 @@
     </template>
     <template #content>
       <!-- Flash messages -->
-      <FlashMessage ref="messageComponent" />
+      <flash-message ref="flashMessageComponent" />
       <app-search
         :categories="categories"
         :levels="levels"
@@ -103,7 +103,7 @@ const props = defineProps({
   levels: Object,
 });
 
-const messageComponent = ref(null);
+const flashMessageComponent = ref(null);
 
 // breadcrumbs
 const breadcrumbs = [
@@ -119,7 +119,7 @@ const deleteQuestion = (id) => {
   form.delete(route("questions.destroy", id), {
     onSuccess: () => {
       form.reset();
-      messageComponent.value.remover();
+      flashMessageComponent.value.remover();
     },
   });
 };

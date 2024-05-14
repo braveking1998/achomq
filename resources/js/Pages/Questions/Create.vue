@@ -1,26 +1,26 @@
 <template>
   <Head title="افزودن سوال" />
-  <AuthWithSidebarLayout>
+  <auth-with-sidebar-layout>
     <template #header>
-      <Breadcrumbs :breadcrumbs="breadcrumbs" />
+      <app-breadcrumbs :breadcrumbs="breadcrumbs" />
     </template>
     <template #aside>
-      <Box class="flex flex-col gap-4 w-full p-6">
+      <app-box class="flex flex-col gap-4 w-full p-6">
         <h1 class="text-gray-500 text-center font-bold">مشخصات سوال</h1>
         <div class="text-gray-800 text-sm flex flex-col gap-2">
           <div>نام طراح: {{ user.name }}</div>
           <div>تاریخ امروز: {{ dateFormated }}</div>
         </div>
-      </Box>
+      </app-box>
     </template>
     <template #content>
       <!-- Flash messages -->
-      <FlashMessage ref="messageComponent" />
-      <Box class="p-6">
+      <flash-message ref="flashMessageComponent" varient="bg-success-500" />
+      <app-box class="p-6">
         <form @submit.prevent="create">
           <div class="flex flex-col gap-4 md:px-16">
-            <div class="flex justify-between">
-              <div class="w-2/5">
+            <div class="flex flex-col gap-4 sm:flex-row justify-between">
+              <div class="w-full sm:w-2/5">
                 <label for="level">سطح سوال:</label>
                 <select id="level" class="input" v-model.number="form.level_id">
                   <option
@@ -32,7 +32,7 @@
                   </option>
                 </select>
               </div>
-              <div class="w-2/5">
+              <div class="w-full sm:w-2/5">
                 <label for="category">دسته بندی سوال:</label>
                 <select
                   id="category"
@@ -49,6 +49,7 @@
                 </select>
               </div>
             </div>
+            <hr class="mt-4" />
             <div class="mt-4">
               <label class="block" for="question">متن سوال:</label>
               <textarea
@@ -128,18 +129,18 @@
             </div>
           </div>
         </form>
-      </Box>
+      </app-box>
     </template>
-  </AuthWithSidebarLayout>
+  </auth-with-sidebar-layout>
 </template>
 
 <script setup>
 import { Head, usePage, useForm } from "@inertiajs/vue3";
 import AuthWithSidebarLayout from "@/Layouts/AuthWithSidebarLayout.vue";
-import Box from "@/Components/Box.vue";
+import AppBox from "@/Components/AppBox.vue";
 import { computed, ref } from "vue";
 import { useShamsiNames, useShamsiDate } from "@/Composables/date.js";
-import Breadcrumbs from "@/Components/Breadcrumbs.vue";
+import AppBreadcrumbs from "@/Components/AppBreadcrumbs.vue";
 import FlashMessage from "@/Components/FlashMessage.vue";
 
 const props = defineProps({
@@ -152,7 +153,7 @@ const page = usePage();
 const user = computed(() => page.props.auth.user);
 
 // Handle flash messages
-const messageComponent = ref(null);
+const flashMessageComponent = ref(null);
 
 // breadcrumbs
 const breadcrumbs = [
@@ -185,7 +186,7 @@ const create = () =>
   form.post(route("questions.store"), {
     onSuccess: () => {
       form.reset("question", "answers");
-      messageComponent.value.remover();
+      flashMessageComponent.value.remover();
     },
   });
 </script>

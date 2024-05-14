@@ -59,7 +59,7 @@
       <div class="flex items-center gap-4 relative">
         <div class="w-24 h-24 border-2 border-gray-700 p-1 rounded-full">
           <img
-            :src="auth.user.chosen_image.src"
+            :src="auth.user.profile_src"
             alt="profile"
             class="w-full h-full rounded-full"
           />

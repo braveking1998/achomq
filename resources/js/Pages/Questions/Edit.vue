@@ -1,22 +1,22 @@
 <template>
   <Head title="ویرایش سوال" />
-  <AuthWithSidebarLayout>
+  <auth-with-sidebar-layout>
     <template #header>
-      <Breadcrumbs :breadcrumbs="breadcrumbs" />
+      <app-breadcrumbs :breadcrumbs="breadcrumbs" />
     </template>
     <template #aside>
-      <Box class="flex flex-col gap-4 w-full p-6">
+      <app-box class="flex flex-col gap-4 w-full p-6">
         <h1 class="text-gray-500 text-center font-bold">مشخصات سوال</h1>
         <div class="text-gray-800 text-sm flex flex-col gap-2">
           <div>نام طراح: {{ question.user.name }}</div>
           <div>تاریخ امروز: {{ dateFormated }}</div>
         </div>
-      </Box>
+      </app-box>
     </template>
     <template #content>
       <!-- Flash messages -->
-      <FlashMessage ref="messageComponent" />
-      <Box class="p-6">
+      <flash-message ref="flashMessageComponent" />
+      <app-box class="p-6">
         <form @submit.prevent="update">
           <div class="flex flex-col gap-4 md:px-16">
             <div class="flex justify-between">
@@ -128,18 +128,18 @@
             </div>
           </div>
         </form>
-      </Box>
+      </app-box>
     </template>
-  </AuthWithSidebarLayout>
+  </auth-with-sidebar-layout>
 </template>
 
 <script setup>
 import { Head, useForm } from "@inertiajs/vue3";
 import AuthWithSidebarLayout from "@/Layouts/AuthWithSidebarLayout.vue";
-import Box from "@/Components/Box.vue";
-import { computed, ref } from "vue";
+import AppBox from "@/Components/AppBox.vue";
+import { ref } from "vue";
 import { useShamsiNames, useShamsiDate } from "@/Composables/date.js";
-import Breadcrumbs from "@/Components/Breadcrumbs.vue";
+import AppBreadcrumbs from "@/Components/AppBreadcrumbs.vue";
 import FlashMessage from "@/Components/FlashMessage.vue";
 
 const props = defineProps({
@@ -149,7 +149,7 @@ const props = defineProps({
 });
 
 // Handle flash messages
-const messageComponent = ref(null);
+const flashMessageComponent = ref(null);
 
 // breadcrumbs
 const breadcrumbs = [
@@ -159,8 +159,7 @@ const breadcrumbs = [
 ];
 
 // Date
-const { shamsiYear, shamsiMonthNumber, shamsiMonth, shamsiDay } =
-  useShamsiDate();
+const { shamsiYear, shamsiMonth, shamsiDay } = useShamsiDate();
 const { shamsiDayNames } = useShamsiNames();
 
 const day = new Date().getDay();
@@ -182,7 +181,7 @@ const form = useForm({
 const update = () =>
   form.put(route("questions.update", props.question.id), {
     onSuccess: () => {
-      messageComponent.value.remover();
+      flashMessageComponent.value.remover();
     },
   });
 </script>

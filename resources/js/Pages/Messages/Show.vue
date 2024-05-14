@@ -1,13 +1,13 @@
 <template>
   <Head title="مشاهده پیام" />
 
-  <AuthWithoutSidebarLayout>
+  <auth-without-sidebar-layout>
     <template #header>
-      <Breadcrumbs :breadcrumbs="breadcrumbs"> </Breadcrumbs>
+      <app-breadcrumbs :breadcrumbs="breadcrumbs"> </app-breadcrumbs>
     </template>
 
     <template #content>
-      <Box class="flex flex-col gap-4 p-6">
+      <app-box class="flex flex-col gap-4 p-6">
         <p class="text-gray-500">
           <span>عنوان پیام: </span
           ><span class="font-bold">{{ message.data.title }}</span>
@@ -31,16 +31,16 @@
             >حذف پیام</Link
           >
         </div>
-      </Box>
+      </app-box>
     </template>
-  </AuthWithoutSidebarLayout>
+  </auth-without-sidebar-layout>
 </template>
 
 <script setup>
 import { Head, Link } from "@inertiajs/vue3";
 import AuthWithoutSidebarLayout from "@/Layouts/AuthWithoutSidebarLayout.vue";
-import Breadcrumbs from "@/Components/Breadcrumbs.vue";
-import Box from "@/Components/Box.vue";
+import AppBreadcrumbs from "@/Components/AppBreadcrumbs.vue";
+import AppBox from "@/Components/AppBox.vue";
 
 const props = defineProps({
   message: Object,

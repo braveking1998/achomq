@@ -1,25 +1,20 @@
 <template>
   <Head title="تایید سوال" />
-  <AuthWithSidebarLayout>
+  <auth-with-sidebar-layout>
     <template #aside>
-      <Box class="flex flex-col gap-4 w-full p-6">
+      <app-box class="flex flex-col gap-4 w-full p-6">
         <h1 class="text-gray-500 text-center font-bold">مشخصات سوال</h1>
         <div class="text-gray-800 text-sm flex flex-col gap-2">
           <div>نام طراح: {{ question.user.name }}</div>
           <div>تاریخ امروز: {{ dateFormated }}</div>
         </div>
-      </Box>
+      </app-box>
     </template>
     <template #content>
       <!-- Flash messages -->
-      <div
-        v-show="flashMessage && flashMessageVisible"
-        @click="flashMessageVisible = !flashMessageVisible"
-        class="flash-message"
-      >
-        {{ flashMessage }}
-      </div>
-      <Box class="p-6">
+      <flash-message ref="flashMessageComponent" />
+
+      <app-box class="p-6">
         <form @submit.prevent="update">
           <div class="flex flex-col gap-4 md:px-16">
             <div class="flex justify-between">
@@ -151,16 +146,17 @@
             </div>
           </div>
         </form>
-      </Box>
+      </app-box>
     </template>
-  </AuthWithSidebarLayout>
+  </auth-with-sidebar-layout>
 </template>
 
 <script setup>
-import { Head, usePage, useForm, Link } from "@inertiajs/vue3";
+import { Head, useForm, Link } from "@inertiajs/vue3";
 import AuthWithSidebarLayout from "@/Layouts/AuthWithSidebarLayout.vue";
-import Box from "@/Components/Box.vue";
-import { computed, ref } from "vue";
+import AppBox from "@/Components/AppBox.vue";
+import { ref } from "vue";
+import FlashMessage from "@/Components/FlashMessage.vue";
 import { useShamsiNames, useShamsiDate } from "@/Composables/date.js";
 
 const props = defineProps({
@@ -171,21 +167,10 @@ const props = defineProps({
 });
 
 // Handle flash messages
-const page = usePage();
-const flashMessage = computed(() => {
-  return page.props.flash.success;
-});
-
-const flashMessageVisible = ref(true);
-const flashMessageVisibleChange = (time) => {
-  setTimeout(() => {
-    flashMessageVisible.value = false;
-  }, time);
-};
+const flashMessageComponent = ref(null);
 
 // Date
-const { shamsiYear, shamsiMonthNumber, shamsiMonth, shamsiDay } =
-  useShamsiDate();
+const { shamsiYear, shamsiMonth, shamsiDay } = useShamsiDate();
 const { shamsiDayNames } = useShamsiNames();
 
 const day = new Date().getDay();
@@ -207,9 +192,7 @@ const form = useForm({
 const update = () =>
   form.put(route("admin.submit.update", props.question.id), {
     onSuccess: () => {
-      flashMessageVisible.value = true;
-
-      flashMessageVisibleChange(2000);
+      flashMessageComponent.value.remover();
     },
   });
 </script>

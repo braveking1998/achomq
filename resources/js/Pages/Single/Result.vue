@@ -1,11 +1,11 @@
 <template>
   <Head title="بازی تک نفره" />
-  <AuthWithoutSidebarLayout>
+  <auth-without-sidebar-layout>
     <template #header>
-      <Breadcrumbs :breadcrumbs="breadcrumbs"> </Breadcrumbs>
+      <app-breadcrumbs :breadcrumbs="breadcrumbs" />
     </template>
     <template #content>
-      <Box class="container md:max-w-[50%] mx-auto" :class="`!bg-${color}`">
+      <app-box class="container md:max-w-[50%] mx-auto" :class="`!bg-${color}`">
         <div
           class="flex flex-col gap-4 justify-center items-center text-white font-bold py-8"
         >
@@ -32,15 +32,15 @@
             >بازی مجدد</Link
           >
         </div>
-      </Box>
+      </app-box>
     </template>
-  </AuthWithoutSidebarLayout>
+  </auth-without-sidebar-layout>
 </template>
 <script setup>
 import { Head, Link } from "@inertiajs/vue3";
 import AuthWithoutSidebarLayout from "@/Layouts/AuthWithoutSidebarLayout.vue";
-import Box from "@/Components/Box.vue";
-import Breadcrumbs from "@/Components/Breadcrumbs.vue";
+import AppBox from "@/Components/AppBox.vue";
+import AppBreadcrumbs from "@/Components/AppBreadcrumbs.vue";
 
 defineProps({
   correct: Number,

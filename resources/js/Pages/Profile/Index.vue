@@ -1,24 +1,24 @@
 <template>
   <Head title="پروفایل" />
 
-  <AuthWithoutSidebarLayout>
+  <auth-without-sidebar-layout>
     <template #header>
-      <Breadcrumbs :breadcrumbs="breadcrumbs" />
+      <app-breadcrumbs :breadcrumbs="breadcrumbs" />
     </template>
 
     <template #content>
-      <Box class="p-6">
-        <ProfileImages :images="images" />
-      </Box>
+      <app-box class="p-6">
+        <profile-images :images="images" />
+      </app-box>
     </template>
-  </AuthWithoutSidebarLayout>
+  </auth-without-sidebar-layout>
 </template>
 
 <script setup>
 import AuthWithoutSidebarLayout from "@/Layouts/AuthWithoutSidebarLayout.vue";
-import Breadcrumbs from "@/Components/Breadcrumbs.vue";
-import Box from "@/Components/Box.vue";
-import ProfileImages from "@/Pages/Profile/Index/Partials/ProfileImages.vue";
+import AppBreadcrumbs from "@/Components/AppBreadcrumbs.vue";
+import AppBox from "@/Components/AppBox.vue";
+import ProfileImages from "@/Pages/Profile/Index/Components/ProfileImages.vue";
 import { Head, usePage } from "@inertiajs/vue3";
 
 defineProps({

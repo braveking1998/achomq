@@ -1,13 +1,13 @@
 <template>
-  <Head title="همه پیام ها" />
+  <Head title="همه سوالات" />
   <auth-without-sidebar-layout>
     <template #header>
       <app-breadcrumbs :breadcrumbs="breadcrumbs">
         <template #right-side>
           <Link
-            :href="route('admin.notification.create')"
-            class="btn-primary hidden md:block"
-            >پیام جدید</Link
+            :href="route('questions.create')"
+            class="btn-primary hidden xs:block"
+            >افزودن سوال</Link
           >
         </template>
       </app-breadcrumbs>
@@ -16,6 +16,11 @@
       <!-- Flash messages -->
       <flash-message ref="flashMessageComponent" />
 
+      <app-search
+        :categories="categories"
+        :levels="levels"
+        :filters="filters"
+      />
       <app-box class="p-6">
         <table
           class="w-full table-auto border border-gray-500 border-collapse text-base font-medium text-gray-500"
@@ -23,33 +28,45 @@
           <thead>
             <tr>
               <th class="border border-gray-500 p-2 md:p-4">ردیف</th>
-              <th class="border border-gray-500">عنوان</th>
-              <th class="border border-gray-500">متن پیام</th>
+              <th class="border border-gray-500">متن سوال</th>
+              <th class="border border-gray-500">دسته بندی</th>
               <th class="border border-gray-500">عملیات</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(message, index) in messages.data" :key="message.id">
+            <tr v-for="(question, index) in questions.data" :key="question.id">
               <td class="border border-gray-500 md:p-2 text-center">
-                {{ messages.from + index }}
+                {{ questions.from + index }}
               </td>
               <td class="border border-gray-500 md:pr-4">
-                {{ shorten(message.title, 10) }}
+                {{ question.text }}
               </td>
-              <td class="border border-gray-500 md:pr-4">
-                {{ shorten(message.text, 30) }}
+              <td class="border border-gray-500 text-center">
+                <Link
+                  class="text-indigo-800 underline italic"
+                  :href="
+                    route('questions.index', { category: question.category.id })
+                  "
+                >
+                  {{ question.category.name }}
+                </Link>
               </td>
               <td class="border border-gray-500">
                 <div
                   class="flex flex-col md:flex-row gap-2 my-2 md:m-2 items-center justify-center"
                 >
                   <Link
-                    :href="route('admin.notification.show', message.id)"
+                    :href="route('questions.show', question.id)"
                     class="btn-primary text-center px-2 md:px-4"
                     >نمایش</Link
                   >
+                  <Link
+                    :href="route('questions.edit', question.id)"
+                    class="btn-primary text-center bg-green-500 px-2 md:px-4"
+                    >ویرایش</Link
+                  >
                   <button
-                    @click="deleteMessage(message.id)"
+                    @click="deleteQuestion(question.id)"
                     class="btn-primary text-center bg-red-500 px-2 md:px-4"
                   >
                     حذف
@@ -60,10 +77,10 @@
           </tbody>
         </table>
         <div
-          v-if="messages.data.length"
+          v-if="questions.data.length"
           class="w-full flex justify-center my-8"
         >
-          <app-pagination :links="messages.links" />
+          <app-pagination :links="questions.links" />
         </div>
       </app-box>
     </template>
@@ -74,28 +91,33 @@
 import AuthWithoutSidebarLayout from "@/Layouts/AuthWithoutSidebarLayout.vue";
 import AppBreadcrumbs from "@/Components/AppBreadcrumbs.vue";
 import AppBox from "@/Components/AppBox.vue";
-import AppPagination from "@/Components/AppPagination.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
-import { ref } from "vue";
-import { shorten } from "@/Composables/string";
+import AppPagination from "@/Components/AppPagination.vue";
 import FlashMessage from "@/Components/FlashMessage.vue";
+import { ref } from "vue";
+import AppSearch from "@/Pages/Questions/Index/Components/AppSearch.vue";
 
 const props = defineProps({
-  messages: Object,
+  filters: Object,
+  questions: Object,
+  categories: Object,
+  levels: Object,
 });
 
-// breadcrumbs
-const breadcrumbs = [{ label: "مدیریت", url: route("admin.index") }];
-
-// Handle flash messages
 const flashMessageComponent = ref(null);
 
-const deleteMessage = (id) => {
+// breadcrumbs
+const breadcrumbs = [
+  { label: "داشبورد", url: route("dashboard") },
+  { label: "سوالات", url: route("questions.index") },
+];
+
+const deleteQuestion = (id) => {
   const form = useForm({
     id: id,
   });
 
-  form.delete(route("admin.notification.destroy", id), {
+  form.delete(route("questions.destroy", id), {
     onSuccess: () => {
       form.reset();
       flashMessageComponent.value.remover();

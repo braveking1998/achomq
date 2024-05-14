@@ -1,7 +1,7 @@
 <template>
-  <BoxWithTitle>
+  <box-with-title>
     <!-- Flash messages -->
-    <FlashMessage ref="messageComponent" />
+    <flash-message ref="flashMessageComponent" />
 
     <!-- Title -->
     <template #title>ایجاد دسته بندی جدید</template>
@@ -33,7 +33,7 @@
         </div>
       </div>
     </form>
-  </BoxWithTitle>
+  </box-with-title>
 </template>
 
 <script setup>
@@ -43,7 +43,7 @@ import BoxWithTitle from "@/Components/BoxWithTitle.vue";
 import FlashMessage from "@/Components/FlashMessage.vue";
 
 // Handle flash messages
-const messageComponent = ref(null);
+const flashMessageComponent = ref(null);
 
 const form = useForm({
   name: "",
@@ -53,7 +53,7 @@ const form = useForm({
 const create = () => {
   form.post(route("admin.setting.category.store"), {
     onSuccess: () => {
-      messageComponent.value.remover();
+      flashMessageComponent.value.remover();
     },
   });
 };

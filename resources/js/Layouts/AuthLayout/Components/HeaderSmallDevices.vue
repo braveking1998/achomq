@@ -2,7 +2,7 @@
   <!-- Phones -->
   <DashboardDropdown
     :name="auth.user.name"
-    :src="auth.user.chosen_image.src"
+    :src="auth.user.profile_src"
     class="block md:hidden"
   >
     <template #header>

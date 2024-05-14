@@ -1,10 +1,10 @@
 <template>
   <Head title="سطح ها" />
 
-  <GameSetting tab="level">
-    <LevelAll :levels="levels" />
-    <LevelCreate />
-  </GameSetting>
+  <game-setting tab="level">
+    <level-all :levels="levels" />
+    <level-create />
+  </game-setting>
 </template>
 <script setup>
 import { Head } from "@inertiajs/vue3";

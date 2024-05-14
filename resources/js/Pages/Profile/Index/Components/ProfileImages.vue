@@ -1,13 +1,13 @@
 <template>
   <!-- Upload public profile images -->
-  <BoxWithTitle>
+  <box-with-title>
     <!-- Title -->
     <template #title>انتخاب عکس پروفایل</template>
 
     <!-- Content -->
     <template #default>
       <!-- Flash messages -->
-      <FlashMessage ref="messageComponent" />
+      <flash-message ref="flashMessageComponent" />
 
       <!-- Content -->
       <div class="flex flex-col gap-4">
@@ -65,12 +65,12 @@
         </div>
       </div>
     </template>
-  </BoxWithTitle>
+  </box-with-title>
 </template>
 
 <script setup>
 import BoxWithTitle from "@/Components/BoxWithTitle.vue";
-import { usePage, Link, router } from "@inertiajs/vue3";
+import { usePage, router } from "@inertiajs/vue3";
 import { computed, ref } from "vue";
 import FlashMessage from "@/Components/FlashMessage.vue";
 
@@ -83,7 +83,7 @@ const selectedImage = computed(() => page.props.auth.user.chosen_image);
 const errors = computed(() => Object.values(page.props.errors));
 
 // Handle flash messages
-const messageComponent = ref(null);
+const flashMessageComponent = ref(null);
 
 const chooseFile = (event) => {
   let file = event.target.files[0];
@@ -113,7 +113,7 @@ const selectNewImage = (id) => {
 const deleteImage = (id) => {
   router.delete(route("profile.images.destroy", id), {
     onSuccess: () => {
-      messageComponent.value.remover();
+      flashMessageComponent.value.remover();
     },
   });
 };

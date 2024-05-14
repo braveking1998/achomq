@@ -1,6 +1,7 @@
 <template>
   <div
-    class="flash-message bg-red-500"
+    class="flash-message"
+    :class="varient"
     v-show="flashMessage && showMessage"
     @click="showMessage = !showMessage"
   >
@@ -10,6 +11,10 @@
 <script setup>
 import { computed, ref } from "vue";
 import { usePage } from "@inertiajs/vue3";
+
+defineProps({
+  varient: String,
+});
 
 const page = usePage();
 const flashMessage = computed(() => {

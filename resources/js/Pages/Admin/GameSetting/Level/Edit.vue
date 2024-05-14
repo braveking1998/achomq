@@ -1,23 +1,23 @@
 <template>
   <Head title="ویرایش سطح" />
-  <AuthWithoutSidebarLayout>
+  <auth-without-sidebar-layout>
     <!-- breadcrumbs -->
     <template #header>
-      <Breadcrumbs :breadcrumbs="breadcrumbs" />
+      <app-breadcrumbs :breadcrumbs="breadcrumbs" />
     </template>
 
     <!-- Content -->
     <template #content>
       <!-- Flash messages -->
-      <FlashMessage ref="messageComponent" />
+      <flash-message ref="flashMessageComponent" />
 
       <!-- Main Content -->
-      <Box class="p-6">
+      <app-box class="p-6">
         <!-- Edit Form -->
         <form @submit.prevent="update">
           <div class="flex flex-col gap-4">
             <!-- Edit level -->
-            <BoxWithTitle>
+            <box-with-title>
               <!-- Title -->
               <template #title>ویرایش سطح ها</template>
               <!-- Level name -->
@@ -62,10 +62,10 @@
                   {{ form.errors.max }}
                 </div>
               </div>
-            </BoxWithTitle>
+            </box-with-title>
 
             <!-- Question makers settings -->
-            <BoxWithTitle>
+            <box-with-title>
               <!-- Title -->
               <template #title> تنظیمات طراحی سوال </template>
               <!-- Content -->
@@ -87,10 +87,10 @@
                   </div>
                 </div>
               </template>
-            </BoxWithTitle>
+            </box-with-title>
 
             <!-- Single player setting -->
-            <BoxWithTitle>
+            <box-with-title>
               <!-- Title -->
               <template #title> تنظیمات بازی تک نفره </template>
 
@@ -163,25 +163,25 @@
                   <button type="reset" class="btn-bordered">از نوسازی</button>
                 </div>
               </template>
-            </BoxWithTitle>
+            </box-with-title>
           </div>
         </form>
-      </Box>
+      </app-box>
     </template>
-  </AuthWithoutSidebarLayout>
+  </auth-without-sidebar-layout>
 </template>
 
 <script setup>
 import { Head, useForm } from "@inertiajs/vue3";
-import Breadcrumbs from "@/Components/Breadcrumbs.vue";
+import AppBreadcrumbs from "@/Components/AppBreadcrumbs.vue";
 import AuthWithoutSidebarLayout from "@/Layouts/AuthWithoutSidebarLayout.vue";
-import Box from "@/Components/Box.vue";
+import AppBox from "@/Components/AppBox.vue";
 import BoxWithTitle from "@/Components/BoxWithTitle.vue";
 import { ref } from "vue";
 import FlashMessage from "@/Components/FlashMessage.vue";
 
 // Handle flash messages
-const messageComponent = ref(null);
+const flashMessageComponent = ref(null);
 
 const props = defineProps({
   level: Object,
@@ -212,7 +212,7 @@ const form = useForm({
 const update = () => {
   form.put(route("admin.setting.level.update", props.level.id), {
     onSuccess: () => {
-      messageComponent.value.remover();
+      flashMessageComponent.value.remover();
     },
   });
 };

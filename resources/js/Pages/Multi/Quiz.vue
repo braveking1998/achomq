@@ -1,21 +1,23 @@
 <template>
   <Head title="بازی تک نفره" />
-  <AuthWithoutSidebarLayout>
+  <auth-without-sidebar-layout>
+    <!-- Content -->
     <template #content>
-      <Box
+      <!-- Question box -->
+      <app-box
         class="container md:max-w-[50%] mx-auto relative"
         v-for="(question, index) in questions"
         :key="index"
         v-show="index == totalAnswered"
       >
-        <!-- Question -->
-        <!-- Header -->
+        <!-- Question passed bar -->
         <div
           class="absolute top-0 right-0 h-10 z-10"
           :class="`bg-${color}`"
           :style="`width: ${((totalAnswered + 1) / questions.length) * 100}%`"
         ></div>
-        <!-- timer -->
+
+        <!-- Question passed text + timer -->
         <div
           class="text-center text-white bg-opacity-40 font-bold shadow-sm h-10 leading-10 relative z-20"
           :class="`bg-${color}`"
@@ -25,17 +27,22 @@
           </p>
           <p class="absolute left-5 text-white">{{ timer }}</p>
         </div>
+
         <!-- Question text -->
         <div class="my-8 font-bold text-center" :class="`text-${color}`">
           {{ question.text }}
         </div>
+
+        <!-- Answers looped -->
         <ul class="m-4 px-4">
-          <!-- Answer -->
-          <div v-if="answered === null" class="flex flex-col gap-4 text-center">
+          <!-- Not clicked answered box -->
+          <div v-if="answered == null" class="flex flex-col gap-4 text-center">
             <li
               v-for="answer in question.answers"
               :key="answer.unique_id"
-              @click="answerClicked(answer.unique_id, answer.is_correct)"
+              @click="
+                answerClicked(question.id, answer.unique_id, answer.is_correct)
+              "
               class="text-center w-full hover:bg-opacity-100 bg-opacity-20 py-2 font-bold hover:text-white cursor-pointer"
               :class="`hover:bg-${color} bg-${color} text-${color}`"
             >
@@ -43,7 +50,7 @@
             </li>
           </div>
 
-          <!-- Correct answer -->
+          <!-- Clicked answered box -->
           <div v-else class="flex flex-col gap-4">
             <li
               v-for="answer in question.answers"
@@ -53,7 +60,7 @@
                 answer.is_correct == 1 && answer.unique_id
                   ? 'bg-green-500'
                   : 'bg-red-500 opacity-50',
-                { '!opacity-100': answered === answer.unique_id },
+                { '!opacity-100': answered == answer.unique_id },
               ]"
             >
               <div class="col-span-8">{{ answer.text }}</div>
@@ -64,41 +71,111 @@
             </li>
           </div>
         </ul>
+
+        <!-- Next question -->
         <transition name="fade">
           <button
             class="btn-primary border-2 block mr-auto ml-4 my-8 font-bold"
             :class="`bg-${color} hover:border-${color} hover:text-${color}`"
             v-show="answered"
             @click="next"
+            v-if="totalAnswered < props.questions.length - 1"
           >
             بعدی
           </button>
+          <button
+            class="btn-primary border-2 block mr-auto ml-4 my-8 font-bold"
+            :class="`bg-${color} hover:border-${color} hover:text-${color}`"
+            v-show="answered"
+            @click="seeResult"
+            v-else
+          >
+            نتیجه
+          </button>
         </transition>
-      </Box>
+      </app-box>
     </template>
-  </AuthWithoutSidebarLayout>
+  </auth-without-sidebar-layout>
 </template>
 
 <script setup>
 import { Head } from "@inertiajs/vue3";
 import AuthWithoutSidebarLayout from "@/Layouts/AuthWithoutSidebarLayout.vue";
-import Box from "@/Components/Box.vue";
+import AppBox from "@/Components/AppBox.vue";
 import { router } from "@inertiajs/vue3";
-import { ref, watch } from "vue";
+import { ref, watch, onMounted, onUnmounted } from "vue";
+import {
+  allowGoBack,
+  preventReload,
+  allowReload,
+} from "@/Composables/preventer";
+
+onMounted(() => {
+  // Prevent go backwards
+  history.pushState(null, null, location.href);
+  window.onpopstate = () => {
+    alert("به دلیل تقلب تمام جواب های شما غلط محاسبه شده است.");
+
+    const answers = ref([]);
+
+    props.questions.forEach(({ id }, index) => {
+      answers.value.push({
+        q_id: id,
+        is_correct: 0,
+      });
+    });
+
+    router.patch(route("multi-player.result", props.gameId), {
+      answers: answers.value,
+    });
+  };
+
+  // Prevent reload
+  preventReload();
+});
+
+onUnmounted(() => {
+  allowGoBack();
+  allowReload();
+});
 
 const props = defineProps({
   questions: Object,
   color: String,
   time: Number,
+  gameId: Number,
 });
+
+// Stop submit several times
+const submitAnswers = ref(false);
 
 const timer = ref(props.time);
 const timerEnabled = ref(true);
+
 const totalAnswered = ref(0);
 const correctAnswers = ref(0);
+const answers = ref([]);
 const answered = ref(null);
+const q_id = ref(0);
 
-const answerClicked = (id, is_correct) => {
+const qIdChanger = () => {
+  props.questions.forEach(({ id }, index) => {
+    if (index == totalAnswered.value) {
+      q_id.value = id;
+    }
+  });
+};
+
+onMounted(() => {
+  qIdChanger();
+});
+
+const answerClicked = (q_id, id, is_correct) => {
+  answers.value.push({
+    q_id: q_id,
+    answer_id: id,
+    is_correct: is_correct,
+  });
   if (answered.value == null) {
     answered.value = id;
     timerEnabled.value = false;
@@ -110,16 +187,19 @@ const answerClicked = (id, is_correct) => {
 };
 
 const next = () => {
-  if (totalAnswered.value < props.questions.length - 1) {
-    answered.value = null;
-    timer.value = props.time;
-    timerEnabled.value = true;
-    totalAnswered.value++;
-  } else {
-    router.put(route("single-player.result"), {
-      total: props.questions.length,
-      correct: correctAnswers.value,
-      color: props.color,
+  answered.value = null;
+  timer.value = props.time;
+  timerEnabled.value = true;
+  totalAnswered.value++;
+  qIdChanger();
+};
+
+const seeResult = () => {
+  if (submitAnswers.value === false) {
+    submitAnswers.value = true;
+    router.patch(route("multi-player.result", props.gameId), {
+      answers: answers.value,
+      corrects: correctAnswers.value,
     });
   }
 };
@@ -132,8 +212,13 @@ watch(
         timer.value--;
       }, 1000);
     } else {
+      // If the time is over
       if (answered.value == null) {
         answered.value = 1;
+        answers.value.push({
+          q_id: q_id.value,
+          is_correct: 0,
+        });
       }
     }
   },

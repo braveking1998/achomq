@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\LevelController;
 use App\Http\Controllers\Admin\StatsController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\NotificationController;
+use App\Http\Controllers\Admin\QuestionManagementController;
 use App\Http\Controllers\UploadPrivateImagesController;
 use App\Http\Controllers\Admin\SubmitQuestionController;
 use App\Http\Controllers\Admin\UploadPublicImagesController;
@@ -97,4 +98,5 @@ Route::middleware(['auth', 'verified', 'admin'])->name('admin.')->prefix('admin'
         Route::get('/stats', StatsController::class)->name('stats');
         Route::resource('images', UploadPublicImagesController::class)->only(['index', 'store', 'destroy']);
     });
+    Route::resource('questions', QuestionManagementController::class);
 });

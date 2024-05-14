@@ -2,8 +2,9 @@
 
 namespace App\Listeners;
 
-use App\Events\StartMultiGame;
+use App\Events\StartSingle;
 use App\Events\WrongAnswer;
+use App\Events\StartMultiGame;
 use Illuminate\Events\Dispatcher;
 
 class DecreaseEventSubscriber
@@ -37,11 +38,20 @@ class DecreaseEventSubscriber
         }
     }
 
+    public function handleStartSingle(StartSingle $event): void
+    {
+        if ($event->user->hearts) {
+            $event->user->hearts -= 1;
+            $event->user->save();
+        }
+    }
+
     public function subscribe(Dispatcher $events): array
     {
         return [
             WrongAnswer::class => 'handleWrongAnswer',
             StartMultiGame::class => 'handleStartMultiGame',
+            StartSingle::class => 'handleStartSingle'
         ];
     }
 }

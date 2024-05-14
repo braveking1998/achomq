@@ -3,12 +3,13 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -54,6 +55,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    protected $appends = ['profile_src'];
+
     public function questions(): HasMany
     {
         return $this->hasMany(Question::class);
@@ -64,10 +67,11 @@ class User extends Authenticatable
         return $this->belongsTo(Level::class);
     }
 
-    // Chosen profile image
-    public function chosenImage(): BelongsTo
+    protected function profileSrc(): Attribute
     {
-        return $this->belongsTo(ProfileImage::class, 'profile_image');
+        return Attribute::make(
+            get: fn () => ($this->profile_image) ? asset('storage/' . ProfileImage::find($this->profile_image)->file_path) : false,
+        );
     }
 
     // Owner

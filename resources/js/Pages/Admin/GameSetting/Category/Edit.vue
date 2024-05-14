@@ -1,18 +1,18 @@
 <template>
   <Head title="ویرایش دسته بندی" />
 
-  <AuthWithoutSidebarLayout>
+  <auth-without-sidebar-layout>
     <template #header>
       <!-- breadcrumbs -->
-      <Breadcrumbs :breadcrumbs="breadcrumbs" />
+      <app-breadcrumbs :breadcrumbs="breadcrumbs" />
     </template>
     <template #content>
       <!-- Flash messages -->
-      <FlashMessage ref="messageComponent" />
+      <flash-message ref="flashMessageComponent" />
 
-      <Box class="p-6">
+      <app-box class="p-6">
         <!-- Content -->
-        <BoxWithTitle>
+        <box-with-title>
           <!-- Title -->
           <template #title>ویرایش دسته بندی</template>
           <!-- Edut Form -->
@@ -43,17 +43,17 @@
               </div>
             </div>
           </form>
-        </BoxWithTitle>
-      </Box>
+        </box-with-title>
+      </app-box>
     </template>
-  </AuthWithoutSidebarLayout>
+  </auth-without-sidebar-layout>
 </template>
 
 <script setup>
 import { Head, useForm } from "@inertiajs/vue3";
-import Breadcrumbs from "@/Components/Breadcrumbs.vue";
+import AppBreadcrumbs from "@/Components/AppBreadcrumbs.vue";
 import AuthWithoutSidebarLayout from "@/Layouts/AuthWithoutSidebarLayout.vue";
-import Box from "@/Components/Box.vue";
+import AppBox from "@/Components/AppBox.vue";
 import BoxWithTitle from "@/Components/BoxWithTitle.vue";
 import { ref } from "vue";
 import FlashMessage from "@/Components/FlashMessage.vue";
@@ -64,7 +64,7 @@ const props = defineProps({
 });
 
 // Handle flash messages
-const messageComponent = ref(null);
+const flashMessageComponent = ref(null);
 
 // breadcrumbs
 const breadcrumbs = [
@@ -80,7 +80,7 @@ const form = useForm({
 const update = () => {
   form.put(route("admin.setting.category.update", props.category.id), {
     onSuccess: () => {
-      messageComponent.value.remover();
+      flashMessageComponent.value.remover();
     },
   });
 };

@@ -1,13 +1,13 @@
 <template>
   <Head title="افزودن سوال" />
 
-  <AuthWitoutSidebarLayout>
+  <auth-without-sidebar-layout>
     <template #header>
-      <Breadcrumbs :breadcrumbs="breadcrumbs" />
+      <app-breadcrumbs :breadcrumbs="breadcrumbs" />
     </template>
 
     <template #content>
-      <Box class="p-6">
+      <app-box class="p-6">
         <div
           v-if="flashMessage"
           class="text-center bg-green-500 px-6 py-2 w-2/3 mx-auto mb-5 text-white"
@@ -100,16 +100,16 @@
             </div>
           </div>
         </form>
-      </Box>
+      </app-box>
     </template>
-  </AuthWitoutSidebarLayout>
+  </auth-without-sidebar-layout>
 </template>
 
 <script setup>
 import { Head, useForm, usePage } from "@inertiajs/vue3";
-import AuthWitoutSidebarLayout from "@/Layouts/AuthWithoutSidebarLayout.vue";
-import Box from "@/Components/Box.vue";
-import Breadcrumbs from "@/Components/Breadcrumbs.vue";
+import AuthWithoutSidebarLayout from "@/Layouts/AuthWithoutSidebarLayout.vue";
+import AppBox from "@/Components/AppBox.vue";
+import AppBreadcrumbs from "@/Components/AppBreadcrumbs.vue";
 import { computed, ref } from "vue";
 
 defineProps({

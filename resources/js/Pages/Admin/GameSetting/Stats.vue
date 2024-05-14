@@ -1,6 +1,6 @@
 <template>
   <Head title="آمار سوالات" />
-  <GameSetting tab="stats">
+  <game-setting tab="stats">
     <!-- Levels -->
     <div class="flex gap-4 mb-8 flex-wrap">
       <!-- Levels loop -->
@@ -29,7 +29,7 @@
         </li>
       </ul>
     </div>
-  </GameSetting>
+  </game-setting>
 </template>
 
 <script setup>

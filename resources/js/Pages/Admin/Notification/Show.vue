@@ -3,7 +3,7 @@
 
   <AuthWithoutSidebarLayout>
     <template #header>
-      <Breadcrumbs :breadcrumbs="breadcrumbs">
+      <app-breadcrumbs :breadcrumbs="breadcrumbs">
         <template #right-side>
           <div class="flex gap-4">
             <Link
@@ -15,11 +15,11 @@
             >
           </div>
         </template>
-      </Breadcrumbs>
+      </app-breadcrumbs>
     </template>
 
     <template #content>
-      <Box class="flex flex-col gap-4 p-6">
+      <app-box class="flex flex-col gap-4 p-6">
         <p class="text-gray-500">
           <span>عنوان پیام: </span>{{ message.title }}
         </p>
@@ -38,7 +38,7 @@
             </span>
           </div>
         </div>
-      </Box>
+      </app-box>
     </template>
   </AuthWithoutSidebarLayout>
 </template>
@@ -46,8 +46,8 @@
 <script setup>
 import { Head, Link } from "@inertiajs/vue3";
 import AuthWithoutSidebarLayout from "@/Layouts/AuthWithoutSidebarLayout.vue";
-import Breadcrumbs from "@/Components/Breadcrumbs.vue";
-import Box from "@/Components/Box.vue";
+import AppBreadcrumbs from "@/Components/AppBreadcrumbs.vue";
+import AppBox from "@/Components/AppBox.vue";
 
 const props = defineProps({
   message: Object,

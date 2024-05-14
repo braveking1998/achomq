@@ -1,6 +1,6 @@
 <template>
   <!-- All Categories -->
-  <BoxWithTitle>
+  <box-with-title>
     <!-- Title -->
     <template #title>دسته بندی ها</template>
     <!-- Loop Category -->
@@ -31,7 +31,7 @@
         </Link>
       </div>
     </div>
-  </BoxWithTitle>
+  </box-with-title>
 </template>
 
 <script setup>
