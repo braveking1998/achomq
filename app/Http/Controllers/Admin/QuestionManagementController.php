@@ -18,11 +18,10 @@ class QuestionManagementController extends Controller
     {
         $filters = $request->only(['category', 'level', 'text']);
 
-        return Inertia::render('Admin/QuestionManagement/Index', [
+        return Inertia::render('Admin/Question/Index', [
             'filters' => $filters,
             'questions' => Question::with('category')->mostRecent()
                 ->filter($filters)
-                ->userRestrict()
                 ->paginate(10)
                 ->withQueryString(),
             'categories' => Category::all(),
