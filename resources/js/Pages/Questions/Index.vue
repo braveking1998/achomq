@@ -29,6 +29,7 @@
               <th class="border border-gray-500 p-2 md:p-4">ردیف</th>
               <th class="border border-gray-500">متن سوال</th>
               <th class="border border-gray-500">دسته بندی</th>
+              <th class="border border-gray-500">وضعیت سوال</th>
               <th class="border border-gray-500">عملیات</th>
             </tr>
           </thead>
@@ -49,6 +50,9 @@
                 >
                   {{ question.category.name }}
                 </Link>
+              </td>
+              <td class="border border-gray-500 text-center">
+                {{ question.status === 2 ? "تایید شده" : "معلق" }}
               </td>
               <td class="border border-gray-500">
                 <div

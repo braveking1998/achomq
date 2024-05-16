@@ -16,11 +16,12 @@ class QuestionManagementController extends Controller
      */
     public function index(Request $request)
     {
-        $filters = $request->only(['category', 'level', 'text']);
+        $filters = $request->only(['category', 'level', 'status', 'text']);
 
-        return Inertia::render('Admin/Question/Index', [
+        return Inertia::render('Admin/Questions/Index', [
             'filters' => $filters,
-            'questions' => Question::with('category')->mostRecent()
+            'questions' => Question::with('category')->withTrashed()
+                ->mostRecent()
                 ->filter($filters)
                 ->paginate(10)
                 ->withQueryString(),

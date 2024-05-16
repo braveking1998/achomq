@@ -30,6 +30,7 @@
               <th class="border border-gray-500 p-2 md:p-4">ردیف</th>
               <th class="border border-gray-500">متن سوال</th>
               <th class="border border-gray-500">دسته بندی</th>
+              <th class="border border-gray-500">وضعیت</th>
               <th class="border border-gray-500">عملیات</th>
             </tr>
           </thead>
@@ -50,6 +51,9 @@
                 >
                   {{ question.category.name }}
                 </Link>
+              </td>
+              <td class="border border-gray-500 text-center">
+                {{ questionStatus(index) }}
               </td>
               <td class="border border-gray-500">
                 <div
@@ -95,7 +99,7 @@ import { Head, Link, useForm } from "@inertiajs/vue3";
 import AppPagination from "@/Components/AppPagination.vue";
 import FlashMessage from "@/Components/FlashMessage.vue";
 import { ref } from "vue";
-import AppSearch from "@/Pages/Questions/Index/Components/AppSearch.vue";
+import AppSearch from "@/Pages/Admin/Questions/Index/Components/AppSearch.vue";
 
 const props = defineProps({
   filters: Object,
@@ -105,6 +109,22 @@ const props = defineProps({
 });
 
 const flashMessageComponent = ref(null);
+
+const questionStatus = (x) => {
+  const question = props.questions.data[x];
+
+  if (question.deleted_at !== null) {
+    return "لغو شده";
+  }
+
+  if (question.status === 1) {
+    return "معلق";
+  }
+
+  if (question.status === 2) {
+    return "تایید شده";
+  }
+};
 
 // breadcrumbs
 const breadcrumbs = [

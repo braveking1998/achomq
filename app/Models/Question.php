@@ -46,6 +46,15 @@ class Question extends Model
             $filters['level'] ?? false,
             fn ($query, $value) => $query->where('level_id', '=', $value)
         )->when(
+            $filters['status'] ?? false,
+            function ($query, $value) {
+                if ($value === "-1") {
+                    $query->where('deleted_at', '!=', null);
+                } else {
+                    $query->where('status', '=', $value)->where('deleted_at', '=', null);
+                }
+            }
+        )->when(
             $filters['text'] ?? false,
             fn ($query, $value) => $query->where('text', 'like', '%' . $value . '%')
         );

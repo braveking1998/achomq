@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('text');
             $table->foreignIdFor(\App\Models\Level::class)->constrained('levels');
             $table->foreignIdFor(\App\Models\Category::class)->constrained('categories')->cascadeOnUpdate();
-            $table->boolean('status')->default(false);
+            $table->boolean('status')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });
