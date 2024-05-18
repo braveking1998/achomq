@@ -30,7 +30,7 @@
         </p>
         <p class="text-gray-500"><span>سطح: </span>{{ question.level.name }}</p>
         <p class="text-gray-500">
-          <span>تاریخ ایجاد: </span>{{ dateFormated }}
+          <span>تاریخ ایجاد: </span> {{ formatedDate }}
         </p>
         <ul class="flex flex-col gap-4">
           <li
@@ -52,7 +52,7 @@ import AuthWithoutSidebarLayout from "@/Layouts/AuthWithoutSidebarLayout.vue";
 import AppBreadcrumbs from "@/Components/AppBreadcrumbs.vue";
 import AppBox from "@/Components/AppBox.vue";
 import { Head, Link } from "@inertiajs/vue3";
-import { useShamsiNames, useShamsiDate } from "@/Composables/date.js";
+import { useFormattedShamsiDate } from "@/Composables/date.js";
 
 const breadcrumbs = [
   { label: "داشبورد", url: route("dashboard") },
@@ -63,11 +63,5 @@ const props = defineProps({
 });
 
 // Date
-const { shamsiYear, shamsiMonth, shamsiDay } = useShamsiDate(
-  new Date(props.question.created_at)
-);
-const { shamsiDayNames } = useShamsiNames();
-
-const day = new Date(props.question.created_at).getDay();
-const dateFormated = `${shamsiDayNames[day]} ${shamsiDay} ${shamsiMonth} ماه ${shamsiYear}`;
+const { formatedDate } = useFormattedShamsiDate(props.question.created_at);
 </script>
