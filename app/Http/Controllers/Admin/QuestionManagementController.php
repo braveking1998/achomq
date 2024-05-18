@@ -51,7 +51,7 @@ class QuestionManagementController extends Controller
      */
     public function show(question $question)
     {
-        return Inertia::render('Questions/Show', [
+        return Inertia::render('Admin/Questions/Show', [
             'question' => $question->load(['answers', 'level', 'category']),
         ]);
     }
