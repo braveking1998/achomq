@@ -86,8 +86,7 @@ class QuestionController extends Controller
     public function show(Question $question)
     {
         return Inertia::render('Questions/Show', [
-            'question' => $question::with(['answers', 'level', 'category'])
-                ->find($question->id),
+            'question' => $question->load(['answers', 'level', 'category']),
         ]);
     }
 
