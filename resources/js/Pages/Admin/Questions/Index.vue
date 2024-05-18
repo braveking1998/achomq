@@ -154,8 +154,8 @@ const questionStatus = (x) => {
 
 // breadcrumbs
 const breadcrumbs = [
-  { label: "داشبورد", url: route("dashboard") },
-  { label: "سوالات", url: route("questions.index") },
+  { label: "مدیریت", url: route("admin.index") },
+  { label: "سوالات", url: route("admin.questions.index") },
 ];
 
 const deleteQuestion = (id) => {
