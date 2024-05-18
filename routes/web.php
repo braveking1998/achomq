@@ -98,5 +98,6 @@ Route::middleware(['auth', 'verified', 'admin'])->name('admin.')->prefix('admin'
         Route::get('/stats', StatsController::class)->name('stats');
         Route::resource('images', UploadPublicImagesController::class)->only(['index', 'store', 'destroy']);
     });
-    Route::resource('questions', QuestionManagementController::class);
+    Route::resource('questions', QuestionManagementController::class)->only(['index']);
+    Route::get('questions/{question}', [QuestionManagementController::class, 'show'])->withTrashed()->name('questions.show');
 });

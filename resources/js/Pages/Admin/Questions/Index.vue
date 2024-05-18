@@ -43,7 +43,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(question, index) in questions.data" :key="question.id">
+            <tr
+              v-for="(question, index) in questions.data"
+              :key="question.id"
+              :class="{ 'opacity-40': question.deleted_at }"
+            >
               <td class="border border-gray-500 md:p-2 text-center">
                 {{ questions.from + index }}
               </td>
