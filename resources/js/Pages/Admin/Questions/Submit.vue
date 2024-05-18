@@ -1,12 +1,15 @@
 <template>
   <Head title="تایید سوال" />
   <auth-with-sidebar-layout>
+    <template #header>
+      <app-breadcrumbs :breadcrumbs="breadcrumbs" />
+    </template>
     <template #aside>
       <app-box class="flex flex-col gap-4 w-full p-6">
         <h1 class="text-gray-500 text-center font-bold">مشخصات سوال</h1>
         <div class="text-gray-800 text-sm flex flex-col gap-2">
           <div>نام طراح: {{ question.user.name }}</div>
-          <div>تاریخ امروز: {{ dateFormated }}</div>
+          <div>تاریخ امروز: {{ formatedDate }}</div>
         </div>
       </app-box>
     </template>
@@ -122,7 +125,7 @@
                 تایید سوال
               </button>
               <Link
-                :href="route('admin.submit.destroy', question.id)"
+                :href="route('admin.questions.submit.destroy', question.id)"
                 as="button"
                 method="delete"
                 class="btn-primary bg-red-500 hover:border-red-500 hover:text-red-500"
@@ -130,7 +133,7 @@
                 لغو سوال
               </Link>
               <Link
-                :href="route('admin.submit.edit', next.id)"
+                :href="route('admin.questions.submit.edit', next)"
                 class="btn-primary"
                 v-if="next"
               >
@@ -157,7 +160,8 @@ import AuthWithSidebarLayout from "@/Layouts/AuthWithSidebarLayout.vue";
 import AppBox from "@/Components/AppBox.vue";
 import { ref } from "vue";
 import FlashMessage from "@/Components/FlashMessage.vue";
-import { useShamsiNames, useShamsiDate } from "@/Composables/date.js";
+import { useFormattedShamsiDate } from "@/Composables/date.js";
+import AppBreadcrumbs from "@/Components/AppBreadcrumbs.vue";
 
 const props = defineProps({
   question: Object,
@@ -166,15 +170,16 @@ const props = defineProps({
   categories: Object,
 });
 
+const breadcrumbs = [
+  { label: "مدیریت", url: route("admin.index") },
+  { label: "سوالات", url: route("admin.questions.index") },
+];
+
 // Handle flash messages
 const flashMessageComponent = ref(null);
 
 // Date
-const { shamsiYear, shamsiMonth, shamsiDay } = useShamsiDate();
-const { shamsiDayNames } = useShamsiNames();
-
-const day = new Date().getDay();
-const dateFormated = `${shamsiDayNames[day]} ${shamsiDay} ${shamsiMonth} ماه ${shamsiYear}`;
+const { formatedDate } = useFormattedShamsiDate(props.question.created_at);
 
 // Form post
 const form = useForm({
@@ -190,7 +195,7 @@ const form = useForm({
 });
 
 const update = () =>
-  form.put(route("admin.submit.update", props.question.id), {
+  form.put(route("admin.questions.submit.update", props.question.id), {
     onSuccess: () => {
       flashMessageComponent.value.remover();
     },
