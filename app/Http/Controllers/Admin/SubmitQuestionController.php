@@ -17,12 +17,15 @@ class SubmitQuestionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Question $question)
     {
-        $next = Question::all()->where('status', 0)->where('id', '!=', $id)->first();
+        if ($question->status === 2) {
+            abort(404);
+        }
+        $next = Question::all()->where('status', 1)->where('id', '!=', $question->id)->first()->id;
 
-        return Inertia::render('Admin/Submit', [
-            'question' => Question::with(['answers', 'level', 'category', 'user'])->find($id),
+        return Inertia::render('Admin/Questions/Submit', [
+            'question' => $question->load(['answers', 'level', 'category', 'user']),
             'next' => $next,
             'levels' => Level::all(),
             'categories' => Category::all(),
@@ -44,10 +47,10 @@ class SubmitQuestionController extends Controller
         $question = Question::find($id);
 
         $qUpdate = $question->update([
-            'text' => (Str::endsWith($request->question, '؟') ? $request->question : $request->question.'؟'),
+            'text' => (Str::endsWith($request->question, '؟') ? $request->question : $request->question . '؟'),
             'level_id' => $request->level_id,
             'category_id' => $request->category_id,
-            'status' => 1,
+            'status' => 2,
         ]);
 
         // Update answers
