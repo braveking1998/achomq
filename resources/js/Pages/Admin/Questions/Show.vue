@@ -58,6 +58,7 @@ const breadcrumbs = [
   { label: "داشبورد", url: route("dashboard") },
   { label: "سوالات", url: route("admin.questions.index") },
 ];
+
 const props = defineProps({
   question: Object,
 });
