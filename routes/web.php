@@ -88,8 +88,6 @@ Route::get('/debug', [DebugController::class, 'index'])->name('debug');
 // Admin
 Route::middleware(['auth', 'verified', 'admin'])->name('admin.')->prefix('admin')->group(function () {
     Route::get('/', AdminController::class)->name('index');
-    Route::resource('submit', SubmitQuestionController::class)
-        ->only(['edit', 'update', 'destroy']);
     Route::resource('notification', NotificationController::class)->except(['edit', 'update'])->parameter('notification', 'message');
     Route::prefix('setting')->name('setting.')->group(function () {
         Route::get('/', [CategoryController::class, 'index'])->name('index');
@@ -100,4 +98,8 @@ Route::middleware(['auth', 'verified', 'admin'])->name('admin.')->prefix('admin'
     });
     Route::resource('questions', QuestionManagementController::class)->only(['index']);
     Route::get('questions/{question}', [QuestionManagementController::class, 'show'])->withTrashed()->name('questions.show');
+    Route::prefix('questions')->name('questions.')->group(function () {
+        Route::resource('submit', SubmitQuestionController::class)
+            ->only(['edit', 'update', 'destroy'])->parameter('submit', 'question');
+    });
 });
