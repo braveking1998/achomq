@@ -31,8 +31,10 @@ class IncreaseEventSubscriber
 
     public function handleAddQuestion(AddQuestion $event): void
     {
-        $points = $event->user->level->add_question;
+        $points = $event->user->level->levelPerks->where('action', 'add_question_points')->first()->value;
+        $coins = $event->user->level->levelPerks->where('action', 'add_question_coins')->first()->value;
         $event->user->points += $points;
+        $event->user->coins += $coins;
         $event->user->save();
 
         $this->increaseLevel($event->user);
