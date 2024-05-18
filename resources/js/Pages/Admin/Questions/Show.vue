@@ -55,7 +55,7 @@ import { Head, Link } from "@inertiajs/vue3";
 import { useFormattedShamsiDate } from "@/Composables/date.js";
 
 const breadcrumbs = [
-  { label: "داشبورد", url: route("dashboard") },
+  { label: "داشبورد", url: route("admin.index") },
   { label: "سوالات", url: route("admin.questions.index") },
 ];
 
