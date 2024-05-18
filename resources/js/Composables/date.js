@@ -186,9 +186,9 @@ const useShamsiDate = (date = new Date()) => {
   return { shamsiYear, shamsiMonth, shamsiMonthNumber, shamsiDay };
 };
 
-export const useFormattedShamsiDate = (data) => {
+export const useFormattedShamsiDate = (data = null) => {
   const { shamsiDayNames } = useShamsiNames();
-  const { shamsiMonth, shamsiYear } = useShamsiDate();
+  const { shamsiYear, shamsiMonth, shamsiDay } = useShamsiDate();
   const day = new Date(data).getDay();
   const formatedDate = `${shamsiDayNames[day]} ${shamsiDay} ${shamsiMonth} ماه ${shamsiYear}`;
 
