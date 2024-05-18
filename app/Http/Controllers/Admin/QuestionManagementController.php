@@ -27,7 +27,7 @@ class QuestionManagementController extends Controller
                 ->withQueryString(),
             'categories' => Category::all(),
             'levels' => Level::all(),
-            'next' => Question::where('status', 1)->first()->id
+            'next' => Question::where('status', 1)->first()
         ]);
     }
 

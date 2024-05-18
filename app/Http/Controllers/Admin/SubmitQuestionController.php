@@ -22,7 +22,7 @@ class SubmitQuestionController extends Controller
         if ($question->status === 2) {
             abort(404);
         }
-        $next = Question::all()->where('status', 1)->where('id', '!=', $question->id)->first()->id;
+        $next = Question::all()->where('status', 1)->where('id', '>', $question->id)->first();
 
         return Inertia::render('Admin/Questions/Submit', [
             'question' => $question->load(['answers', 'level', 'category', 'user']),

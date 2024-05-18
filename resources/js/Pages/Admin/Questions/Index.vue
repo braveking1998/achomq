@@ -6,7 +6,7 @@
         <template #right-side>
           <div class="flex gap-2">
             <Link
-              :href="route('admin.questions.submit.edit', next)"
+              :href="route('admin.questions.submit.edit', next.id)"
               class="btn-success hidden xs:block"
               >تایید سوالات</Link
             >
@@ -118,7 +118,7 @@ const props = defineProps({
   questions: Object,
   categories: Object,
   levels: Object,
-  next: Number,
+  next: Object,
 });
 
 const flashMessageComponent = ref(null);
