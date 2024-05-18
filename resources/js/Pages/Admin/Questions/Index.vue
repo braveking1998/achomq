@@ -4,11 +4,18 @@
     <template #header>
       <app-breadcrumbs :breadcrumbs="breadcrumbs">
         <template #right-side>
-          <Link
-            :href="route('questions.create')"
-            class="btn-primary hidden xs:block"
-            >افزودن سوال</Link
-          >
+          <div class="flex gap-2">
+            <Link
+              :href="route('questions.create')"
+              class="btn-primary hidden xs:block"
+              >افزودن سوال</Link
+            >
+            <Link
+              :href="route('questions.create')"
+              class="btn-success hidden xs:block"
+              >تایید سوالات</Link
+            >
+          </div>
         </template>
       </app-breadcrumbs>
     </template>
@@ -29,6 +36,7 @@
             <tr>
               <th class="border border-gray-500 p-2 md:p-4">ردیف</th>
               <th class="border border-gray-500">متن سوال</th>
+              <th class="border border-gray-500">طراح سوال</th>
               <th class="border border-gray-500">دسته بندی</th>
               <th class="border border-gray-500">وضعیت</th>
               <th class="border border-gray-500">عملیات</th>
@@ -43,24 +51,29 @@
                 {{ question.text }}
               </td>
               <td class="border border-gray-500 text-center">
+                {{ question.user.name }}
+              </td>
+              <td class="border border-gray-500 text-center">
                 <Link
                   class="text-indigo-800 underline italic"
                   :href="
-                    route('questions.index', { category: question.category.id })
+                    route('admin.questions.index', {
+                      category: question.category.id,
+                    })
                   "
                 >
                   {{ question.category.name }}
                 </Link>
               </td>
               <td class="border border-gray-500 text-center">
-                {{ questionStatus(index) }}
+                {{ questionStatus(index).value }}
               </td>
               <td class="border border-gray-500">
                 <div
                   class="flex flex-col md:flex-row gap-2 my-2 md:m-2 items-center justify-center"
                 >
                   <Link
-                    :href="route('questions.show', question.id)"
+                    :href="route('admin.questions.show', question.id)"
                     class="btn-primary text-center px-2 md:px-4"
                     >نمایش</Link
                   >
@@ -114,15 +127,24 @@ const questionStatus = (x) => {
   const question = props.questions.data[x];
 
   if (question.deleted_at !== null) {
-    return "لغو شده";
+    return {
+      value: "لغو شده",
+      num_value: -1,
+    };
   }
 
   if (question.status === 1) {
-    return "معلق";
+    return {
+      value: "معلق",
+      num_value: 1,
+    };
   }
 
   if (question.status === 2) {
-    return "تایید شده";
+    return {
+      value: "تایید شده",
+      num_value: 2,
+    };
   }
 };
 

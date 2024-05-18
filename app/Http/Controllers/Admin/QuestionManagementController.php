@@ -20,7 +20,7 @@ class QuestionManagementController extends Controller
 
         return Inertia::render('Admin/Questions/Index', [
             'filters' => $filters,
-            'questions' => Question::with('category')->withTrashed()
+            'questions' => Question::with(['category', 'user'])->withTrashed()
                 ->mostRecent()
                 ->filter($filters)
                 ->paginate(10)
