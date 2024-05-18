@@ -15,8 +15,6 @@ class Question extends Model
 
     protected $fillable = ['unique_id', 'text', 'status', 'level_id', 'category_id', 'user_id'];
 
-    protected $with = ['answers', 'level', 'category'];
-
     public function answers(): HasMany
     {
         return $this->hasMany(Answer::class);
