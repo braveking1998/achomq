@@ -78,11 +78,15 @@ class SubmitQuestionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Question $question)
     {
-        $question = Question::find($id);
         $question->deleteOrFail();
+        $next = Question::all()->where('status', 1)->where('id', '>', $question->id)->first();
 
-        return redirect()->back()->with('success', 'سوال با موفقیت حذف شد');
+        if ($next !== null) {
+            return redirect()->route('admin.questions.submit.edit', ['question' => $next])->with('success', 'سوال با موفقیت حذف شد');
+        }
+
+        return redirect()->route('admin.questions.index')->with('success', 'سوال با موفقیت حذف شد.');
     }
 }
