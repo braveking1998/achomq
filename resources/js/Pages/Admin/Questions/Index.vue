@@ -65,7 +65,7 @@
                 </Link>
               </td>
               <td class="border border-gray-500 text-center">
-                {{ questionStatus(index).value }}
+                {{ useQuestionStatus(question).value }}
               </td>
               <td class="border border-gray-500">
                 <div
@@ -110,8 +110,9 @@ import AppBox from "@/Components/AppBox.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 import AppPagination from "@/Components/AppPagination.vue";
 import FlashMessage from "@/Components/FlashMessage.vue";
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 import AppSearch from "@/Pages/Admin/Questions/Index/Components/AppSearch.vue";
+import { useQuestionStatus } from "@/Composables/questionStatus";
 
 const props = defineProps({
   filters: Object,
@@ -122,31 +123,6 @@ const props = defineProps({
 });
 
 const flashMessageComponent = ref(null);
-
-const questionStatus = (x) => {
-  const question = props.questions.data[x];
-
-  if (question.deleted_at !== null) {
-    return {
-      value: "لغو شده",
-      num_value: -1,
-    };
-  }
-
-  if (question.status === 1) {
-    return {
-      value: "معلق",
-      num_value: 1,
-    };
-  }
-
-  if (question.status === 2) {
-    return {
-      value: "تایید شده",
-      num_value: 2,
-    };
-  }
-};
 
 // breadcrumbs
 const breadcrumbs = [

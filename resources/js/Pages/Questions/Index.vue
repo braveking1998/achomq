@@ -52,7 +52,7 @@
                 </Link>
               </td>
               <td class="border border-gray-500 text-center">
-                {{ question.status === 2 ? "تایید شده" : "معلق" }}
+                {{ useQuestionStatus(question).value }}
               </td>
               <td class="border border-gray-500">
                 <div
@@ -99,6 +99,7 @@ import AppPagination from "@/Components/AppPagination.vue";
 import FlashMessage from "@/Components/FlashMessage.vue";
 import { ref } from "vue";
 import AppSearch from "@/Pages/Questions/Index/Components/AppSearch.vue";
+import { useQuestionStatus } from "@/Composables/questionStatus";
 
 const props = defineProps({
   filters: Object,

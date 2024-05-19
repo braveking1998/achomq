@@ -30,6 +30,9 @@
         </p>
         <p class="text-gray-500"><span>سطح: </span>{{ question.level.name }}</p>
         <p class="text-gray-500">
+          <span>وضعیت سوال: </span> {{ useQuestionStatus(question).value }}
+        </p>
+        <p class="text-gray-500">
           <span>تاریخ ایجاد: </span> {{ formatedDate }}
         </p>
         <ul class="flex flex-col gap-4">
@@ -52,7 +55,8 @@ import AuthWithoutSidebarLayout from "@/Layouts/AuthWithoutSidebarLayout.vue";
 import AppBreadcrumbs from "@/Components/AppBreadcrumbs.vue";
 import AppBox from "@/Components/AppBox.vue";
 import { Head, Link } from "@inertiajs/vue3";
-import { useFormattedShamsiDate } from "@/Composables/date.js";
+import { useFormattedShamsiDate } from "@/Composables/date";
+import { useQuestionStatus } from "@/Composables/questionStatus";
 
 const breadcrumbs = [
   { label: "داشبورد", url: route("dashboard") },
