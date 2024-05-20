@@ -16,7 +16,7 @@
           <!-- Title -->
           <template #title>ویرایش دسته بندی</template>
           <!-- Edut Form -->
-          <form @submit.prevent="update">
+          <form @submit.prevent="">
             <div class="flex flex-col gap-8 md:px-0">
               <div>
                 <label for="name" class="block">نام دسته بندی</label>
@@ -38,8 +38,12 @@
                 />
               </div>
               <div class="flex gap-4">
-                <button type="submit" class="btn-primary">ثبت دسته بندی</button>
-                <button type="reset" class="btn-bordered">از نوسازی</button>
+                <button @click="update" class="btn-primary">
+                  ثبت دسته بندی
+                </button>
+                <button @click="undoChanges" class="btn-danger-border">
+                  از نوسازی
+                </button>
               </div>
             </div>
           </form>
@@ -83,5 +87,10 @@ const update = () => {
       flashMessageComponent.value.remover();
     },
   });
+};
+
+const undoChanges = () => {
+  form.name = props.category.name;
+  form.slug = props.category.slug;
 };
 </script>
