@@ -25,15 +25,15 @@
   }
 
   .btn-primary {
-    @apply font-medium text-center bg-blue-light !text-white py-2 px-4 border rounded-lg hover:bg-white hover:text-blue-light hover:border hover:border-blue-light;
+    @apply font-medium text-center bg-blue-light text-white py-2 px-4 border rounded-lg hover:bg-white hover:text-blue-light hover:border hover:border-blue-light;
   }
 
   .btn-success {
-    @apply font-medium text-center bg-green-500 !text-white py-2 px-4 border rounded-lg hover:bg-white hover:text-green-500 hover:border hover:border-green-500;
+    @apply font-medium text-center bg-green-500 text-white py-2 px-4 border rounded-lg hover:bg-white hover:text-green-500 hover:border hover:border-green-500;
   }
 
   .btn-danger {
-    @apply font-medium text-center bg-red-500 !text-white py-2 px-4 border rounded-lg hover:bg-white hover:text-red-500 hover:border hover:border-red-500;
+    @apply font-medium text-center bg-red-500 text-white py-2 px-4 border rounded-lg hover:bg-white hover:text-red-500 hover:border hover:border-red-500;
   }
 
   .btn-primary-border {
