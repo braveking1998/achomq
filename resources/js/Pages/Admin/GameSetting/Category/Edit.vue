@@ -73,7 +73,7 @@ const flashMessageComponent = ref(null);
 // breadcrumbs
 const breadcrumbs = [
   { label: "پنل ادمین", url: route("admin.index") },
-  { label: "تنظیمات بازی", url: props.previous },
+  { label: "تنظیمات بازی", url: route("admin.setting.category.index") },
 ];
 
 const form = useForm({

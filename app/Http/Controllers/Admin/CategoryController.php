@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use Inertia\Inertia;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
+use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
@@ -36,7 +36,6 @@ class CategoryController extends Controller
     {
         return Inertia::render('Admin/GameSetting/Category/Edit', [
             'category' => $category,
-            'previous' => url()->previous(),
         ]);
     }
 
