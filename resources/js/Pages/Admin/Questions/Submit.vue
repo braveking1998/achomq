@@ -18,7 +18,7 @@
       <flash-message ref="flashMessageComponent" />
 
       <app-box class="p-6">
-        <form @submit.prevent="update">
+        <form @submit.prevent="">
           <div class="flex flex-col gap-4 md:px-16">
             <div class="flex justify-between">
               <div class="w-2/5">
@@ -120,18 +120,17 @@
             <div class="flex flex-col md:flex-row gap-4 mt-4">
               <button
                 type="submit"
+                @click="update()"
                 class="btn-primary bg-green-500 hover:border-green-500 hover:text-green-500"
               >
                 تایید سوال
               </button>
-              <Link
-                :href="route('admin.questions.submit.destroy', question.id)"
-                as="button"
-                method="delete"
+              <button
+                @click="destroy()"
                 class="btn-primary bg-red-500 hover:border-red-500 hover:text-red-500"
               >
                 لغو سوال
-              </Link>
+              </button>
               <Link
                 :href="route('admin.questions.submit.edit', next)"
                 class="btn-primary"
@@ -155,7 +154,7 @@
 </template>
 
 <script setup>
-import { Head, useForm, Link } from "@inertiajs/vue3";
+import { Head, useForm, Link, router } from "@inertiajs/vue3";
 import AuthWithSidebarLayout from "@/Layouts/AuthWithSidebarLayout.vue";
 import AppBox from "@/Components/AppBox.vue";
 import { ref } from "vue";
@@ -196,8 +195,24 @@ const form = useForm({
 
 const update = () =>
   form.put(route("admin.questions.submit.update", props.question.id), {
+    preserveState: false,
     onSuccess: () => {
-      flashMessageComponent.value.remover();
+      if (flashMessageComponent.value !== null) {
+        flashMessageComponent.value.remover();
+      }
     },
   });
+
+// route("admin.questions.submit.destroy", question.id);
+
+const destroy = () => {
+  router.delete(route("admin.questions.submit.destroy", props.question.id), {
+    preserveState: false,
+    onSuccess: () => {
+      if (flashMessageComponent.value !== null) {
+        flashMessageComponent.value.remover();
+      }
+    },
+  });
+};
 </script>

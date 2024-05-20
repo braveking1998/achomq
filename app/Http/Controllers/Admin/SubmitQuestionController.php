@@ -19,7 +19,7 @@ class SubmitQuestionController extends Controller
      */
     public function edit(Question $question)
     {
-        if ($question->status === 2) {
+        if ($question->status !== 1) {
             abort(404);
         }
         $next = Question::all()->where('status', 1)->where('id', '>', $question->id)->first();
@@ -72,21 +72,28 @@ class SubmitQuestionController extends Controller
         // If approved
         AddQuestion::dispatch($question->user);
 
-        return redirect()->back()->with('success', 'سوال با موفقیت ویرایش شد');
+        $next = Question::all()->where('status', 1)->where('id', '>', $question->id)->first();
+
+
+        if ($next !== null) {
+            return to_route('admin.questions.submit.edit', ['question' => $next->id])->with('success', 'سوال با موفقیت تایید شد.');
+        }
+
+        return redirect()->route('admin.questions.index')->with('success', 'سوال با موفقیت تایید شد.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Question $question)
+    public function destroy(question $question)
     {
         $question->deleteOrFail();
         $next = Question::all()->where('status', 1)->where('id', '>', $question->id)->first();
 
         if ($next !== null) {
-            return redirect()->route('admin.questions.submit.edit', ['question' => $next])->with('success', 'سوال با موفقیت حذف شد');
+            return to_route('admin.questions.submit.edit', ['question' => $next->id])->with('success', 'سوال با موفقیت تایید شد.');
         }
 
-        return redirect()->route('admin.questions.index')->with('success', 'سوال با موفقیت حذف شد.');
+        return redirect()->route('admin.questions.index')->with('success', 'سوال با موفقیت لغو شد.');
     }
 }
