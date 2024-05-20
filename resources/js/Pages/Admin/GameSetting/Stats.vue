@@ -20,11 +20,11 @@
       <ul class="mr-8 flex flex-col gap-4">
         <!-- Categories Loop -->
         <li
-          class="flex gap-12 text-lg"
+          class="grid grid-cols-3 gap-12 text-lg lg:w-1/2"
           v-for="category in categories"
           :key="category.id"
         >
-          <div>{{ category.name }}</div>
+          <div class="col-span-2">{{ category.name }}</div>
           <div>{{ category.questions_count }}</div>
         </li>
       </ul>
