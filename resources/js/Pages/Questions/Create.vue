@@ -9,7 +9,7 @@
         <h1 class="text-gray-500 text-center font-bold">مشخصات سوال</h1>
         <div class="text-gray-800 text-sm flex flex-col gap-2">
           <div>نام طراح: {{ user.name }}</div>
-          <div>تاریخ امروز: {{ dateFormated }}</div>
+          <div>تاریخ امروز: {{ useFormattedShamsiDate().formatedDate }}</div>
         </div>
       </app-box>
     </template>
@@ -139,7 +139,7 @@ import { Head, usePage, useForm } from "@inertiajs/vue3";
 import AuthWithSidebarLayout from "@/Layouts/AuthWithSidebarLayout.vue";
 import AppBox from "@/Components/AppBox.vue";
 import { computed, ref } from "vue";
-import { useShamsiNames, useShamsiDate } from "@/Composables/date.js";
+import { useFormattedShamsiDate } from "@/Composables/date";
 import AppBreadcrumbs from "@/Components/AppBreadcrumbs.vue";
 import FlashMessage from "@/Components/FlashMessage.vue";
 
@@ -161,13 +161,6 @@ const breadcrumbs = [
   { label: "سوالات", url: route("questions.index") },
   { label: "افزودن سوال", url: route("questions.create") },
 ];
-
-// Date
-const { shamsiYear, shamsiMonth, shamsiDay } = useShamsiDate();
-const { shamsiDayNames } = useShamsiNames();
-
-const day = new Date().getDay();
-const dateFormated = `${shamsiDayNames[day]} ${shamsiDay} ${shamsiMonth} ماه ${shamsiYear}`;
 
 // Form post
 const form = useForm({
