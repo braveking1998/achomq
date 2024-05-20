@@ -6,6 +6,7 @@
         <template #right-side>
           <div class="flex gap-2">
             <Link
+              v-if="next"
               :href="route('admin.questions.submit.edit', next.id)"
               class="btn-success hidden xs:block"
               >تایید سوالات</Link
@@ -77,7 +78,7 @@
                     >نمایش</Link
                   >
                   <Link
-                    :href="route('questions.edit', question.id)"
+                    :href="route('admin.questions.edit', question.id)"
                     class="btn-primary text-center bg-green-500 px-2 md:px-4"
                     >ویرایش</Link
                   >
@@ -85,7 +86,7 @@
                     @click="deleteQuestion(question.id)"
                     class="btn-primary text-center bg-red-500 px-2 md:px-4"
                   >
-                    حذف
+                    {{ question.deleted_at !== null ? "حذف دائمی" : "حذف" }}
                   </button>
                 </div>
               </td>
@@ -110,7 +111,7 @@ import AppBox from "@/Components/AppBox.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 import AppPagination from "@/Components/AppPagination.vue";
 import FlashMessage from "@/Components/FlashMessage.vue";
-import { ref, reactive } from "vue";
+import { onMounted, ref } from "vue";
 import AppSearch from "@/Pages/Admin/Questions/Index/Components/AppSearch.vue";
 import { useQuestionStatus } from "@/Composables/questionStatus";
 
@@ -124,6 +125,10 @@ const props = defineProps({
 
 const flashMessageComponent = ref(null);
 
+onMounted(() => {
+  flashMessageComponent.value.remover();
+});
+
 // breadcrumbs
 const breadcrumbs = [
   { label: "مدیریت", url: route("admin.index") },
@@ -132,10 +137,10 @@ const breadcrumbs = [
 
 const deleteQuestion = (id) => {
   const form = useForm({
-    id: id,
+    id,
   });
 
-  form.delete(route("questions.destroy", id), {
+  form.delete(route("admin.questions.destroy", id), {
     onSuccess: () => {
       form.reset();
       flashMessageComponent.value.remover();

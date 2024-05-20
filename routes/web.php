@@ -96,8 +96,11 @@ Route::middleware(['auth', 'verified', 'admin'])->name('admin.')->prefix('admin'
         Route::get('/stats', StatsController::class)->name('stats');
         Route::resource('images', UploadPublicImagesController::class)->only(['index', 'store', 'destroy']);
     });
-    Route::resource('questions', QuestionManagementController::class)->only(['index']);
-    Route::get('questions/{question}', [QuestionManagementController::class, 'show'])->withTrashed()->name('questions.show');
+    Route::resource('questions', QuestionManagementController::class)->except(['create', 'destroy'])->withTrashed();
+    Route::delete('questions/{question}', [QuestionManagementController::class, 'destroy'])->withTrashed()->name('questions.destroy');
+    Route::put('questions/restore/{question}', [QuestionManagementController::class, 'restore'])->withTrashed()->name('questions.restore');
+    Route::put('questions/suspend/{question}', [QuestionManagementController::class, 'suspend'])->name('questions.suspend');
+    Route::put('questions/active/{question}', [QuestionManagementController::class, 'active'])->name('questions.active');
     Route::prefix('questions')->name('questions.')->group(function () {
         Route::resource('submit', SubmitQuestionController::class)
             ->only(['edit', 'update', 'destroy'])->parameter('submit', 'question');

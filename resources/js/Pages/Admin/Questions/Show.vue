@@ -6,16 +6,9 @@
         <template #right-side>
           <div class="flex gap-4">
             <Link
-              :href="route('questions.edit', question.id)"
+              :href="route('admin.questions.edit', question.id)"
               class="btn-primary bg-green-500"
               >ویرایش سوال</Link
-            >
-            <Link
-              :href="route('questions.destroy', question.id)"
-              class="btn-primary bg-red-500"
-              method="delete"
-              as="button"
-              >حذف سوال</Link
             >
           </div>
         </template>
@@ -58,14 +51,15 @@ import { Head, Link } from "@inertiajs/vue3";
 import { useFormattedShamsiDate } from "@/Composables/date.js";
 import { useQuestionStatus } from "@/Composables/questionStatus.js";
 
-const breadcrumbs = [
-  { label: "مدیریت", url: route("admin.index") },
-  { label: "سوالات", url: route("admin.questions.index") },
-];
-
 const props = defineProps({
   question: Object,
+  prevUrl: String,
 });
+
+const breadcrumbs = [
+  { label: "مدیریت", url: route("admin.index") },
+  { label: "سوالات", url: props.prevUrl },
+];
 
 // Date
 const { formatedDate } = useFormattedShamsiDate(props.question.created_at);
