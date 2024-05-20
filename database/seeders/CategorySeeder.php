@@ -18,7 +18,7 @@ class CategorySeeder extends Seeder
         ['id' => 6, 'name' => 'زبان و فرهنگ', 'slug' => 'literature'],
         ['id' => 7, 'name' => 'دینی', 'slug' => 'religion'],
         ['id' => 8, 'name' => 'جغراقیا', 'slug' => 'geography'],
-        ['id' => 9, 'name' => 'فیلم شناسی', 'slug' => 'geography'],
+        ['id' => 9, 'name' => 'فیلم شناسی', 'slug' => 'cinema-knowledge'],
     );
 
     /**
