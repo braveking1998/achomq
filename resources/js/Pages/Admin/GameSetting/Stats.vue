@@ -5,8 +5,8 @@
     <div class="flex gap-4 mb-8 flex-wrap">
       <!-- Levels loop -->
       <button
-        class="btn-bordered"
-        :class="{ 'btn-primary': clickedLevel === level.id }"
+        class="btn-primary-border"
+        :class="{ 'btn-link': clickedLevel === level.id }"
         v-for="level in levels"
         :key="level.id"
         @click="clickedLevel = level.id"

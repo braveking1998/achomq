@@ -7,28 +7,28 @@
       <app-box class="p-6">
         <div class="flex flex-col md:flex-row gap-4 md:px-0">
           <Link
-            class="btn-bordered"
+            class="btn-primary-border"
             :href="route('admin.setting.category.index')"
-            :class="{ 'btn-primary': tab === 'category' }"
+            :class="{ 'btn-primary text-white': tab === 'category' }"
           >
             دسته بندی
           </Link>
           <Link
-            class="btn-bordered"
+            class="btn-primary-border"
             :href="route('admin.setting.level.index')"
             :class="{ 'btn-primary': tab === 'level' }"
           >
             سطح
           </Link>
           <Link
-            class="btn-bordered"
+            class="btn-primary-border"
             :href="route('admin.setting.stats')"
             :class="{ 'btn-primary': tab === 'stats' }"
           >
             آمار
           </Link>
           <Link
-            class="btn-bordered"
+            class="btn-primary-border"
             :href="route('admin.setting.images.index')"
             :class="{ 'btn-primary': tab === 'images' }"
           >
