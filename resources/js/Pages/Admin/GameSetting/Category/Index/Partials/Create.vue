@@ -29,7 +29,7 @@
         </div>
         <div class="flex gap-4">
           <button type="submit" class="btn-primary">ثبت دسته بندی</button>
-          <button type="reset" class="btn-bordered">از نوسازی</button>
+          <button type="reset" class="btn-danger-border">از نوسازی</button>
         </div>
       </div>
     </form>
@@ -53,6 +53,7 @@ const form = useForm({
 const create = () => {
   form.post(route("admin.setting.category.store"), {
     onSuccess: () => {
+      form.reset();
       flashMessageComponent.value.remover();
     },
   });

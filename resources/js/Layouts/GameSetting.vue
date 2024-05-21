@@ -16,21 +16,21 @@
           <Link
             class="btn-primary-border"
             :href="route('admin.setting.level.index')"
-            :class="{ 'btn-primary': tab === 'level' }"
+            :class="{ 'btn-primary text-white': tab === 'level' }"
           >
             سطح
           </Link>
           <Link
             class="btn-primary-border"
             :href="route('admin.setting.stats')"
-            :class="{ 'btn-primary': tab === 'stats' }"
+            :class="{ 'btn-primary text-white': tab === 'stats' }"
           >
             آمار
           </Link>
           <Link
             class="btn-primary-border"
             :href="route('admin.setting.images.index')"
-            :class="{ 'btn-primary': tab === 'images' }"
+            :class="{ 'btn-primary text-white': tab === 'images' }"
           >
             آپلود تصاویر عمومی
           </Link>
@@ -56,5 +56,5 @@ defineProps({
 });
 
 // breadcrumbs
-const breadcrumbs = [{ label: "پنل ادمین", url: route("admin.index") }];
+const breadcrumbs = [{ label: "مدیریت", url: route("admin.index") }];
 </script>

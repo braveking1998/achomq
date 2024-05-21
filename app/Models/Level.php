@@ -26,4 +26,9 @@ class Level extends Model
     {
         return $this->hasMany(LevelPerk::class);
     }
+
+    public function singleFeatures(): HasMany
+    {
+        return $this->hasMany(SingleFeature::class);
+    }
 }

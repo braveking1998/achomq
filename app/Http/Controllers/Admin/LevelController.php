@@ -11,7 +11,7 @@ class LevelController extends Controller
 {
     private function feature($level, $feature)
     {
-        $feature = $level->singlePlayer()->where('feature', $feature)->first();
+        $feature = $level->singleFeatures()->where('feature', $feature)->first();
 
         if ($feature) {
             return $feature->value;
@@ -46,7 +46,6 @@ class LevelController extends Controller
     {
         return Inertia::render('Admin/GameSetting/Level/Edit', [
             'level' => $level,
-            'previous' => url()->previous(),
             'win_coins' => (int) $this->feature($level, 'win_coins') ?? false,
             'lose_coins' => (int) $this->feature($level, 'lose_coins') ?? false,
             'points' => (int) $this->feature($level, 'points') ?? false,

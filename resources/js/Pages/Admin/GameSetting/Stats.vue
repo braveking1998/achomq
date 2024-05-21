@@ -6,7 +6,7 @@
       <!-- Levels loop -->
       <button
         class="btn-primary-border"
-        :class="{ 'btn-link': clickedLevel === level.id }"
+        :class="{ 'btn-primary text-white': clickedLevel === level.id }"
         v-for="level in levels"
         :key="level.id"
         @click="clickedLevel = level.id"
