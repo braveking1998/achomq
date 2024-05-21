@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Inertia\Inertia;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -21,10 +22,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        Category::create($request->validate([
+        $valid = $request->validate([
             'name' => 'required|string|min:3|max:255',
-            'slug' => 'required',
-        ]));
+            'slug' => 'required|unique:categories',
+        ]);
+
+        $valid['slug'] = Str::slug($request->slug, '-');
+        Category::create($valid);
 
         return redirect()->back()->with('success', 'دسته بندی ایجاد شد');
     }
@@ -44,10 +48,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        $category->update($request->validate([
+        $valid = $request->validate([
             'name' => 'required|string|min:3|max:255',
-            'slug' => 'required',
-        ]));
+            'slug' => 'required|unique:categories,slug,' . $category->id,
+        ]);
+
+        $valid['slug'] = Str::slug($request->slug, '-');
+
+        $category->update($valid);
 
         return redirect()->back()->with('success', 'دسته بندی بروزرسانی شد');
     }

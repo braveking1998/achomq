@@ -26,6 +26,9 @@
                   type="text"
                   v-model="form.name"
                 />
+                <div class="input-error" v-if="form.errors.name">
+                  {{ form.errors.name }}
+                </div>
               </div>
               <div>
                 <label for="slug" class="block">اسلاگ دسته بندی</label>
@@ -36,9 +39,16 @@
                   type="text"
                   v-model="form.slug"
                 />
+                <div class="input-error" v-if="form.errors.slug">
+                  {{ form.errors.slug }}
+                </div>
               </div>
               <div class="flex gap-4">
-                <button @click="update" class="btn-primary">
+                <button
+                  @click="update"
+                  class="btn-primary"
+                  :disabled="form.processing"
+                >
                   ثبت دسته بندی
                 </button>
                 <button @click="undoChanges" class="btn-danger-border">
@@ -84,6 +94,7 @@ const form = useForm({
 const update = () => {
   form.put(route("admin.setting.category.update", props.category.id), {
     onSuccess: () => {
+      form.slug = props.category.slug;
       flashMessageComponent.value.remover();
     },
   });
