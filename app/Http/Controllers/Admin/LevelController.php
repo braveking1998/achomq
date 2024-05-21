@@ -13,7 +13,7 @@ class LevelController extends Controller
     public function index()
     {
         return Inertia::render('Admin/GameSetting/Level/Index', [
-            'levels' => Level::withCount('questions')->get(),
+            'levels' => Level::withCount('questions')->orderBy('max')->get(),
         ]);
     }
 

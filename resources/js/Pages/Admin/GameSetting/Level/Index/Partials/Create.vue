@@ -17,6 +17,9 @@
             type="text"
             v-model="form.name"
           />
+          <div class="input-error" v-if="form.errors.name">
+            {{ form.errors.name }}
+          </div>
         </div>
         <!-- Level slug -->
         <div>
@@ -28,6 +31,9 @@
             type="text"
             v-model="form.slug"
           />
+          <div class="input-error" v-if="form.errors.slug">
+            {{ form.errors.slug }}
+          </div>
         </div>
         <!-- Level max -->
         <div>
@@ -39,11 +45,16 @@
             type="number"
             v-model.number="form.max"
           />
+          <div class="input-error" v-if="form.errors.max">
+            {{ form.errors.max }}
+          </div>
         </div>
         <!-- Submit -->
         <div class="flex gap-4">
-          <button type="submit" class="btn-primary">ثبت سطح</button>
-          <button type="reset" class="btn-bordered">از نوسازی</button>
+          <button type="submit" class="btn-primary" :disabled="form.processing">
+            ثبت سطح
+          </button>
+          <button type="reset" class="btn-danger-border">از نوسازی</button>
         </div>
       </div>
     </form>
@@ -68,6 +79,7 @@ const form = useForm({
 const create = () => {
   form.post(route("admin.setting.level.store"), {
     onSuccess: () => {
+      form.reset();
       messageComponent.value.remover();
     },
   });

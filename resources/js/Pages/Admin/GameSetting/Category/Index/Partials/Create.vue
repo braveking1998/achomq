@@ -16,6 +16,9 @@
             type="text"
             v-model="form.name"
           />
+          <div class="input-error" v-if="form.errors.name">
+            {{ form.errors.name }}
+          </div>
         </div>
         <div>
           <label for="slug" class="block">اسلاگ دسته بندی</label>
@@ -26,9 +29,14 @@
             type="text"
             v-model="form.slug"
           />
+          <div class="input-error" v-if="form.errors.slug">
+            {{ form.errors.slug }}
+          </div>
         </div>
         <div class="flex gap-4">
-          <button type="submit" class="btn-primary">ثبت دسته بندی</button>
+          <button type="submit" class="btn-primary" :disabled="form.processing">
+            ثبت دسته بندی
+          </button>
           <button type="reset" class="btn-danger-border">از نوسازی</button>
         </div>
       </div>
