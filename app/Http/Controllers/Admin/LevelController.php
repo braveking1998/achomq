@@ -9,16 +9,6 @@ use Inertia\Inertia;
 
 class LevelController extends Controller
 {
-    private function feature($level, $feature)
-    {
-        $feature = $level->singleFeatures()->where('feature', $feature)->first();
-
-        if ($feature) {
-            return $feature->value;
-        }
-
-        return false;
-    }
 
     public function index()
     {
@@ -44,12 +34,20 @@ class LevelController extends Controller
      */
     public function edit(Level $level)
     {
+        $levelPerks = $level->levelPerks()->get()->mapWithKeys(function ($item, $key) {
+            return
+                [$item->action => (int) $item->value];
+        });
+
+        $singleFeatures = $level->singleFeatures()->get()->mapWithKeys(function ($item, $key) {
+            return
+                [$item->feature => (int) $item->value];
+        });
+
         return Inertia::render('Admin/GameSetting/Level/Edit', [
             'level' => $level,
-            'win_coins' => (int) $this->feature($level, 'win_coins') ?? false,
-            'lose_coins' => (int) $this->feature($level, 'lose_coins') ?? false,
-            'points' => (int) $this->feature($level, 'points') ?? false,
-            'time' => (int) $this->feature($level, 'time') ?? false,
+            'perks' => $levelPerks,
+            'features' => $singleFeatures
         ]);
     }
 
@@ -62,7 +60,6 @@ class LevelController extends Controller
             'name' => 'required|string|min:3|max:255',
             'slug' => 'required',
             'max' => 'required|integer',
-            'add_question' => 'required|integer',
         ]));
 
         $features = $request->validate([
@@ -72,8 +69,20 @@ class LevelController extends Controller
             'time' => 'required|integer',
         ]);
 
+        $levelPerks = $request->validate([
+            'add_question_points' => 'required|integer',
+            'add_question_coins' => 'required|integer',
+        ]);
+
+        foreach ($levelPerks as $key => $value) {
+            $level->levelPerks()->updateOrCreate(
+                ['action' => $key],
+                ['value' => $value]
+            );
+        }
+
         foreach ($features as $key => $value) {
-            $level->singlePlayer()->updateOrCreate(
+            $level->singleFeatures()->updateOrCreate(
                 ['feature' => $key],
                 ['value' => $value]
             );

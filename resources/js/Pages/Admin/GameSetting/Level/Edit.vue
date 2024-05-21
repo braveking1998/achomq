@@ -14,7 +14,7 @@
       <!-- Main Content -->
       <app-box class="p-6">
         <!-- Edit Form -->
-        <form @submit.prevent="update">
+        <form @submit.prevent="">
           <div class="flex flex-col gap-4">
             <!-- Edit level -->
             <box-with-title>
@@ -70,7 +70,7 @@
               <template #title> تنظیمات طراحی سوال </template>
               <!-- Content -->
               <template #default>
-                <!-- Points increase -->
+                <!-- Point increase -->
                 <div>
                   <label for="add_question" class="block"
                     >میزان افزایش امتیاز</label
@@ -80,10 +80,33 @@
                     id="add_question"
                     class="input w-1/2"
                     type="number"
-                    v-model.number="form.add_question"
+                    v-model.number="form.add_question_points"
                   />
-                  <div class="input-error" v-if="form.errors.add_question">
-                    {{ form.errors.add_question }}
+                  <div
+                    class="input-error"
+                    v-if="form.errors.add_question_points"
+                  >
+                    {{ form.errors.add_question_points }}
+                  </div>
+                </div>
+
+                <!-- Coins increase -->
+                <div>
+                  <label for="add_question" class="block"
+                    >میزان افزایش سکه</label
+                  >
+                  <input
+                    dir="ltr"
+                    id="add_question"
+                    class="input w-1/2"
+                    type="number"
+                    v-model.number="form.add_question_coins"
+                  />
+                  <div
+                    class="input-error"
+                    v-if="form.errors.add_question_coins"
+                  >
+                    {{ form.errors.add_question_coins }}
                   </div>
                 </div>
               </template>
@@ -159,8 +182,10 @@
 
                 <!-- Submit -->
                 <div class="flex gap-4">
-                  <button type="submit" class="btn-primary">ثبت سطح</button>
-                  <button type="reset" class="btn-bordered">از نوسازی</button>
+                  <button @click="update" class="btn-primary">ثبت سطح</button>
+                  <button @click="undoChanges" class="btn-danger-border">
+                    از نوسازی
+                  </button>
                 </div>
               </template>
             </box-with-title>
@@ -185,11 +210,8 @@ const flashMessageComponent = ref(null);
 
 const props = defineProps({
   level: Object,
-  previous: String,
-  win_coins: Number,
-  lose_coins: Number,
-  points: Number,
-  time: Number,
+  perks: Object,
+  features: Object,
 });
 
 // breadcrumbs
@@ -202,11 +224,12 @@ const form = useForm({
   name: props.level.name ?? "",
   slug: props.level.slug ?? "",
   max: props.level.max ?? 0,
-  add_question: props.level.add_question ?? 0,
-  win_coins: props.win_coins ?? 0,
-  lose_coins: props.lose_coins ?? 0,
-  points: props.points ?? 0,
-  time: props.time ?? 0,
+  win_coins: props.features.win_coins ?? 0,
+  lose_coins: props.features.lose_coins ?? 0,
+  points: props.features.points ?? 0,
+  time: props.features.time ?? 0,
+  add_question_points: props.perks.add_question_points ?? 0,
+  add_question_coins: props.perks.add_question_coins ?? 0,
 });
 
 const update = () => {
@@ -215,5 +238,17 @@ const update = () => {
       flashMessageComponent.value.remover();
     },
   });
+};
+
+const undoChanges = () => {
+  form.name = props.level.slug;
+  form.slug = props.level.slug;
+  form.max = props.level.max;
+  form.win_coins = props.features.win_coins;
+  form.lose_coins = props.features.lose_coins;
+  form.points = props.features.points;
+  form.time = props.features.time;
+  add_question_points = props.perks.add_question_points;
+  add_question_coins = props.perks.add_question_coins;
 };
 </script>

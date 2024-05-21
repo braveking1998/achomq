@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor('\App\Models\Level')->constrained('levels')->onDelete('cascade');
             $table->string("action");
-            $table->string("value");
+            $table->smallInteger("value");
             $table->timestamps();
         });
     }

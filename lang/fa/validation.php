@@ -203,7 +203,9 @@ return [
         'url' => 'آدرس اینترنتی',
         'text' => 'پیام',
         'selectedUsers' => 'انتخاب کاربران',
-        'title' => 'عنوان'
+        'title' => 'عنوان',
+        'add_question_points' => 'میزان افزایش امتیاز',
+        'add_question_coins' => 'میزان افزایش سکه',
     ],
 
 ];
