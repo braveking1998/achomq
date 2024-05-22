@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Level;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Level;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class LevelController extends Controller
 {
@@ -19,12 +20,15 @@ class LevelController extends Controller
 
     public function store(Request $request)
     {
-        $validate = $request->validate([
+        $valid = $request->validate([
             'name' => 'required|string|min:3|max:255',
-            'slug' => 'required',
+            'slug' => 'required|unique:levels',
             'max' => 'required|integer',
         ]);
-        Level::create($validate);
+
+        $valid['slug'] = Str::slug($request->slug, '-');
+
+        Level::create($valid);
 
         return redirect()->back()->with('success', 'سطح ایجاد شد.');
     }
@@ -56,11 +60,15 @@ class LevelController extends Controller
      */
     public function update(Request $request, Level $level)
     {
-        $level->update($request->validate([
+        $valid = $request->validate([
             'name' => 'required|string|min:3|max:255',
-            'slug' => 'required',
+            'slug' => 'required|unique:levels,slug,' . $level->id,
             'max' => 'required|integer',
-        ]));
+        ]);
+
+        $valid['slug'] = Str::slug($request->slug, '-');
+
+        $level->update($valid);
 
         $features = $request->validate([
             'win_coins' => 'required|integer',
