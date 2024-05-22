@@ -126,7 +126,7 @@ const flashMessage = computed(() => {
 // breadcrumbs
 const breadcrumbs = [
   { label: "مدیریت", url: route("admin.index") },
-  { label: "همه پیام ها", url: route("admin.notification.index") },
+  { label: "همه پیام ها", url: route("admin.messages.index") },
 ];
 
 // Form post
@@ -138,7 +138,7 @@ const form = useForm({
 });
 
 const create = () =>
-  form.post(route("admin.notification.store"), {
+  form.post(route("admin.messages.store"), {
     onSuccess: () => {
       form.reset("text", "title", "selectedUsers");
       selectedImage.value = false;

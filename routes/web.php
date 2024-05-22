@@ -12,7 +12,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\LevelController;
 use App\Http\Controllers\Admin\StatsController;
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\NotificationController;
+use App\Http\Controllers\Admin\MessageMangementController;
 use App\Http\Controllers\Admin\QuestionManagementController;
 use App\Http\Controllers\UploadPrivateImagesController;
 use App\Http\Controllers\Admin\SubmitQuestionController;
@@ -88,7 +88,7 @@ Route::get('/debug', [DebugController::class, 'index'])->name('debug');
 // Admin
 Route::middleware(['auth', 'verified', 'admin'])->name('admin.')->prefix('admin')->group(function () {
     Route::get('/', AdminController::class)->name('index');
-    Route::resource('notification', NotificationController::class)->except(['edit', 'update'])->parameter('notification', 'message');
+    Route::resource('messages', MessageMangementController::class)->except(['edit', 'update']);
     Route::prefix('setting')->name('setting.')->group(function () {
         Route::get('/', [CategoryController::class, 'index'])->name('index');
         Route::resource('category', CategoryController::class)->only(['index', 'store', 'edit', 'update', 'destroy']);

@@ -5,7 +5,7 @@
       <app-breadcrumbs :breadcrumbs="breadcrumbs">
         <template #right-side>
           <Link
-            :href="route('admin.notification.create')"
+            :href="route('admin.messages.create')"
             class="btn-primary hidden md:block"
             >پیام جدید</Link
           >
@@ -18,6 +18,7 @@
 
       <app-box class="p-6">
         <table
+          v-if="messages.data.length"
           class="w-full table-auto border border-gray-500 border-collapse text-base font-medium text-gray-500"
         >
           <thead>
@@ -44,7 +45,7 @@
                   class="flex flex-col md:flex-row gap-2 my-2 md:m-2 items-center justify-center"
                 >
                   <Link
-                    :href="route('admin.notification.show', message.id)"
+                    :href="route('admin.messages.show', message.id)"
                     class="btn-primary text-center px-2 md:px-4"
                     >نمایش</Link
                   >
@@ -59,8 +60,9 @@
             </tr>
           </tbody>
         </table>
+        <div v-else class="text-center">هیچ پیامی وجود ندارد.</div>
         <div
-          v-if="messages.data.length"
+          v-if="messages.data.length && messages.last_page !== 1"
           class="w-full flex justify-center my-8"
         >
           <app-pagination :links="messages.links" />
@@ -95,7 +97,7 @@ const deleteMessage = (id) => {
     id: id,
   });
 
-  form.delete(route("admin.notification.destroy", id), {
+  form.delete(route("admin.messages.destroy", id), {
     onSuccess: () => {
       form.reset();
       flashMessageComponent.value.remover();

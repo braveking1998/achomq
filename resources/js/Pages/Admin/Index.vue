@@ -14,9 +14,7 @@
           >
         </div>
         <div>
-          <Link
-            :href="route('admin.notification.index')"
-            class="btn-success w-full"
+          <Link :href="route('admin.messages.index')" class="btn-success w-full"
             >ارسال پیام به کاربران</Link
           >
         </div>

@@ -7,7 +7,7 @@
         <template #right-side>
           <div class="flex gap-4">
             <Link
-              :href="route('admin.notification.destroy', message.id)"
+              :href="route('admin.messages.destroy', message.id)"
               class="btn-primary bg-red-500"
               method="delete"
               as="button"
@@ -57,6 +57,6 @@ const props = defineProps({
 // breadcrumbs
 const breadcrumbs = [
   { label: "مدیریت", url: route("admin.index") },
-  { label: "همه پیام ها", url: route("admin.notification.index") },
+  { label: "همه پیام ها", url: route("admin.messages.index") },
 ];
 </script>

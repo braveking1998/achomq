@@ -12,14 +12,14 @@ use App\Notifications\AdminMessage;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Notifications\DatabaseNotification;
 
-class NotificationController extends Controller
+class MessageMangementController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Inertia::render('Admin/Notification/Index', [
+        return Inertia::render('Admin/Messages/Index', [
             'messages' => Message::mostRecent()->paginate(10),
         ]);
     }
@@ -29,7 +29,7 @@ class NotificationController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Admin/Notification/Create', [
+        return Inertia::render('Admin/Messages/Create', [
             'users' => User::all(['id', 'name'])->except(1),
             'images' => ProfileImage::where('type', 'public')->get(),
         ]);
@@ -76,7 +76,7 @@ class NotificationController extends Controller
         if (in_array('all', $message['users'])) {
             $all = 'all';
         }
-        return Inertia::render('Admin/Notification/Show', [
+        return Inertia::render('Admin/Messages/Show', [
             'message' => $message,
             'users' => $all ?? User::find($users)
         ]);
@@ -91,6 +91,6 @@ class NotificationController extends Controller
 
         DatabaseNotification::where('data->message_id', $message->id)->delete();
 
-        return redirect()->route('admin.notification.index')->with('success', 'پیام با موفقیت حذف شد');
+        return redirect()->route('admin.messages.index')->with('success', 'پیام با موفقیت حذف شد');
     }
 }
