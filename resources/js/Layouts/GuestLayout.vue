@@ -35,13 +35,11 @@
       <div
         class="mt-8 flex flex-col sm:flex-row gap-4 items-center sm:justify-end ml-4 lg:mt-16"
       >
-        <Link :href="route('login')" class="btn-sign w-[230px]"
-          >از اینجا وارد شو</Link
-        >
+        <Link :href="route('login')" class="btn-sign w-[150px]">ورود</Link>
         <Link
           :href="route('register')"
-          class="btn-sign bg-blue-primary w-[230px]"
-          >همین الان شروع کن</Link
+          class="btn-sign bg-blue-primary w-[150px]"
+          >ثبت نام</Link
         >
       </div>
     </section>

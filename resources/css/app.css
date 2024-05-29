@@ -54,7 +54,7 @@
   }
 
   .btn-sign {
-    @apply text-center py-2 px-8 rounded-xl text-gray-100 border-0 border-solid shadow-[inset_0_0_20px_rgba(255,255,255,0)] outline outline-1 outline-[rgba(255,255,255,.5)] outline-offset-0 [text-shadow:_none] transition-all duration-[1250ms] ease-[cubic-bezier(0.19,1,0.22,1)];
+    @apply text-center bg-orange-500 py-2 px-8 rounded-xl text-gray-100 border-0 border-solid shadow-[inset_0_0_20px_rgba(255,255,255,0)] outline outline-1 outline-[rgba(255,255,255,.5)] outline-offset-0 [text-shadow:_none] transition-all duration-[1250ms] ease-[cubic-bezier(0.19,1,0.22,1)];
   }
 
   .btn-sign:hover {
