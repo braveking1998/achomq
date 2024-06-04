@@ -15,7 +15,7 @@ class QuestionFactory extends Factory
      * @return array<string, mixed>
      */
 
-    protected static $qId = 51;
+    protected static $qId = 9;
 
     public function definition(): array
     {
@@ -24,8 +24,8 @@ class QuestionFactory extends Factory
             'unique_id' => fake()->uuid(),
             'text' => fake()->sentence(),
             'status' => 1,
-            'level_id' => 3,
-            'category_id' => fake()->randomElement([1, 3]),
+            'level_id' => fake()->randomElement([2, 7]),
+            'category_id' => fake()->randomElement([3, 9]),
             'user_id' => 2,
         ];
     }

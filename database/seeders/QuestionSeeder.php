@@ -12,7 +12,7 @@ class QuestionSeeder extends Seeder
      */
     public function run(): void
     {
-        Question::factory(30)
+        Question::factory(100)
             ->hasAnswers(4, function (array $attributes) {
                 return [
                     'is_correct' => ($attributes['id'] - 1) % 4 == 0 ?? false,

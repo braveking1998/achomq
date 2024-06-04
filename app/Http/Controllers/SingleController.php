@@ -35,7 +35,7 @@ class SingleController extends Controller
                 'categories' => Category::where('slug', '!=', 'default')
                     ->whereHas('questions', function (Builder $query) {
                         $query->where('status', 1)->where('level_id', Auth::user()->level_id);
-                    }, '>=', 5)
+                    }, '>=', 3)
                     ->get()
                     ->shuffle()
                     ->take(3),
