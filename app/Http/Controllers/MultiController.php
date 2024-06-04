@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\MultiGameWinner;
-use App\Events\StartMultiGame;
-use App\Models\Category;
-use App\Models\MultiGame;
-use App\Models\MultiGameType;
-use App\Models\Question;
 use App\Models\User;
-use App\Notifications\MultiplayNotification;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
+use App\Models\Multi;
+use App\Models\Category;
+use App\Models\Question;
+use App\Models\MultiType;
+use Illuminate\Http\Request;
+use App\Models\MultiGameType;
+use App\Events\StartMultiGame;
+use App\Events\MultiGameWinner;
+use Illuminate\Support\Facades\Auth;
+use App\Notifications\MultiplayNotification;
+use Illuminate\Validation\ValidationException;
 
 class MultiController extends Controller
 {
-    private function gamerType(MultiGame $game)
+    private function gamerType(Multi $game)
     {
         $user = Auth::user();
         $gamerType = ($game->starter == $user->id) ? 'starter' : 'rival';
@@ -25,7 +26,7 @@ class MultiController extends Controller
         return $gamerType;
     }
 
-    private function theWinner(MultiGame $game, MultiGameType $type)
+    private function theWinner(Multi $game, MultiType $type)
     {
         $starter = User::find($game->starter);
         $rival = User::find($game->rival);
@@ -44,7 +45,7 @@ class MultiController extends Controller
 
     private function foundRival($user, $type)
     {
-        $available = MultiGame::where('rival', 1)->where('multi_game_type_id', $type->id)
+        $available = Multi::where('rival', 1)->where('multi_game_type_id', $type->id)
             ->where('category_id', '!=', 6)
             ->where('is_active', 1)
             ->where('starter', '!=', $user->id)
@@ -68,7 +69,7 @@ class MultiController extends Controller
         }
     }
 
-    private function stageIncreaser(MultiGame $game)
+    private function stageIncreaser(Multi $game)
     {
         if ($game->category_id == 6) {
             $game->stage += 1;
@@ -80,7 +81,7 @@ class MultiController extends Controller
         $game->save();
     }
 
-    private function saveAnswers(MultiGame $game, $answers, $corrects)
+    private function saveAnswers(Multi $game, $answers, $corrects)
     {
         if ($this->gamerType($game) == 'starter') {
             if (!empty($game->s_answers)) {
@@ -105,7 +106,7 @@ class MultiController extends Controller
         $game->save();
     }
 
-    private function whoToPlay(MultiGame $game)
+    private function whoToPlay(Multi $game)
     {
         $user = Auth::user();
         if ($game->rival == 1) {
@@ -136,27 +137,24 @@ class MultiController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $activeGames = MultiGame::where(function ($query) use ($user) {
+        $activeGames = Multi::where(function ($query) use ($user) {
             $query->where('starter', $user->id)
                 ->orWhere('rival', $user->id);
         })->where('is_active', 1)->get() ?? false;
-        $games = MultiGame::where(function ($query) use ($user) {
+        $games = Multi::where(function ($query) use ($user) {
             $query->where('starter', $user->id)
                 ->orWhere('rival', $user->id);
         })->where('is_active', 0)->orderBy('id', 'desc')->get()->take(5) ?? false;
 
-        return Inertia::render('MultiPlayer/Index', [
+        return Inertia::render('Multi/Index', [
             'user' => $user,
             'activeGames' => $activeGames,
             'games' => $games,
-            'normal' => MultiGameType::find(1),
-            'bronze' => MultiGameType::find(2),
-            'silver' => MultiGameType::find(3),
-            'gold' => MultiGameType::find(4),
+            'types' => MultiType::all(),
         ]);
     }
 
-    public function create(MultiGameType $type)
+    public function create(MultiType $type)
     {
         $user = Auth::user();
         if ($user->level_id >= $type->required_level) {
@@ -188,7 +186,7 @@ class MultiController extends Controller
         return redirect()->back();
     }
 
-    public function play(MultiGame $game)
+    public function play(Multi $game)
     {
         $user = Auth::user();
 
@@ -199,7 +197,7 @@ class MultiController extends Controller
         ]);
     }
 
-    public function category(MultiGame $game)
+    public function category(Multi $game)
     {
         return Inertia::render('MultiPlayer/Category', [
             'categories' => Category::where('slug', '!=', 'default')
@@ -211,7 +209,7 @@ class MultiController extends Controller
         ]);
     }
 
-    public function categoryLoad(Request $request, MultiGame $game)
+    public function categoryLoad(Request $request, Multi $game)
     {
         $category = Category::where('slug', '!=', 'default')
             ->checkQuestions($game)
@@ -253,7 +251,7 @@ class MultiController extends Controller
         return redirect()->route('multi-player.play', ['game' => $game->id]);
     }
 
-    public function setCategory(Request $request, MultiGame $game)
+    public function setCategory(Request $request, Multi $game)
     {
         $game->category_id = $request->category ?? 6;
         $game->is_playing = 1;
@@ -261,7 +259,7 @@ class MultiController extends Controller
         $game->save();
     }
 
-    public function setQuiz(Request $request, MultiGame $game)
+    public function setQuiz(Request $request, Multi $game)
     {
         $this->setCategory($request, $game);
 
@@ -288,7 +286,7 @@ class MultiController extends Controller
         );
     }
 
-    public function quiz(Request $request, MultiGame $game)
+    public function quiz(Request $request, Multi $game)
     {
         // Change category to default
         $game->category_id = 6;
@@ -340,7 +338,7 @@ class MultiController extends Controller
         );
     }
 
-    public function quizLoad(MultiGame $game)
+    public function quizLoad(Multi $game)
     {
         if ($game->category_id == 6) {
             $answers[$game->stage] = [
@@ -391,7 +389,7 @@ class MultiController extends Controller
         return redirect()->route('multi-player.play', ['game' => $game->id]);
     }
 
-    public function result(Request $request, MultiGame $game)
+    public function result(Request $request, Multi $game)
     {
         $user = Auth::user();
         $type = $game->type()->first();

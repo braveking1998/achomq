@@ -103,9 +103,7 @@
                     {{ determinWinner(game) }}
                   </td>
                   <td class="text-white font-bold underline">
-                    <Link :href="route('multi-player.play', game.id)"
-                      >مشاهده</Link
-                    >
+                    <Link :href="route('multi.play', game.id)">مشاهده</Link>
                   </td>
                 </tr>
               </tbody>
@@ -126,140 +124,36 @@
           </div>
           <!-- Create games -->
           <div class="flex gap-8 flex-wrap justify-center">
-            <!-- Normal -->
             <div
-              class="bg-gradient-to-tr from-gray-500 from-10% to-black to-80% flex flex-col gap-2 pt-5 px-5 pb-5 text-white w-56"
+              v-for="(item, index) in types"
+              :key="item.id"
+              :class="classes[index]"
             >
-              <p class="text-center font-bold text-lg">{{ normal.name }}</p>
+              <p class="text-center font-bold text-lg">{{ item.name }}</p>
               <p class="mt-5">
                 <font-awesome-icon :icon="['fas', 'coins']" /><span class="mr-2"
-                  >هزینه: {{ normal.cost }} سکه</span
+                  >هزینه: {{ item.cost }} سکه</span
                 >
               </p>
               <p>
                 <font-awesome-icon :icon="['fas', 'gift']" /><span class="mr-2"
-                  >جایزه: {{ normal.coin }} سکه</span
+                  >جایزه: {{ item.coin }} سکه</span
                 >
               </p>
               <p>
                 <font-awesome-icon :icon="['fas', 'hand-holding-heart']" /><span
                   class="mr-2"
-                  >جایزه: {{ normal.point }} امتیاز</span
+                  >جایزه: {{ item.point }} امتیاز</span
                 >
               </p>
               <p class="text-white font-bold mt-5 text-center">
-                حداقل سطح: {{ normal.required_level.name }}
+                حداقل سطح: {{ item.min_level.name }}
               </p>
               <p class="text-center">
                 <Link
                   as="button"
                   method="post"
-                  :href="route('multi-player.create', normal.id)"
-                  ><button class="btn-primary">شروع بازی</button></Link
-                >
-              </p>
-            </div>
-
-            <!-- Bronez -->
-            <!-- background: linear-gradient(to bottom, #CD7F32 0%, #BE7023 100%); -->
-            <div
-              class="bg-gradient-to-b from-[#CD7F32] to-[#BE7023] flex flex-col gap-2 pt-5 px-5 pb-5 text-white w-56"
-            >
-              <p class="text-center font-bold text-lg">{{ bronze.name }}</p>
-              <p class="mt-5">
-                <font-awesome-icon :icon="['fas', 'coins']" /><span class="mr-2"
-                  >هزینه: {{ bronze.cost }} سکه</span
-                >
-              </p>
-              <p>
-                <font-awesome-icon :icon="['fas', 'gift']" /><span class="mr-2"
-                  >جایزه: {{ bronze.coin }} سکه</span
-                >
-              </p>
-              <p>
-                <font-awesome-icon :icon="['fas', 'hand-holding-heart']" /><span
-                  class="mr-2"
-                  >جایزه: {{ bronze.point }} امتیاز</span
-                >
-              </p>
-              <p class="text-white font-bold mt-5 text-center">
-                حداقل سطح: {{ bronze.required_level.name }}
-              </p>
-              <p class="text-center">
-                <Link
-                  as="button"
-                  method="post"
-                  :href="route('multi-player.create', bronze.id)"
-                  ><button class="btn-primary">شروع بازی</button></Link
-                >
-              </p>
-            </div>
-
-            <!-- Silver -->
-            <!-- background: linear-gradient(to bottom, #CD7F32 0%, #BE7023 100%); -->
-            <div
-              class="bg-gradient-to-b from-[#ededed] to-[#bdbdbd] flex flex-col gap-2 pt-5 px-5 pb-5 text-black w-56"
-            >
-              <p class="text-center font-bold text-lg">{{ silver.name }}</p>
-              <p class="mt-5">
-                <font-awesome-icon :icon="['fas', 'coins']" /><span class="mr-2"
-                  >هزینه: {{ silver.cost }} سکه</span
-                >
-              </p>
-              <p>
-                <font-awesome-icon :icon="['fas', 'gift']" /><span class="mr-2"
-                  >جایزه: {{ silver.coin }} سکه</span
-                >
-              </p>
-              <p>
-                <font-awesome-icon :icon="['fas', 'hand-holding-heart']" /><span
-                  class="mr-2"
-                  >جایزه: {{ silver.point }} امتیاز</span
-                >
-              </p>
-              <p class="font-bold mt-5 text-center">
-                حداقل سطح: {{ silver.required_level.name }}
-              </p>
-              <p class="text-center">
-                <Link
-                  as="button"
-                  method="post"
-                  :href="route('multi-player.create', silver.id)"
-                  ><button class="btn-primary">شروع بازی</button></Link
-                >
-              </p>
-            </div>
-
-            <!-- Gold -->
-            <!-- background: linear-gradient(to bottom, #CD7F32 0%, #BE7023 100%); -->
-            <div
-              class="bg-gradient-to-t from-[#7D3E00] to-[#FFC170] flex flex-col gap-2 pt-5 px-5 pb-5 text-black w-56"
-            >
-              <p class="text-center font-bold text-lg">{{ gold.name }}</p>
-              <p class="mt-5">
-                <font-awesome-icon :icon="['fas', 'coins']" /><span class="mr-2"
-                  >هزینه: {{ gold.cost }} سکه</span
-                >
-              </p>
-              <p>
-                <font-awesome-icon :icon="['fas', 'gift']" /><span class="mr-2"
-                  >جایزه: {{ gold.coin }} سکه</span
-                >
-              </p>
-              <p>
-                <font-awesome-icon
-                  class="text-yellow-500 border-1 border-white"
-                  :icon="['fas', 'star']"
-                /><span class="mr-2">جایزه: {{ gold.star }} ستاره</span>
-              </p>
-              <p class="font-bold mt-5 text-center text-white">
-                حداقل سطح: {{ gold.required_level.name }}
-              </p>
-              <p class="text-center">
-                <Link
-                  as="button"
-                  method="post"
-                  :href="route('multi-player.create', gold.id)"
+                  :href="route('multi.create', item.id)"
                   ><button class="btn-primary">شروع بازی</button></Link
                 >
               </p>
@@ -286,14 +180,18 @@ const props = defineProps({
   games: Object,
   user: Object,
   activeGames: Object,
-  normal: Object,
-  bronze: Object,
-  silver: Object,
-  gold: Object,
+  types: Object,
 });
 
 const page = usePage();
 const errors = computed(() => page.props.errors);
+
+const classes = [
+  "bg-gradient-to-tr from-gray-500 from-10% to-black to-80% flex flex-col gap-2 pt-5 px-5 pb-5 text-white w-56",
+  "bg-gradient-to-b from-[#CD7F32] to-[#BE7023] flex flex-col gap-2 pt-5 px-5 pb-5 text-white w-56",
+  "bg-gradient-to-b from-[#ededed] to-[#bdbdbd] flex flex-col gap-2 pt-5 px-5 pb-5 text-black w-56",
+  "bg-gradient-to-t from-[#7D3E00] to-[#FFC170] flex flex-col gap-2 pt-5 px-5 pb-5 text-black w-56",
+];
 
 const determinWinner = (game) => {
   if (game.starter.id == props.user.id) {

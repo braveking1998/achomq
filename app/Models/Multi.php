@@ -10,6 +10,8 @@ class Multi extends Model
 {
     use HasFactory;
 
+    protected $table = 'multi';
+
     protected $fillable = [
         'game_id',
         'stage',
