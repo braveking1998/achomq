@@ -16,6 +16,9 @@ export default {
     "hover:text-blue-light",
     "hover:text-green-500",
     "hover:text-red-500",
+    "hover:!bg-blue-light",
+    "hover:!bg-green-500",
+    "hover:!bg-red-500",
   ],
   theme: {
     extend: {

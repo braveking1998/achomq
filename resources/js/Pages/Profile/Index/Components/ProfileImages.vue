@@ -43,7 +43,7 @@
               class="w-full h-full hover:opacity-60 hover:cursor-pointer hover:border-green-500 hover:border-4"
               :class="{
                 'opacity-60 border-4 border-green-500':
-                  image.id === selectedImage.id,
+                  image.id === selectedImage,
               }"
               @click="selectNewImage(image.id)"
             />
@@ -79,7 +79,7 @@ defineProps({
 });
 
 const page = usePage();
-const selectedImage = computed(() => page.props.auth.user.chosen_image);
+const selectedImage = computed(() => page.props.auth.user.profile_image);
 const errors = computed(() => Object.values(page.props.errors));
 
 // Handle flash messages
