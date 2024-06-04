@@ -125,7 +125,7 @@ onMounted(() => {
       });
     });
 
-    router.patch(route("multi-player.result", props.gameId), {
+    router.patch(route("multi.result", props.gameId), {
       answers: answers.value,
     });
   };
@@ -197,7 +197,7 @@ const next = () => {
 const seeResult = () => {
   if (submitAnswers.value === false) {
     submitAnswers.value = true;
-    router.patch(route("multi-player.result", props.gameId), {
+    router.patch(route("multi.result", props.gameId), {
       answers: answers.value,
       corrects: correctAnswers.value,
     });

@@ -21,15 +21,15 @@ class Category extends Model
     public function scopeCheckQuestions(Builder $query, Multi $game): Builder
     {
         return $query->whereHas('questions', function (Builder $query) use ($game) {
-            $query->where('status', 1);
+            $query->where('status', 2);
 
             $type = $game->type()->first();
-            $nextType = MultiType::where('id', '>', $type->id)->orderBy('id')->first() ?? false;
+            $nextType = ($type) ? MultiType::where('id', '>', $type->id)->orderBy('id')->first() : false;
             if ($nextType != false) {
-                $query->whereBetween('level_id', [$type->required_level, $nextType->required_level]);
+                $query->whereBetween('level_id', [$type->min_level, $nextType->min_level]);
             } elseif ($nextType == false) {
-                $query->where('level_id', '>=', $type->required_level);
+                $query->where('level_id', '>=', $type->min_level);
             }
-        }, '>=', 5);
+        }, '>=', 3);
     }
 }

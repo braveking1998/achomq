@@ -46,6 +46,6 @@ class Multi extends Model
 
     public function type(): BelongsTo
     {
-        return $this->belongsTo(MultiType::class);
+        return $this->belongsTo(MultiType::class, 'multi_type_id');
     }
 }

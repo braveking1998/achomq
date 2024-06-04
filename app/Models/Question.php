@@ -76,9 +76,9 @@ class Question extends Model
         $type = $game->type()->first();
         $nextType = MultiType::where('id', '>', $type->id)->orderBy('id')->first() ?? false;
         if ($nextType != false) {
-            return $query->whereBetween('level_id', [$type->required_level, $nextType->required_level]);
+            return $query->whereBetween('level_id', [$type->min_level, $nextType->min_level]);
         } elseif ($nextType == false) {
-            return $query->where('level_id', '>=', $type->required_level);
+            return $query->where('level_id', '>=', $type->min_level);
         }
     }
 }

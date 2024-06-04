@@ -35,7 +35,7 @@ class MessageController extends Controller
 
         if ($message->type === "App\Notifications\MultiplayNotification") {
             $game_id = $message->data['game_id'];
-            return redirect()->route('multi-play');
+            return redirect()->route('multi.play', $game_id);
         }
 
         return Inertia::render('Messages/Show', [

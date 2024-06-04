@@ -27,6 +27,12 @@ class IncreaseEventSubscriber
             $user->level_id = $nextLevel->id;
             $user->save();
         }
+
+        // while($nextLevel) {
+        //     if ($user->points > $currentLevel->max) {
+        //         $nextLevel = 
+        //     }
+        // }
     }
 
     public function handleAddQuestion(AddQuestion $event): void

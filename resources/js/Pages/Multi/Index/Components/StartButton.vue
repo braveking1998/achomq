@@ -28,12 +28,12 @@ const pickColor = computed(() => {
 const start = (text) => {
   if (text == "user") {
     // If category has not set
-    if (props.game.category_id == 6) {
-      return router.post(route("multi-player.category", props.game.id));
+    if (props.game.category_id == 1) {
+      return router.post(route("multi.category", props.game.id));
     }
 
     // Else
-    return router.put(route("multi-player.quiz", props.game.id), {
+    return router.put(route("multi.quiz", props.game.id), {
       color: pickColor.value,
     });
   }

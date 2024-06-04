@@ -11,7 +11,7 @@
             :key="category.id"
             @click.prevent="selectedCategory(category.id)"
             class="px-0"
-            :class="`btn-dashboard text-${pickColor} border-${pickColor} hover:bg-${pickColor}`"
+            :class="`btn-border text-${pickColor} border-${pickColor} hover:!bg-${pickColor}`"
           >
             {{ category.name }}
           </button>
@@ -53,7 +53,7 @@ const pickColor = computed(() => {
 });
 
 const selectedCategory = (categoryId) =>
-  router.post(route("multi-player.setQuiz", props.gameId), {
+  router.post(route("multi.setQuiz", props.gameId), {
     category: categoryId,
     color: pickColor.value,
   });

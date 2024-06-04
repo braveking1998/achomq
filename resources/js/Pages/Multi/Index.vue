@@ -44,7 +44,7 @@
                   </td>
                   <td>
                     <Link
-                      :href="route('multi-player.play', game.id)"
+                      :href="route('multi.play', game.id)"
                       class="btn-primary"
                     >
                       بازی
@@ -137,13 +137,13 @@
               </p>
               <p>
                 <font-awesome-icon :icon="['fas', 'gift']" /><span class="mr-2"
-                  >جایزه: {{ item.coin }} سکه</span
+                  >جایزه: {{ item.coins }} سکه</span
                 >
               </p>
               <p>
                 <font-awesome-icon :icon="['fas', 'hand-holding-heart']" /><span
                   class="mr-2"
-                  >جایزه: {{ item.point }} امتیاز</span
+                  >جایزه: {{ item.points }} امتیاز</span
                 >
               </p>
               <p class="text-white font-bold mt-5 text-center">

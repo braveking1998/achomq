@@ -71,12 +71,12 @@ Route::middleware('auth')
     ->name('multi.')
     ->prefix('multi')
     ->group(function () {
-        Route::get('/', [MultiController::class, 'index'])->name('index');
+        Route::get('/', [MultiController::class, 'index'])->name('index'); // can create games and see active games
         Route::post('/create/{type}', [MultiController::class, 'create'])->name('create');
         Route::get('/play/{game}', [MultiController::class, 'play'])->name('play');
-        Route::get('/play/{game}/category', [MultiController::class, 'categoryLoad'])->name('categoryLoad');
+        Route::get('/play/{game}/category', [MultiController::class, 'categoryLoad'])->name('categoryLoad'); // load cheat
         Route::post('/play/{game}/category', [MultiController::class, 'category'])->name('category');
-        Route::get('/play/{game}/quiz', [MultiController::class, 'quizLoad'])->name('quizLoad');
+        Route::get('/play/{game}/quiz', [MultiController::class, 'quizLoad'])->name('quizLoad'); // load cheat
         Route::post('/play/{game}/quiz', [MultiController::class, 'setQuiz'])->name('setQuiz');
         Route::put('/play/{game}/quiz', [MultiController::class, 'quiz'])->name('quiz');
         Route::patch('/play/{game}', [MultiController::class, 'result'])->name('result');

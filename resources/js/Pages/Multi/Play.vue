@@ -11,7 +11,7 @@
           <div class="flex flex-col border-l-2 border-gray-500">
             <!-- Titles -->
             <display-user
-              :src="game.starter.chosen_image.src"
+              :src="game.starter.profile_src"
               :name="game.starter.name"
             />
 
@@ -25,7 +25,7 @@
           <div class="flex flex-col">
             <!-- Titles -->
             <display-user
-              :src="game.rival.chosen_image.src"
+              :src="game.rival.profile_src"
               :name="game.rival.name"
             />
 
@@ -72,7 +72,7 @@ import AppBreadcrumbs from "@/Components/AppBreadcrumbs.vue";
 // breadcrumbs
 const breadcrumbs = [
   { label: "داشبورد", url: route("dashboard") },
-  { label: "بازی های دو نفره", url: route("multi-player.index") },
+  { label: "بازی های دو نفره", url: route("multi.index") },
 ];
 
 onMounted(() => {
