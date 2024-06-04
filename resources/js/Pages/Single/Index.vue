@@ -15,7 +15,7 @@
             :key="category.id"
             @click.prevent="selectedCategory(category.id)"
             class="px-0"
-            :class="`btn-dashboard text-${pickColor} border-${pickColor} hover:bg-${pickColor}`"
+            :class="`btn-border text-${pickColor} border-${pickColor} hover:!bg-${pickColor}`"
           >
             {{ category.name }}
           </button>

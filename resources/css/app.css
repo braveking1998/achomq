@@ -36,6 +36,10 @@
     @apply font-medium text-center bg-red-500 text-white py-2 px-4 border rounded-lg hover:bg-white hover:text-red-500 hover:border hover:border-red-500;
   }
 
+  .btn-border {
+    @apply font-medium hover:text-white py-2 px-4 rounded-lg border text-center;
+  }
+
   .btn-primary-border {
     @apply font-medium text-blue-light hover:bg-blue-light hover:text-white py-2 px-4 rounded-lg border border-blue-light text-center;
   }

@@ -34,7 +34,7 @@ class SingleController extends Controller
             [
                 'categories' => Category::where('slug', '!=', 'default')
                     ->whereHas('questions', function (Builder $query) {
-                        $query->where('status', 1)->where('level_id', Auth::user()->level_id);
+                        $query->where('status', 2)->where('level_id', Auth::user()->level_id);
                     }, '>=', 3)
                     ->get()
                     ->shuffle()
@@ -57,7 +57,7 @@ class SingleController extends Controller
                     ->inRandomOrder();
             })
             ->where('level_id', $level)
-            ->where('status', 1)
+            ->where('status', 2)
             ->get()
             ->shuffle()
             ->take(3);
@@ -67,7 +67,7 @@ class SingleController extends Controller
             [
                 'questions' => $questions,
                 'color' => $request->color,
-                'time' => (int) $time->value ?? 15,
+                'time' => ($time && $time->value != false) ? (int) $time->value : 15,
             ]
         );
     }

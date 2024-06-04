@@ -116,7 +116,7 @@ const next = () => {
     timerEnabled.value = true;
     totalAnswered.value++;
   } else {
-    router.put(route("single-player.result"), {
+    router.put("", {
       total: props.questions.length,
       correct: correctAnswers.value,
       color: props.color,

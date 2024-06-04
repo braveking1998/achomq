@@ -28,7 +28,7 @@
           <Link
             class="border-2 border-white px-4 py-2 rounded-lg mt-4 hover:bg-white"
             :class="`hover:text-${color}`"
-            :href="route('single-player.category')"
+            :href="route('single.index')"
             >بازی مجدد</Link
           >
         </div>
