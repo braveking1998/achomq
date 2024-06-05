@@ -73,7 +73,6 @@
           <div>در صورت هر گونه پیشنهاد به شماره زیر ارسال کنید</div>
           <ul class="flex gap-4 justify-center mt-4">
             <li>09391613713</li>
-            <li>07152623008</li>
           </ul>
         </div>
         <div class="mt-6">

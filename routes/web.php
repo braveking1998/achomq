@@ -2,7 +2,6 @@
 
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DebugController;
 use App\Http\Controllers\MultiController;
 use App\Http\Controllers\SingleController;
 use App\Http\Controllers\MessageController;
@@ -81,9 +80,6 @@ Route::middleware('auth')
         Route::put('/play/{game}/quiz', [MultiController::class, 'quiz'])->name('quiz');
         Route::patch('/play/{game}', [MultiController::class, 'result'])->name('result');
     });
-
-// Debog
-Route::get('/debug', [DebugController::class, 'index'])->name('debug');
 
 // Admin
 Route::middleware(['auth', 'verified', 'admin'])->name('admin.')->prefix('admin')->group(function () {
