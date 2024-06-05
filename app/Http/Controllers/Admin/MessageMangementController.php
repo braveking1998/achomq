@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\message;
-use Illuminate\Http\Request;
-use App\Models\User;
-use Inertia\Inertia;
 use App\Models\ProfileImage;
+use App\Models\User;
 use App\Notifications\AdminMessage;
-use Illuminate\Support\Facades\Notification;
+use Illuminate\Http\Request;
 use Illuminate\Notifications\DatabaseNotification;
+use Illuminate\Support\Facades\Notification;
+use Inertia\Inertia;
 
 class MessageMangementController extends Controller
 {
@@ -44,11 +44,11 @@ class MessageMangementController extends Controller
             'selectedUsers' => 'required',
             'title' => 'required|string|min:3|max:110',
             'text' => 'required|string',
-            'image' => 'required'
+            'image' => 'required',
         ]);
 
         // All users
-        if (in_array("all", $request->selectedUsers)) {
+        if (in_array('all', $request->selectedUsers)) {
             $users = User::all();
         } else {
             $users = User::find($request->selectedUsers);
@@ -76,9 +76,10 @@ class MessageMangementController extends Controller
         if (in_array('all', $message['users'])) {
             $all = 'all';
         }
+
         return Inertia::render('Admin/Messages/Show', [
             'message' => $message,
-            'users' => $all ?? User::find($users)
+            'users' => $all ?? User::find($users),
         ]);
     }
 

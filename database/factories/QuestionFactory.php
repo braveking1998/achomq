@@ -14,7 +14,6 @@ class QuestionFactory extends Factory
      *
      * @return array<string, mixed>
      */
-
     protected static $qId = 9;
 
     public function definition(): array

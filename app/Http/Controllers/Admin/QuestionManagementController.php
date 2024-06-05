@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Inertia\Inertia;
-use App\Models\Level;
+use App\Http\Controllers\Controller;
 use App\Models\Answer;
 use App\Models\Category;
+use App\Models\Level;
 use App\Models\question;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
+use Inertia\Inertia;
 
 class QuestionManagementController extends Controller
 {
@@ -29,7 +29,7 @@ class QuestionManagementController extends Controller
                 ->withQueryString(),
             'categories' => Category::all(),
             'levels' => Level::all(),
-            'next' => Question::where('status', 1)->first()
+            'next' => Question::where('status', 1)->first(),
         ]);
     }
 
@@ -40,7 +40,7 @@ class QuestionManagementController extends Controller
     {
         return Inertia::render('Admin/Questions/Show', [
             'question' => $question->load(['answers', 'level', 'category']),
-            'prevUrl' => (Str::startsWith(url()->previous(), route('admin.questions.index') . '?page')) ? url()->previous() : route('admin.questions.index')
+            'prevUrl' => (Str::startsWith(url()->previous(), route('admin.questions.index').'?page')) ? url()->previous() : route('admin.questions.index'),
         ]);
     }
 
@@ -53,7 +53,7 @@ class QuestionManagementController extends Controller
             'question' => $question->load(['answers', 'level', 'category', 'user']),
             'levels' => Level::all(),
             'categories' => Category::all(),
-            'prevUrl' => (Str::startsWith(url()->previous(), route('admin.questions.index') . '?page')) ? url()->previous() : route('admin.questions.index')
+            'prevUrl' => (Str::startsWith(url()->previous(), route('admin.questions.index').'?page')) ? url()->previous() : route('admin.questions.index'),
         ]);
     }
 
@@ -70,7 +70,7 @@ class QuestionManagementController extends Controller
         );
 
         $qUpdate = $question->update([
-            'text' => (Str::endsWith($request->question, '؟') ? $request->question : $request->question . '؟'),
+            'text' => (Str::endsWith($request->question, '؟') ? $request->question : $request->question.'؟'),
             'level_id' => $request->level_id,
             'category_id' => $request->category_id,
         ]);
@@ -129,6 +129,7 @@ class QuestionManagementController extends Controller
         }
 
         $question->forceDelete();
+
         return redirect()->back()->with('success', 'سوال با موفقیت حذف شد');
     }
 }

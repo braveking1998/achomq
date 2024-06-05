@@ -1,22 +1,22 @@
 <?php
 
-use Inertia\Inertia;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MultiController;
-use App\Http\Controllers\SingleController;
-use App\Http\Controllers\MessageController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\LevelController;
-use App\Http\Controllers\Admin\StatsController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\LevelController;
 use App\Http\Controllers\Admin\MessageMangementController;
 use App\Http\Controllers\Admin\QuestionManagementController;
-use App\Http\Controllers\UploadPrivateImagesController;
+use App\Http\Controllers\Admin\StatsController;
 use App\Http\Controllers\Admin\SubmitQuestionController;
 use App\Http\Controllers\Admin\UploadPublicImagesController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\MultiController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\SingleController;
+use App\Http\Controllers\UploadPrivateImagesController;
+use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,7 +45,7 @@ Route::middleware('auth')->prefix('profile')->name('profile.')->group(function (
     Route::resource('images', UploadPrivateImagesController::class)->only(['store', 'destroy']);
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';
 
 // Messages
 Route::resource('messages', MessageController::class)

@@ -2,12 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use Illuminate\Http\Request;
+use Illuminate\Notifications\DatabaseNotification;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
-use App\Models\ProfileImage;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Notifications\DatabaseNotification;
 
 class HandleInertiaRequests extends Middleware
 {

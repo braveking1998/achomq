@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Inertia\Inertia;
-use App\Models\Category;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Inertia\Inertia;
 
 class CategoryController extends Controller
 {
@@ -50,7 +50,7 @@ class CategoryController extends Controller
     {
         $valid = $request->validate([
             'name' => 'required|string|min:3|max:255',
-            'slug' => 'required|unique:categories,slug,' . $category->id,
+            'slug' => 'required|unique:categories,slug,'.$category->id,
         ]);
 
         $valid['slug'] = Str::slug($request->slug, '-');

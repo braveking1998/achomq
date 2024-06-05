@@ -3,7 +3,6 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -53,7 +52,7 @@ class AdminMessage extends Notification
             'message_id' => $this->message['id'],
             'title' => $this->message['title'],
             'text' => $this->message['text'],
-            'image' => $this->message['image']
+            'image' => $this->message['image'],
         ];
     }
 }

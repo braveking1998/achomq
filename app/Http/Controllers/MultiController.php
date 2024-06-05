@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Inertia\Inertia;
-use App\Models\Multi;
-use App\Models\Category;
-use App\Models\Question;
-use App\Models\MultiType;
-use Illuminate\Http\Request;
-use App\Models\MultiGameType;
-use App\Events\StartMultiGame;
 use App\Events\MultiGameWinner;
-use Illuminate\Support\Facades\Auth;
+use App\Events\StartMultiGame;
+use App\Models\Category;
+use App\Models\Multi;
+use App\Models\MultiType;
+use App\Models\Question;
+use App\Models\User;
 use App\Notifications\MultiplayNotification;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Inertia\Inertia;
 
 class MultiController extends Controller
 {
@@ -34,7 +33,7 @@ class MultiController extends Controller
         if ($game->is_active == 0) {
             if ((int) $game->s_corrects > (int) $game->r_corrects) {
                 MultiGameWinner::dispatchIf((int) $game->s_corrects > (int) $game->r_corrects, $starter, (int) $type->coins, (int) $type->points);
-            } else if ((int) $game->s_corrects < (int) $game->r_corrects) {
+            } elseif ((int) $game->s_corrects < (int) $game->r_corrects) {
                 MultiGameWinner::dispatchIf((int) $game->s_corrects < (int) $game->r_corrects, $rival, (int) $type->coins, (int) $type->points);
             }
         }
@@ -81,7 +80,7 @@ class MultiController extends Controller
     private function saveAnswers(Multi $game, $answers, $corrects)
     {
         if ($this->gamerType($game) == 'starter') {
-            if (!empty($game->s_answers)) {
+            if (! empty($game->s_answers)) {
                 $prev_answers = json_decode($game->s_answers, true);
                 $game->s_answers = json_encode(array_merge($prev_answers, $answers));
             } else {
@@ -90,7 +89,7 @@ class MultiController extends Controller
 
             $game->s_corrects += $corrects;
         } elseif ($this->gamerType($game) == 'rival') {
-            if (!empty($game->r_answers)) {
+            if (! empty($game->r_answers)) {
                 $prev_answers = json_decode($game->r_answers, true);
                 $game->r_answers = json_encode(array_merge($prev_answers, $answers));
             } else {

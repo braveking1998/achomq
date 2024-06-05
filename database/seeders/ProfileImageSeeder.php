@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\DB;
 
 class ProfileImageSeeder extends Seeder
 {
-
-    public $images = array(
+    public $images = [
         ['id' => 1, 'file_path' => 'images/profile.webp'],
         ['id' => 2, 'file_path' => 'images/man-profile.webp'],
         ['id' => 3, 'file_path' => 'images/woman-profile.webp'],
-    );
+    ];
+
     /**
      * Run the database seeds.
      */

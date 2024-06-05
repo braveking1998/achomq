@@ -46,7 +46,7 @@ class Question extends Model
         )->when(
             $filters['status'] ?? false,
             function ($query, $value) {
-                if ($value === "-1") {
+                if ($value === '-1') {
                     $query->where('deleted_at', '!=', null);
                 } else {
                     $query->where('status', '=', $value)->where('deleted_at', '=', null);
@@ -54,7 +54,7 @@ class Question extends Model
             }
         )->when(
             $filters['text'] ?? false,
-            fn ($query, $value) => $query->where('text', 'like', '%' . $value . '%')
+            fn ($query, $value) => $query->where('text', 'like', '%'.$value.'%')
         );
     }
 

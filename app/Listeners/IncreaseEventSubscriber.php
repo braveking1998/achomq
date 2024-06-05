@@ -30,7 +30,7 @@ class IncreaseEventSubscriber
 
         // while($nextLevel) {
         //     if ($user->points > $currentLevel->max) {
-        //         $nextLevel = 
+        //         $nextLevel =
         //     }
         // }
     }

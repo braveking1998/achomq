@@ -47,7 +47,7 @@ class SubmitQuestionController extends Controller
         $question = Question::find($id);
 
         $qUpdate = $question->update([
-            'text' => (Str::endsWith($request->question, '؟') ? $request->question : $request->question . '؟'),
+            'text' => (Str::endsWith($request->question, '؟') ? $request->question : $request->question.'؟'),
             'level_id' => $request->level_id,
             'category_id' => $request->category_id,
             'status' => 2,
@@ -73,7 +73,6 @@ class SubmitQuestionController extends Controller
         AddQuestion::dispatch($question->user);
 
         $next = Question::all()->where('status', 1)->where('id', '>', $question->id)->first();
-
 
         if ($next !== null) {
             return to_route('admin.questions.submit.edit', ['question' => $next->id])->with('success', 'سوال با موفقیت تایید شد.');

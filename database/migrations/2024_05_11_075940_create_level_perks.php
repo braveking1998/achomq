@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('level_perks', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor('\App\Models\Level')->constrained('levels')->onDelete('cascade');
-            $table->string("action");
-            $table->smallInteger("value");
+            $table->string('action');
+            $table->smallInteger('value');
             $table->timestamps();
         });
     }

@@ -4,12 +4,10 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class CategorySeeder extends Seeder
 {
-
-    private $categories = array(
+    private $categories = [
         ['id' => 1, 'name' => 'بدون دسته بندی', 'slug' => 'default'],
         ['id' => 2, 'name' => 'اطلاعات عمومی', 'slug' => 'general_knowledge'],
         ['id' => 3, 'name' => 'ورزشی', 'slug' => 'sports'],
@@ -19,7 +17,7 @@ class CategorySeeder extends Seeder
         ['id' => 7, 'name' => 'دینی', 'slug' => 'religion'],
         ['id' => 8, 'name' => 'جغراقیا', 'slug' => 'geography'],
         ['id' => 9, 'name' => 'فیلم شناسی', 'slug' => 'cinema-knowledge'],
-    );
+    ];
 
     /**
      * Run the database seeds.

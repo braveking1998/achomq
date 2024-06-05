@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
-use App\Jobs\EarnHeart;
-use App\Models\Category;
+use App\Events\CorrectAnswer;
 use App\Events\StartSingle;
 use App\Events\WrongAnswer;
-use Illuminate\Http\Request;
-use App\Events\CorrectAnswer;
+use App\Jobs\EarnHeart;
+use App\Models\Category;
 use App\Models\SingleFeature;
-use App\Models\SinglePlayerFeature;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class SingleController extends Controller
 {
@@ -39,7 +38,7 @@ class SingleController extends Controller
                     ->get()
                     ->shuffle()
                     ->take(3),
-                'canPlay' => $canPlay
+                'canPlay' => $canPlay,
             ]
         );
     }

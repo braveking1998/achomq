@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\DatabaseNotification;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class MessageController extends Controller
 {
@@ -27,7 +27,7 @@ class MessageController extends Controller
     {
         $message = DatabaseNotification::find($id);
 
-        if (!$message) {
+        if (! $message) {
             return redirect()->route('messages.index');
         }
         // Mark read
@@ -35,11 +35,12 @@ class MessageController extends Controller
 
         if ($message->type === "App\Notifications\MultiplayNotification") {
             $game_id = $message->data['game_id'];
+
             return redirect()->route('multi.play', $game_id);
         }
 
         return Inertia::render('Messages/Show', [
-            'message' => $message
+            'message' => $message,
         ]);
     }
 

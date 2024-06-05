@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreignIdFor(\App\Models\Level::class)->after("is_admin")->default(1)->constrained('levels')->onUpdate('cascade');
-            $table->foreignIdFor('\App\Models\ProfileImage', 'profile_image')->after("is_admin")->default(1)->constrained('profile_images')->onUpdate('cascade');
+            $table->foreignIdFor(\App\Models\Level::class)->after('is_admin')->default(1)->constrained('levels')->onUpdate('cascade');
+            $table->foreignIdFor('\App\Models\ProfileImage', 'profile_image')->after('is_admin')->default(1)->constrained('profile_images')->onUpdate('cascade');
         });
     }
 

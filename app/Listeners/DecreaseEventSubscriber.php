@@ -2,9 +2,9 @@
 
 namespace App\Listeners;
 
+use App\Events\StartMultiGame;
 use App\Events\StartSingle;
 use App\Events\WrongAnswer;
-use App\Events\StartMultiGame;
 use Illuminate\Events\Dispatcher;
 
 class DecreaseEventSubscriber
@@ -51,7 +51,7 @@ class DecreaseEventSubscriber
         return [
             WrongAnswer::class => 'handleWrongAnswer',
             StartMultiGame::class => 'handleStartMultiGame',
-            StartSingle::class => 'handleStartSingle'
+            StartSingle::class => 'handleStartSingle',
         ];
     }
 }

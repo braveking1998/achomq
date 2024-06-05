@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Inertia\Inertia;
-use App\Models\Level;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Level;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Inertia\Inertia;
 
 class LevelController extends Controller
 {
-
     public function index()
     {
         return Inertia::render('Admin/GameSetting/Level/Index', [
@@ -39,19 +38,17 @@ class LevelController extends Controller
     public function edit(Level $level)
     {
         $levelPerks = $level->levelPerks()->get()->mapWithKeys(function ($item, $key) {
-            return
-                [$item->action => (int) $item->value];
+            return [$item->action => (int) $item->value];
         });
 
         $singleFeatures = $level->singleFeatures()->get()->mapWithKeys(function ($item, $key) {
-            return
-                [$item->feature => (int) $item->value];
+            return [$item->feature => (int) $item->value];
         });
 
         return Inertia::render('Admin/GameSetting/Level/Edit', [
             'level' => $level,
             'perks' => $levelPerks,
-            'features' => $singleFeatures
+            'features' => $singleFeatures,
         ]);
     }
 
@@ -62,7 +59,7 @@ class LevelController extends Controller
     {
         $valid = $request->validate([
             'name' => 'required|string|min:3|max:255',
-            'slug' => 'required|unique:levels,slug,' . $level->id,
+            'slug' => 'required|unique:levels,slug,'.$level->id,
             'max' => 'required|integer',
         ]);
 

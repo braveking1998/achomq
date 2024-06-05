@@ -52,6 +52,7 @@ class UploadPublicImagesController extends Controller
     {
         if ($image->id === 1) {
             throw ValidationException::withMessages(['message' => 'شما نمی توانید این پروفایل را حذف کنید.']);
+
             return redirect()->back();
         }
         // Set user's profile image to null

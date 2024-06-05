@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
 {
@@ -20,7 +19,7 @@ class UserSeeder extends Seeder
             'phone_number' => '09027777657',
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
-            'is_admin' => 1
+            'is_admin' => 1,
         ]);
         \App\Models\User::factory(10)->create();
     }

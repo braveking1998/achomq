@@ -3,14 +3,14 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Laravel\Sanctum\HasApiTokens;
 use App\Notifications\PasswordReset;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -71,7 +71,7 @@ class User extends Authenticatable
     protected function profileSrc(): Attribute
     {
         return Attribute::make(
-            get: fn () => ($this->profile_image) ? asset('storage/' . ProfileImage::find($this->profile_image)->file_path) : false,
+            get: fn () => ($this->profile_image) ? asset('storage/'.ProfileImage::find($this->profile_image)->file_path) : false,
         );
     }
 
