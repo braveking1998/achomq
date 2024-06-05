@@ -19,7 +19,7 @@ class FrontController extends Controller
             'canRegister' => Route::has('register'),
             'LaravelVersion' => Application::VERSION,
             'phpVersion' => PHP_VERSION,
-            'topUsers' => User::orderBy('level_id', 'desc')->orderBy('points', 'desc')->limit(3)->get('name')
+            'topUsers' => User::where('id', '!=', 1)->orderBy('level_id', 'desc')->orderBy('points', 'desc')->limit(3)->get('name')
         ]);
     }
 }
