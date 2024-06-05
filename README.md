@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <p align="center"><img src="/public/images/logo.webp" width="400" alt="Achomq Logo"></p>
+=======
+<p align="center">مسابقه کیو | مسابقه اطلاعات عمومی</p>
+>>>>>>> a021122383c3fbf11f537c35f7b6051ce0443604
 
 <p align="center">اچم کیو | مسابقه اطلاعات عمومی (مشابه کوییز آو کینگز)</p>
 <p align="center">ساخته شده با Laravel و Vuejs 3</p>
